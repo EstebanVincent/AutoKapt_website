@@ -19,10 +19,13 @@ if (isset($_POST["submit"])) {
         header("location: ../pages/logIn/signUp.php/?error=usernameoremailtaken");
         exit(); 
     }
-    /* maybe longueur password > 8 */
+    if (!pwdLongEnough($password)){
+        header("location: ../pages/logIn/signUp.php/?error=password<8char");
+        exit(); 
+    }
     createUser($conn, $username, $email, $password, $gender, $age);
 
 } else {
-    /* header("location: ../");
-    exit(); */
+    header("location: ../pages/logIn/signUp.php");
+    exit();
 }

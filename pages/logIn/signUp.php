@@ -51,6 +51,15 @@
             </div>
             <input type="submit" name="submit" value="Register">
         </form>
+    
+
+    <?php
+        $pathErrors = $_SERVER['DOCUMENT_ROOT'];
+        $pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
+        include_once($pathErrors);
+    ?>
+    
     </div>
+
 </body>
 </html>

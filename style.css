@@ -213,6 +213,8 @@ h3 {
 .right p {
     text-align: center;
     margin-left: 10px;
+    color: rgba(190, 13, 13, 0.87);
+    font-size: 20px;
 }
 .right form {
     padding: 0 40px;
