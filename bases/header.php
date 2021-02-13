@@ -21,7 +21,7 @@
           echo '<li class="scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
           echo '<ul class="sous">';
             echo '<li><a href="#">My profile</a></li>';
-            echo '<li><a href="/AutoKapt/includes/logOut.inc.php">Log out</a></li>';
+            echo '<li><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
           echo'</ul>';
           echo '</li>';
         }

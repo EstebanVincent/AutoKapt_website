@@ -16,4 +16,15 @@ if(isset($_GET["error"])) {
         echo"<p>Wrong password!</p>";
     }
 }
+if(isset($_GET["reset"])) {
+    if($_GET["reset"] == "success"){
+        echo"<p>Check your e-mail!</p>";
+    }
+}
+if(isset($_GET["newPassword"])) {
+    if($_GET["newPassword"] == "passwordupdated"){
+        echo"<p>Your password has been reset!</p>";
+    }
+}
+
 ?>

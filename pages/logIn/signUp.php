@@ -49,7 +49,7 @@
                 <span></span>
                 <label>Age</label>
             </div>
-            <input type="submit" name="submit" value="Register">
+            <input type="submit" name="signUp-submit" value="Register">
         </form>
     
 

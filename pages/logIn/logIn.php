@@ -24,7 +24,7 @@
                 <label>Password</label>
             </div>
             <div class="forgot"><a href="/AutoKapt/pages/logIn/passwordRecovery.php">Forgot password?</a></div>
-            <input type="submit" name="submit" value="Login">
+            <input type="submit" name="logIn-submit" value="Login">
             <div class="create"><a href="/AutoKapt/pages/logIn/signUp.php">Create Account</a></div>
         </form>
 

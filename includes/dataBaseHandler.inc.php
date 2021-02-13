@@ -2,7 +2,7 @@
 $serverName = "localhost";
 $dBUsername = "root";
 $dBPassword = "";  
-$dBName = "users";
+$dBName = "autokapt";
 
 $conn = mysqli_connect($serverName, $dBUsername, $dBPassword, $dBName);
 

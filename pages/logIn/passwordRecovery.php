@@ -13,14 +13,21 @@
     <div class="right">
         <h4>Forgot your password?</h4>
         <p>Please enter your account's registered email adress and we'll send you a recovery email.</p>
-        <form method="POST">
+        <form action="/AutoKapt/includes/passwordRecovery.inc.php" method="POST">
             <div class="element">
-                <input type="email" required>
+                <input type="email" name="email" required>
                 <span></span>
                 <label>Email</label>
             </div>
-            <input type="submit" value="Send email">
+            <input type="submit" name="password-recovery-submit" value="Send email">
         </form>
+
+        <?php
+        $pathErrors = $_SERVER['DOCUMENT_ROOT'];
+        $pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
+        include_once($pathErrors);
+        ?>
+
     </div>
 </body>
 </html>
