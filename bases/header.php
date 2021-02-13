@@ -18,7 +18,12 @@
         <li id="name"><a href="/AutoKapt/home.php">AutoKapt</a></li>
         <?php
         if(isset($_SESSION["userUsername"])){
-          echo '<li><a href="/AutoKapt/">Profile</a></li>';/* Menu déroulant a faire */
+          echo '<li class="scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
+          echo '<ul class="sous">';
+            echo '<li><a href="#">My profile</a></li>';
+            echo '<li><a href="/AutoKapt/includes/logOut.inc.php">Log out</a></li>';
+          echo'</ul>';
+          echo '</li>';
         }
         else {
           echo '<li><a href="/AutoKapt/pages/logIn/logIn.php">Log in</a></li>';

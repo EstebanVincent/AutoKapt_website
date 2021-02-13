@@ -8,7 +8,7 @@ if (isset($_POST["submit"])) {
     $gender = $_POST["gender"];
     $age = $_POST["age"];
 
-    require_once 'dataBaseHeader.inc.php';
+    require_once 'dataBaseHandler.inc.php';
     require_once 'functions.inc.php';
 
     if (pwdMatch($password, $pwdRepeat) !== false){

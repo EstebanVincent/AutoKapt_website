@@ -53,7 +53,7 @@ function createUser($conn, $username, $email, $password, $gender, $age) {
     mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashedPassword , $gender, $age);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../home.php/?error=none");/* pour les erreurs apres */ 
+    header("location: ../home.php/?error=accountcreationsuccess");/* pour les erreurs apres */ 
     exit(); 
 }
 function logInUser($conn, $username, $password){
@@ -72,7 +72,7 @@ function logInUser($conn, $username, $password){
         session_start();
         $_SESSION["userid"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
-        header("location: ../home.php/?error=none");/* pour les erreurs apres */ 
+        header("location: ../home.php/?error=loginSuccess");/* pour les erreurs apres */ 
         exit(); 
     }
 }
