@@ -23,8 +23,7 @@ a {
   color: black;
 }
 
-/*************************** NAVBAR ******************************* */
-
+/*************************** Header ******************************* */
 nav {
   position: top;
   width: 100%;
@@ -85,7 +84,6 @@ nav > ul li:hover .sous {
   display: block;
   text-align: center;
 }
-/***************** SEARCHBAR ******************* */
 .searchTerm {
   width: 100px;
   border: none;
@@ -105,6 +103,13 @@ nav > ul li:hover .sous {
 ::placeholder {
   color: white;
   opacity: 1;
+}
+/*************************** FOOTER ******************************* */
+footer {
+  position: absolute;
+  top: 75%;
+  width: 100%;
+  opacity: 0.9;
 }
 
 /*************************** IMAGE PRINCIPALE ******************************* */
@@ -334,4 +339,26 @@ input[type="submit"]:hover {
 }
 .back :hover {
   text-decoration: underline;
+}
+
+/*************************** PROFILE ******************************* */
+.left {
+  position: absolute;
+  top: 35%;
+  left: 170px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #aaabb6;
+}
+.left ul {
+  display: flex;
+  flex-direction: column;
+  background-color: #9c9da8;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+}
+.left a {
+  margin-top: 0px;
 }

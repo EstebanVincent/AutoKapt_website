@@ -8,8 +8,8 @@
     </form>
     <div id="secondLine"></div>
     <div id="copyrightAndIcons"></div>
-    </fouter>
-</body>
+</footer>
+</body> 
 
 
 </html>

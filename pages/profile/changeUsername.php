@@ -17,31 +17,33 @@
 
 <div class="right">
   <form action="/AutoKapt/includes/profile/change.inc.php" method="POST">
-    <h4>Current password</h4>
+    <h4>Verify password</h4>
       <div class="element">
-        <input type="password" name="currentPassword" required>
+        <input type="password" name="verifyPassword" required>
         <span></span>
-        <label>Current password</label>
+        <label>Verify password</label>
       </div>
-    <h4>Insert new password</h4>
+    <h4>Insert new username</h4>
       <div class="element">
-        <input type="password" name="newPassword" required>
+        <input type="text" name="newUsername" required>
         <span></span>
-        <label>New password</label>
+        <label>New username</label>
       </div>
       <div class="element">
-        <input type="password" name="verifyNewPassword" required>
+        <input type="text" name="verifyNewUsername" required>
         <span></span>
-        <label>Verify new password</label>
+        <label>Verify new username</label>
       </div>
-    <input type="submit" name="change-password-submit" value="Update password">
+    <input type="submit" name="change-username-submit" value="Update username">
   </form>
+
   <?php
         $pathErrors = $_SERVER['DOCUMENT_ROOT'];
         $pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
         include_once($pathErrors);
     ?>
 </div>
+
 <?php
   $pathFooter = $_SERVER['DOCUMENT_ROOT'];
   $pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
