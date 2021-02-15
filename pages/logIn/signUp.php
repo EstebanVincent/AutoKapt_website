@@ -13,7 +13,7 @@
     <div class="right">
         <h4>Registration</h4>
         <div class="back"><a href="/AutoKapt/pages/logIn/logIn.php">Already have an account?</a></div>
-        <form action="/AutoKapt/includes/signUp.inc.php" method="POST">
+        <form action="/AutoKapt/includes/logIn/signUp.inc.php" method="POST">
             <div class="element">
                 <input type="text" name="username" required>
                 <span></span>
@@ -32,7 +32,7 @@
             <div class="element">
                 <input type="password" name="pwdRepeat" required>
                 <span></span>
-                <label>Confirm Pwd</label> 
+                <label>Verify password</label> 
             </div>
             <div class="element">
                 <input list="gender" name="gender" required>

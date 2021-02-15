@@ -15,29 +15,33 @@
   <header>
     <nav>
       <ul>
-        <li id="name"><a href="/AutoKapt/home.php">AutoKapt</a></li>
+        <li class="hover" id="name"><a href="/AutoKapt/home.php">AutoKapt</a></li>
         <?php
         if(isset($_SESSION["userUsername"])){
-          echo '<li class="scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
-          echo '<ul class="sous">';
-            echo '<li><a href="#">My profile</a></li>';
-            echo '<li><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
+          echo '<li class="hover scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
+                    echo '<ul class="sous">';
+            echo '<li class="hover"><a href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>';
+            echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
+            /* echo '<li><a href="/AutoKapt/pages/logIn/createNewPassword.php">New password</a></li>'; */ /* ne fonctionne pas car ducoup pas de token comme ça */
           echo'</ul>';
           echo '</li>';
         }
         else {
-          echo '<li><a href="/AutoKapt/pages/logIn/logIn.php">Log in</a></li>';
+          echo '<li class="hover"><a href="/AutoKapt/pages/logIn/logIn.php">Log in</a></li>';
         }
         ?>
         
-        <li class="scroll"><a href="#">Langue</a>
+        <li class="hover scroll"><a href="#">Langue</a>
           <ul class="sous">
             <li><a href="#">English</a></li>
             <li><a href="#">Français</a></li>
           </ul>
         </li>
-        <li><a href="/AutoKapt/pages/faq.php">FAQ</a></li>
-        <li><a href="/AutoKapt/pages/team.php">L'équipe</a></li>
+        <li class="hover"><a href="/AutoKapt/pages/faq.php">FAQ</a></li>
+        <li class="hover"><a href="/AutoKapt/pages/team.php">L'équipe</a></li>
+        <li><input  type="search" class="searchTerm" placeholder="Search">
+        </li>
+        
       </ul>
     </nav>
     <div id="navbar"></div>

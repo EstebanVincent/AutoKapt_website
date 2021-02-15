@@ -9,7 +9,7 @@ if(isset($_POST["password-recovery-submit"])){
 
     $expires = date("U") + 1800;
 
-    require_once 'dataBaseHandler.inc.php';
+    require_once '../dataBaseHandler.inc.php';
 
     $userEmail = $_POST["email"];
 
@@ -53,10 +53,9 @@ if(isset($_POST["password-recovery-submit"])){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ../pages/logIn/passwordRecovery.php?reset=success");
+    header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
 
 
 } else {
-    header("location: ../home.php");
-    exit();
+    die(header("location: ../../home.php"));
 }

@@ -9,10 +9,10 @@ if(isset($_GET["error"])) {
     if($_GET["error"] == "password<8char"){
         echo"<p>Password must be over 8 characters!</p>";
     }
-    if($_GET["error"] == "wrongLogIn"){
+    if($_GET["error"] == "wronglogin"){
         echo"<p>Inexistent username!</p>";
     }
-    if($_GET["error"] == "wrongPassword"){
+    if($_GET["error"] == "wrongpassword"){
         echo"<p>Wrong password!</p>";
     }
 }
@@ -24,6 +24,9 @@ if(isset($_GET["reset"])) {
 if(isset($_GET["newPassword"])) {
     if($_GET["newPassword"] == "passwordupdated"){
         echo"<p>Your password has been reset!</p>";
+    }
+    if($_GET["newPassword"] == "pwdnotsame"){
+        echo"<p>Passwords are different!</p>";
     }
 }
 

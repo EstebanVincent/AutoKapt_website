@@ -12,8 +12,8 @@
     </div>
     <div class="right">
         <h4>Forgot your password?</h4>
-        <p>Please enter your account's registered email adress and we'll send you a recovery email.</p>
-        <form action="/AutoKapt/includes/passwordRecovery.inc.php" method="POST">
+        <p id="please">Please enter your account's registered email adress and we'll send you a recovery email.</p>
+        <form action="/AutoKapt/includes/logIn/passwordRecovery.inc.php" method="POST">
             <div class="element">
                 <input type="email" name="email" required>
                 <span></span>

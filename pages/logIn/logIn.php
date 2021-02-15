@@ -12,7 +12,7 @@
     </div>
     <div class="right">
         <h4>Log in your account</h4>
-        <form action="/AutoKapt/includes/logIn.inc.php" method="POST">
+        <form action="/AutoKapt/includes/logIn/logIn.inc.php" method="POST">
             <div class="element">
                 <input type="text" name="username" required>
                 <span></span>
