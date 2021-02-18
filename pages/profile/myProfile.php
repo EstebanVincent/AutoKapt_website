@@ -18,6 +18,9 @@
 Tes infos, changer mdp
 Graph evo dernier test
 Moyenne des tests
+Maybe ajouter une banderole pub?
+Ajouter section avis
+mode admin 
 -->
 <?php
   $pathFooter = $_SERVER['DOCUMENT_ROOT'];

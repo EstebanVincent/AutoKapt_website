@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Sign In | AutoKapt</title>
         <link rel="stylesheet" href="/AutoKapt/style.css">
+        <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
     </head>
 <body>
     <div id = "backgroundLogIn">

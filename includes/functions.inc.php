@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 /* return true si match false sinon */
 function pwdMatch($password, $pwdRepeat) {
     $result;
@@ -10,6 +11,7 @@ function pwdMatch($password, $pwdRepeat) {
     }
     return $result;
 }
+/* verifie si l'username et l'email de sont pas déja dans la bdd users */
 function usernameExists($conn, $username, $email) {
     $sql = "SELECT * FROM users WHERE usersUsername = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
@@ -43,6 +45,9 @@ function pwdLongEnough($password) {
     }
     return $result;
 }
+
+
+/* crée l'user dans la bdd users */
 function createUser($conn, $username, $email, $password, $gender, $age) {
     $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
@@ -57,6 +62,7 @@ function createUser($conn, $username, $email, $password, $gender, $age) {
     mysqli_stmt_close($stmt);
     die(header("location: ../../home.php/?error=accountcreationsuccess"));
 }
+/* session start et on fixe les valeurs SESSION userId et userUsername */
 function logInUser($conn, $username, $password){
     $usernameExists = usernameExists($conn, $username, $username);/* 2 fois car comme ça check pas mail */
     if($usernameExists === false){
@@ -74,6 +80,9 @@ function logInUser($conn, $username, $password){
         die(header("location: ../../home.php/?error=loginSuccess"));
     }
 }
+
+
+/* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 30 min*/
 function passwordRecoveryEmail($conn, $selector, $token){
     $url = "localhost/AutoKapt/pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
@@ -125,6 +134,7 @@ function passwordRecoveryEmail($conn, $selector, $token){
     mail($to, $subject, $message, $headers);
     header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
 }
+/* correspond au forget password en cliquant sur le lien du mail, donc utilisation de token pour eviter le hack, utilise les bdd users et pwdreset*/
 function changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat){
     /* date à l'instant t */
     $currentDate = date("U");
@@ -208,6 +218,9 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
         }
     }
 }
+
+
+/* deja dans le compte et verification du mdp donc deja secure */
 function changePassword($conn, $currentPassword, $newPassword){
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
@@ -241,9 +254,10 @@ function changePassword($conn, $currentPassword, $newPassword){
         mysqli_stmt_bind_param($stmt, "si", $newPasswordHashed, $sessionId);
         mysqli_stmt_execute($stmt);  
 
-        die(header("location: ../../pages/profile/myProfile.php/?error=updatepasswordsuccess"));
+        die(header("location: ../../pages/profile/myProfile.php/?change=updatepasswordsuccess"));
     }
 }
+/* same et on change la valeur de l'username de la session en plus */
 function changeUsername($conn, $verifyPassword, $newUsername) {
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
@@ -277,9 +291,10 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
         mysqli_stmt_execute($stmt);  
 
         $_SESSION["userUsername"] = $newUsername;
-        die(header("location: ../../pages/profile/myProfile.php/?error=updateusernamesuccess"));
+        die(header("location: ../../pages/profile/myProfile.php/?change=updateusernamesuccess"));
     }
 }
+/* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
 function changeEmail($conn, $verifyPassword, $newEmail) {
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
@@ -299,7 +314,7 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: ../../pages/profile/changePassword.php/?change=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersEmail=? WHERE usersId=?;";
 

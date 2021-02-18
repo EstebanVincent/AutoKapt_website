@@ -7,15 +7,16 @@
 <html>
 
 <head>
-  <title>AutoKapt</title>
+  <title>Infinite Mesure</title>
   <link rel="stylesheet" href="/AutoKapt/style.css">
+  <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
 </head>
 
 <body>
   <header>
     <nav>
       <ul>
-        <li class="hover" id="name"><a href="/AutoKapt/home.php">AutoKapt</a></li>
+        <li class="hover" id="name"><a href="/AutoKapt/home.php">Infinite Mesure</a></li>
         <?php
         if(isset($_SESSION["userUsername"])){
           echo '<li class="hover scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';

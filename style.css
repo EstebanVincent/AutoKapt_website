@@ -106,8 +106,7 @@ nav > ul li:hover .sous {
 }
 /*************************** FOOTER ******************************* */
 footer {
-  position: absolute;
-  top: 75%;
+  position: bottom;
   width: 100%;
   opacity: 0.9;
 }

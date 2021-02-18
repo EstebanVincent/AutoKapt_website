@@ -4,7 +4,7 @@
   include_once($pathHeader);
 ?>
     <div id="imagePrincipale">
-      <h1>APP G9E</h1>
+      <h1>Infinite Mesure</h1>
       <div id="firstLine"></div>
       <h3>Notre projet</h3>
     </div>
