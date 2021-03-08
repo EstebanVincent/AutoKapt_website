@@ -10,6 +10,7 @@
   <title>Infinite Mesure</title>
   <link rel="stylesheet" href="/AutoKapt/style.css">
   <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
+  <!-- <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.10-0/dist/css/ionicons.min.css"> -->
 </head>
 
 <body>
