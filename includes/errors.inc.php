@@ -36,6 +36,9 @@ if(isset($_GET["mail"])) {
     if($_GET["mail"] == "manager-sent"){
         echo"<p>Email sent to new Manager!</p>";
     }
+    if($_GET["mail"] == "user-sent"){
+        echo"<p>Email sent to new User!</p>";
+    }
 }
 
 ?>

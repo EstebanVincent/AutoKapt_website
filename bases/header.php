@@ -25,7 +25,6 @@
             echo '<li class="hover"><a href="/AutoKapt/pages/Admin/createManager.php">Create Manager</a></li>';
             echo '<li class="hover"><a href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>';
             echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
-            /* echo '<li><a href="/AutoKapt/pages/logIn/createNewPassword.php">New password</a></li>'; */ /* ne fonctionne pas car ducoup pas de token comme ça */
           echo'</ul>';
           echo '</li>';
           } 
@@ -33,18 +32,18 @@
             echo '<li class="hover scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
             echo '<ul class="sous">';
             echo '<li class="hover"><a href="/AutoKapt/pages/Manager/createUser.php">Create user</a></li>';
+            echo '<li class="hover"><a href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>';
             echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
-            /* echo '<li><a href="/AutoKapt/pages/logIn/createNewPassword.php">New password</a></li>'; */ /* ne fonctionne pas car ducoup pas de token comme ça */
             echo'</ul>';
             echo '</li>';
           }
           else if ($_SESSION["userAccess"] == 2){
             echo '<li class="hover scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
-                    echo '<ul class="sous">';
-            echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
-            /* echo '<li><a href="/AutoKapt/pages/logIn/createNewPassword.php">New password</a></li>'; */ /* ne fonctionne pas car ducoup pas de token comme ça */
-          echo'</ul>';
-          echo '</li>';
+                echo '<ul class="sous">';
+                    echo '<li class="hover"><a href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>';
+                    echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
+                 echo'</ul>';
+            echo '</li>';
           }
         }
         else {

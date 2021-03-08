@@ -57,13 +57,15 @@ function createUser($conn, $username, $email, $password, $gender, $age, $access)
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssssss", $username, $email, $hashedPassword , $gender, $age, $access);
+    mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $hashedPassword , $gender, $age, $access);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
 
     die(header("location: ../home.php/?error=accountcreationsuccess"));
 }
+
+
 /* session start et on fixe les valeurs SESSION userId et userUsername */
 function logInUser($conn, $username, $password){
     $usernameExists = usernameExists($conn, $username, $username);/* 2 fois car comme ça check pas mail */
@@ -335,12 +337,13 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
 }
 
 
+/* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createUserEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "localhost/AutoKapt/pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
-    $expires = date("U") + 1800;
+    $expires = date("U") + 604800; /* 1 semaine en secondes */
 
-    require_once '../dataBaseHandler.inc.php';
+    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
@@ -384,12 +387,13 @@ function createUserEmail($conn, $selector, $token){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
+    header('Location: ' . $_SERVER['HTTP_REFERER'] . '?mail=user-sent');
 }
+/* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createManagerEmail($conn, $selector, $token){
     $url = "localhost/AutoKapt/pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
-    $expires = date("U") + 1800;
+    $expires = date("U") + 604800; /* 1 semaine en secondes */
 
     /* require_once '../dataBaseHandler.inc.php'; */
 
@@ -438,23 +442,49 @@ function createManagerEmail($conn, $selector, $token){
     header('Location: ' . $_SERVER['HTTP_REFERER'] . '?mail=manager-sent');
 }
 
+
 /* return l'email correspondant au selector et token dans bdd resetPwd */
-function getEmail($conn, $selector, $token){
-    $sql = "SELECT pwdResetEmail FROM pwdReset WHERE pwdResetSelector=? AND pwdResetToken=? ;";
+function getEmail($conn, $selector, $validator){
+    /* date à l'instant t */
+    $currentDate = date("U");
+
+    /* On selectionne tout de la ligne de la bdd pwdreset qui contient le selector ET dont la date d'expiration est supérieur à l'insatant t */
+    $sql = "SELECT * FROM pwdReset WHERE pwdResetSelector=? AND pwdResetExpires >= ?;";
     $stmt = mysqli_stmt_init($conn);
 
+    /* on test si la communication avec la bdd est possible */
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        echo "error4";
+        echo "error";
         exit();
+    } else {
+        /* on remplace dans $sql par les variables donné au lieu de ? */
+        mysqli_stmt_bind_param($stmt, "ss", $selector, $currentDate);
+        /* on execute le stmt */
+        mysqli_stmt_execute($stmt);
+
+        /* on recupere le résultat */
+        $result = mysqli_stmt_get_result($stmt);
+        if(!$row = mysqli_fetch_assoc($result)){ /* transforme le résultat en array */
+            echo "u need to re-submit your reset request";
+            exit();
+        } else  {
+            /* le token validator est passé en binaire */
+            $tokenBin = hex2bin($validator); 
+            /* booleen qui check si le token de l'url est le meme que celui de la bdd */
+            $tokenCheck = password_verify($tokenBin, $row["pwdResetToken"]); 
+
+            if($tokenCheck === false) {
+                echo "u need to re-submit your reset request";
+                exit();
+            } elseif ($tokenCheck === true){
+                /* on recupere la valeur de l'email dans ma bdd pwdreset */
+                $email = $row["pwdResetEmail"];
+
+                return $email;
+
+
+                
+            }
+        }
     }
-
-    mysqli_stmt_bind_param($stmt, "ss", $selector, $token);
-    mysqli_stmt_execute($stmt);
-    
-    $result =mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
-
-    $email = $row["pwdResetEmail"];
-
-    return $email;
 }
