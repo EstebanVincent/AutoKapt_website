@@ -21,9 +21,9 @@
             } else {
                 if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
                     ?>
-                    <form action="/AutoKapt/includes/logIn/createNewPassword.inc.php" methode="POST">
-                        <input type="hidden" name="selector" value="<?php echo $selector ?>">;
-                        <input type="hidden" name="validator" value="<?php echo $validator ?>">;
+                    <form action="/AutoKapt/includes/logIn/createNewPassword.inc.php" method="POST">
+                        <input type="hidden" name="selector" value="<?php echo $selector ?>">
+                        <input type="hidden" name="validator" value="<?php echo $validator ?>">
                         <div class="element">
                             <input type="password" name="password" required>
                             <span></span>
