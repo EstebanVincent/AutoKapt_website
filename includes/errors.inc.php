@@ -32,5 +32,10 @@ if(isset($_GET["newPassword"])) {
         echo"<p>Your password has been reset!</p>";
     }
 }
+if(isset($_GET["mail"])) {
+    if($_GET["mail"] == "manager-sent"){
+        echo"<p>Email sent to new Manager!</p>";
+    }
+}
 
 ?>

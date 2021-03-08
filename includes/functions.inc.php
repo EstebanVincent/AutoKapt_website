@@ -48,8 +48,8 @@ function pwdLongEnough($password) {
 
 
 /* crée l'user dans la bdd users */
-function createUser($conn, $username, $email, $password, $gender, $age) {
-    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge) VALUES (?, ?, ?, ?, ?);";
+function createUser($conn, $username, $email, $password, $gender, $age, $access) {
+    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header("location: ../../pages/logIn/signUp.php/?error=stmtfailed"));
@@ -57,10 +57,12 @@ function createUser($conn, $username, $email, $password, $gender, $age) {
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hashedPassword , $gender, $age);
+    mysqli_stmt_bind_param($stmt, "ssssss", $username, $email, $hashedPassword , $gender, $age, $access);
     mysqli_stmt_execute($stmt);
+
     mysqli_stmt_close($stmt);
-    die(header("location: ../../home.php/?error=accountcreationsuccess"));
+
+    die(header("location: ../home.php/?error=accountcreationsuccess"));
 }
 /* session start et on fixe les valeurs SESSION userId et userUsername */
 function logInUser($conn, $username, $password){
@@ -385,11 +387,11 @@ function createUserEmail($conn, $selector, $token){
     header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
 }
 function createManagerEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "localhost/AutoKapt/pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
-    require_once '../dataBaseHandler.inc.php';
+    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
@@ -433,5 +435,26 @@ function createManagerEmail($conn, $selector, $token){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
+    header('Location: ' . $_SERVER['HTTP_REFERER'] . '?mail=manager-sent');
+}
+
+/* return l'email correspondant au selector et token dans bdd resetPwd */
+function getEmail($conn, $selector, $token){
+    $sql = "SELECT pwdResetEmail FROM pwdReset WHERE pwdResetSelector=? AND pwdResetToken=? ;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error4";
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $selector, $token);
+    mysqli_stmt_execute($stmt);
+    
+    $result =mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+
+    $email = $row["pwdResetEmail"];
+
+    return $email;
 }
