@@ -9,6 +9,7 @@
     <div id="secondLine"></div>
     <div id="copyrightAndIcons"></div>
 </footer>
+
 </body> 
 
 

@@ -372,12 +372,12 @@ input[type="submit"]:hover {
     padding: 0;
     box-sizing: inherit;
 }
+/******************** QA ************************ */
 html {
     box-sizing: border-box;
 }
 section {
     width: 100%;
-    height: 100vh;
     background-color: blueviolet;
     display: flex;
     align-items: center;
@@ -394,7 +394,6 @@ section {
     border-radius: 0.4rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    box-shadow: 0.5rem 2px 0.5rem grey;
 }
 .Question {
     color: red;
@@ -434,4 +433,20 @@ section {
 }
 .QA-item:target .Answer {
     max-height: 20rem;
+}
+
+/******************** ADD ************************ */
+
+.addQuestion-popup {
+    display: none;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid red;
+    z-index: 9;
+}
+.cancel {
+    float: right;
+}
+textarea {
+    width: 90%;
 }

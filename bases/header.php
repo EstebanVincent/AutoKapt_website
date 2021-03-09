@@ -10,6 +10,8 @@
   <title>Infinite Mesure</title>
   <link rel="stylesheet" href="/AutoKapt/style.css">
   <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
+  <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
+
   <!-- <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.10-0/dist/css/ionicons.min.css"> -->
 </head>
 
@@ -23,8 +25,9 @@
           if($_SESSION["userAccess"] == 0){
             echo '<li class="hover scroll"><a href="#">' . $_SESSION["userUsername"] . '</a>';
                     echo '<ul class="sous">';
-            echo '<li class="hover"><a href="/AutoKapt/pages/Admin/createManager.php">Create Manager</a></li>';
             echo '<li class="hover"><a href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>';
+            echo '<li class="hover"><a href="/AutoKapt/pages/Admin/createManager.php">Create Manager</a></li>';
+            echo '<li class="hover"><a href="/AutoKapt/pages/Admin/modifyFAQ.php">Update FAQ</a></li>';
             echo '<li class="hover"><a href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>';
           echo'</ul>';
           echo '</li>';

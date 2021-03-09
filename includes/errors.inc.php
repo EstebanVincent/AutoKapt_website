@@ -1,4 +1,6 @@
 <?php
+require_once 'functions.inc.php';
+
 if(isset($_GET["error"])) {
     if($_GET["error"] == "pwdsdontmatch"){
         echo"<p>Passwords don't match!</p>";
@@ -40,5 +42,20 @@ if(isset($_GET["mail"])) {
         echo"<p>Email sent to new User!</p>";
     }
 }
+if(isset($_GET["faq"])) {
+    if($_GET["faq"] == "addFAQ"){
+        php_alert('Question has been added to FAQ');
+    }
+    if($_GET["faq"] == "removeQ"){
+        echo"<p>Question has been removed from FAQ</p>";
+    }
+    if($_GET["faq"] == "updateQ"){
+        echo"<p>Question has been modified</p>";
+    }
+    
+}
 
 ?>
+<script>
+    alert("Question has been added to FAQ"))
+</script>

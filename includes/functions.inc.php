@@ -488,3 +488,55 @@ function getEmail($conn, $selector, $validator){
         }
     }
 }
+
+/* ajoute une question/reponse a la faq */
+function addQuestionFAQ($conn, $question, $answer){
+    $sql = "INSERT INTO faq (faqQuestion, faqAnswer) VALUES (?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
+    }
+
+    mysqli_stmt_bind_param($stmt, "ss", $question, $answer);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    die(header('Location: ../../pages/Admin/modifyFAQ.php?faq=addFAQ'));/* pas  lien http précédent car si 2 a la suite ca donne 2 
+    ?faq et ca fait de la merde */
+}
+/* enleve un element de la faq */
+function removeQuestionFAQ($conn, $faqId){
+    $sql = "DELETE FROM faq WHERE faqId=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
+    }
+
+    mysqli_stmt_bind_param($stmt, "i", $faqId);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=removeQ'));
+}
+/* modify un element de la faq */
+function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
+    $sql ="UPDATE faq SET faqQuestion=? AND faqAnswer=? WHERE faqId=?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssi", $newQuestion, $newAnswer, $faqId);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
+    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=updateQ'));
+}
+
+/* envoi une alerte js en php */
+function php_alert($msg){
+    echo '<script>alert("' . $msg . '")</script>';
+}
