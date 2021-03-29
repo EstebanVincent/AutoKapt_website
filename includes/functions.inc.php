@@ -507,22 +507,24 @@ function showFAQAdmin($conn){
     $results = mysqli_query($conn,$sql);
     $row_count = mysqli_num_rows($results);
 
+    /* boucle sur toute les lignes de la bdd faq */
     while ($rows = mysqli_fetch_assoc($results)) {
+        /* affiche chaque question avec sa réponse et les icones */
         echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
             echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
             echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
             echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
             echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
         echo '</div>';
-
+        /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
         echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
             echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
-            echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion" method="post">';
+            echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
                 echo '<h4>Question</h4>';
                 echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
-                echo '<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
                 echo '<h4>Answer</h4>';
-                echo '<textarea form ="addQuestion" name="answer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
+                echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
                 echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
                 echo '</form>';
             echo '</div>';
@@ -561,7 +563,7 @@ function removeQuestionFAQ($conn, $faqId){
 }
 /* modify un element de la faq */
 function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
-    $sql ="UPDATE faq SET faqQuestion=? AND faqAnswer=? WHERE faqId=?;";
+    $sql ="UPDATE faq SET faqQuestion=?, faqAnswer=? WHERE faqId=?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
