@@ -24,7 +24,7 @@
             <p id="demo"></p>
             <button type="button" class="open-button" onclick="openAdd()"><i class="fas fa-plus">Add question</i></button>
 
-			<div class="addQuestion-popup" id="myForm">
+			<div class="addQuestion-popup" id="add">
 				<button type="button" class="btn cancel" onclick="closeAdd()"><i class="far fa-window-close"></i></button>
 				<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="addQuestion" method="post">
 					<h4>Question</h4>
@@ -37,29 +37,7 @@
 		</div>
 	</section>
 
-    <script>
-    function deleteQuestion(faqId) {
-        if (confirm("Delete this question?")) {
-            /* Utiliser la function php removeQuestionFAQ($conn, $faqId) */
-        } 
-    }  
-	function openAdd() {
-	document.getElementById("myForm").style.display = "block";
-	}
-
-	function closeAdd() {
-	document.getElementById("myForm").style.display = "none";
-	}
-
-	function openModif(idFAQ) {
-
-	document.getElementById("modify"+idFAQ.toString()).style.display = "block";
-	}
-
-	function closeModif(idFAQ) {
-	document.getElementById("modify"+idFAQ.toString()).style.display = "none";
-	}
-    </script>
+	<script src="../../js/modifyFAQ.js"></script>
 
   <?php
   $pathErrors = $_SERVER['DOCUMENT_ROOT'];
