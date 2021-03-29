@@ -18,8 +18,8 @@
 			<?php
 			require_once '../includes/dataBaseHandler.inc.php';
 			require_once '../includes/functions.inc.php';
-			/* showFAQ($conn) */
-			hintSearch($conn)
+			showFAQ($conn)
+			/* hintSearch($conn) */
 			?>
 			</div>
 		</div>

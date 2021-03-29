@@ -22,11 +22,11 @@
 			?>
 			</div>
             <p id="demo"></p>
-            <button type="button" class="open-button" onclick="openForm()"><i class="fas fa-plus">Add question</i></button>
+            <button type="button" class="open-button" onclick="openAdd()"><i class="fas fa-plus">Add question</i></button>
 
 			<div class="addQuestion-popup" id="myForm">
-				<button type="button" class="btn cancel" onclick="closeForm()"><i class="far fa-window-close"></i></button>
-				<form action="../../includes/Admin/FAQ.inc.php" class="form-container" id="addQuestion" method="post">
+				<button type="button" class="btn cancel" onclick="closeAdd()"><i class="far fa-window-close"></i></button>
+				<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="addQuestion" method="post">
 					<h4>Question</h4>
 					<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required></textarea>
 					<h4>Answer</h4>
@@ -43,12 +43,21 @@
             /* Utiliser la function php removeQuestionFAQ($conn, $faqId) */
         } 
     }  
-	function openForm() {
+	function openAdd() {
 	document.getElementById("myForm").style.display = "block";
 	}
 
-	function closeForm() {
+	function closeAdd() {
 	document.getElementById("myForm").style.display = "none";
+	}
+
+	function openModif(idFAQ) {
+
+	document.getElementById("modify"+idFAQ.toString()).style.display = "block";
+	}
+
+	function closeModif(idFAQ) {
+	document.getElementById("modify"+idFAQ.toString()).style.display = "none";
 	}
     </script>
 

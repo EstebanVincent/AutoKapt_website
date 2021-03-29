@@ -510,9 +510,22 @@ function showFAQAdmin($conn){
     while ($rows = mysqli_fetch_assoc($results)) {
         echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
             echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
-            echo '<i class="fas fa-edit"></i><button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
+            echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
+            echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
             echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
         echo '</div>';
+
+        echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
+            echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
+            echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion" method="post">';
+                echo '<h4>Question</h4>';
+                echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
+                echo '<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                echo '<h4>Answer</h4>';
+                echo '<textarea form ="addQuestion" name="answer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
+                echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
+                echo '</form>';
+            echo '</div>';
     }
 }
 /* ajoute une question/reponse a la faq */
