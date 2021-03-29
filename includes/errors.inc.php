@@ -1,5 +1,4 @@
 <?php
-require_once 'functions.inc.php';
 
 if(isset($_GET["error"])) {
     if($_GET["error"] == "pwdsdontmatch"){
@@ -44,7 +43,7 @@ if(isset($_GET["mail"])) {
 }
 if(isset($_GET["faq"])) {
     if($_GET["faq"] == "addFAQ"){
-        php_alert('Question has been added to FAQ');
+        echo "<script>alert('Question has been added to FAQ')</script>";
     }
     if($_GET["faq"] == "removeQ"){
         echo"<p>Question has been removed from FAQ</p>";
@@ -56,6 +55,3 @@ if(isset($_GET["faq"])) {
 }
 
 ?>
-<script>
-    alert("Question has been added to FAQ"))
-</script>

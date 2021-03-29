@@ -17,16 +17,9 @@
 
 			<?php
 			require_once '../includes/dataBaseHandler.inc.php';
-			$sql = "SELECT * FROM faq;";
-			$results = mysqli_query($conn,$sql);
-			$row_count = mysqli_num_rows($results);
-
-			while ($rows = mysqli_fetch_assoc($results)) {
-				echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-					echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'] . '</a>';
-					echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-				echo '</div>';
-    		}
+			require_once '../includes/functions.inc.php';
+			/* showFAQ($conn) */
+			hintSearch($conn)
 			?>
 			</div>
 		</div>

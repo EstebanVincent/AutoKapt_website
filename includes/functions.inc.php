@@ -1,5 +1,5 @@
 <?php
-session_start();
+/* session_start(); */
 
 /* return true si match false sinon */
 function pwdMatch($password, $pwdRepeat) {
@@ -489,6 +489,32 @@ function getEmail($conn, $selector, $validator){
     }
 }
 
+/* Affiche toute les lignes de la FAQ */
+function showFAQ($conn){
+    $sql = "SELECT * FROM faq;";
+    $results = mysqli_query($conn,$sql);
+
+    while ($rows = mysqli_fetch_assoc($results)) {
+        echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
+            echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'] . '</a>';
+            echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
+        echo '</div>';
+    }
+}
+/* Affiche toute les lignes de la FAQ avec modif*/
+function showFAQAdmin($conn){
+    $sql = "SELECT * FROM faq;";
+    $results = mysqli_query($conn,$sql);
+    $row_count = mysqli_num_rows($results);
+
+    while ($rows = mysqli_fetch_assoc($results)) {
+        echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
+            echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
+            echo '<i class="fas fa-edit"></i><button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
+            echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
+        echo '</div>';
+    }
+}
 /* ajoute une question/reponse a la faq */
 function addQuestionFAQ($conn, $question, $answer){
     $sql = "INSERT INTO faq (faqQuestion, faqAnswer) VALUES (?, ?);";
@@ -539,4 +565,19 @@ function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
 /* envoi une alerte js en php */
 function php_alert($msg){
     echo '<script>alert("' . $msg . '")</script>';
+}
+
+/* echo la table des email de users et return un array des emails */
+function hintSearch($conn) {
+    $sql = "SELECT usersEmail FROM users;";
+    $results = mysqli_query($conn,$sql);
+    /* $rows = mysqli_fetch_assoc($results);
+    echo $rows['usersEmail']; */
+    $emails[] = $rows['usersEmail'];
+    while ($rows = mysqli_fetch_assoc($results)) {
+        echo '<div class="QA-item" id="question">';
+        echo '<a class="Question" href="#question">' . $rows['usersEmail'] . '</a>';
+            echo '</div>';
+    }
+    return $emails;
 }

@@ -17,18 +17,8 @@
 
 			<?php
 			require_once '../../includes/dataBaseHandler.inc.php';
-            /* require_once '../../includes/functions.inc.php'; */
-			$sql = "SELECT * FROM faq;";
-			$results = mysqli_query($conn,$sql);
-			$row_count = mysqli_num_rows($results);
-
-			while ($rows = mysqli_fetch_assoc($results)) {
-				echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-					echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
-                    echo '<i class="fas fa-edit"></i><button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
-					echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-				echo '</div>';
-    		}
+            require_once '../../includes/functions.inc.php';
+			showFAQAdmin($conn);
 			?>
 			</div>
             <p id="demo"></p>
