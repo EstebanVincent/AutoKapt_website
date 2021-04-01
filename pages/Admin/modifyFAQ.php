@@ -18,7 +18,7 @@
 			<?php
 			require_once '../../includes/dataBaseHandler.inc.php';
             require_once '../../includes/functions.inc.php';
-			showFAQAdmin($conn);
+			showFAQAdmin($conn, $_SESSION["userLanguage"]);
 			?>
 			</div>
             <p id="demo"></p>
@@ -27,6 +27,7 @@
 			<div class="addQuestion-popup" id="add">
 				<button type="button" class="btn cancel" onclick="closeAdd()"><i class="far fa-window-close"></i></button>
 				<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="addQuestion" method="post">
+					<input type="hidden" name="language" value= <?php echo $_SESSION["userLanguage"] ?>/>
 					<h4>Question</h4>
 					<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required></textarea>
 					<h4>Answer</h4>

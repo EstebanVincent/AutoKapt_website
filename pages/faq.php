@@ -18,7 +18,8 @@
 			<?php
 			require_once '../includes/dataBaseHandler.inc.php';
 			require_once '../includes/functions.inc.php';
-			showFAQ($conn)
+			
+			showFAQ($conn, $_SESSION['userLanguage'])
 			/* hintSearch($conn) */
 			?>
 			</div>
