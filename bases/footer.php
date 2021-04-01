@@ -1,13 +1,10 @@
 <footer>
-    <h2>Contactez nous</h2>
-    <form>
-      <input placeholder="Nom">
-      <input placeholder="E-mail">
-      <textarea placeholder="Votre message ici..."></textarea>
-      <button>Envoyer</button>
-    </form>
-    <div id="secondLine"></div>
-    <div id="copyrightAndIcons"></div>
+    <ul class= "flex-container">
+        <li class= "flex-container-child"><a href=pages\faq.php>Notre FAQ</a></li>
+        <li class= "flex-container-child"><a href=pages\team.php>L'équipe</a></li>
+        <li class= "flex-container-child"><a href=pages\faq.php>Notre FAQ</a></li>
+    </ul>
+
 </footer>
 
 </body> 
