@@ -27,7 +27,7 @@ if (isset($_POST["signUpManager-submit"])) {
     }
 
     
-    createUser($conn, $username, $email, $password, $gender, $age, 1);
+    createUser($conn, $username, $email, $password, $gender, $age, 1, 0);
 }
 
 else if (isset($_POST["signUpUser-submit"])) {
@@ -57,7 +57,7 @@ else if (isset($_POST["signUpUser-submit"])) {
   }
 
   
-  createUser($conn, $username, $email, $password, $gender, $age, 2);
+  createUser($conn, $username, $email, $password, $gender, $age, 2, 0);
 }
 else {
     die(header("location: ../../pages/logIn/signUp.php"));
