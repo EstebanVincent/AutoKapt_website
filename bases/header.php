@@ -56,8 +56,8 @@
         ?>
         <li class="hover scroll"><a href="#">Langue</a>
           <ul class="sous">
-            <li><a href="#">English</a></li>
-            <li><a href="#">Français</a></li>
+            <li><a href="/AutoKapt/includes/language/change2English.php">English</a></li>
+            <li><a href="/AutoKapt/includes/language/change2French.php">Français</a></li>
           </ul>
         </li>
         <li class="hover"><a href="/AutoKapt/pages/faq.php">FAQ</a></li>

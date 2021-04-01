@@ -48,8 +48,8 @@ function pwdLongEnough($password) {
 
 
 /* crée l'user dans la bdd users */
-function createUser($conn, $username, $email, $password, $gender, $age, $access) {
-    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
+function createUser($conn, $username, $email, $password, $gender, $age, $access, $language) {
+    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge, usersAccess, usersLanguage) VALUES (?, ?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header("location: ../../pages/logIn/signUp.php/?error=stmtfailed"));
@@ -57,7 +57,7 @@ function createUser($conn, $username, $email, $password, $gender, $age, $access)
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $hashedPassword , $gender, $age, $access);
+    mysqli_stmt_bind_param($stmt, "ssssiii", $username, $email, $hashedPassword , $gender, $age, $access, $language);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -82,6 +82,7 @@ function logInUser($conn, $username, $password){
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
         $_SESSION["userAccess"] = $usernameExists["usersAccess"];
+        $_SESSION["userLanguage"] = $usernameExists["usersLanguage"];
         die(header("location: ../../home.php/?error=loginSuccess"));
     }
 }
@@ -227,6 +228,7 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
 
 /* deja dans le compte et verification du mdp donc deja secure */
 function changePassword($conn, $currentPassword, $newPassword){
+    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -264,6 +266,7 @@ function changePassword($conn, $currentPassword, $newPassword){
 }
 /* same et on change la valeur de l'username de la session en plus */
 function changeUsername($conn, $verifyPassword, $newUsername) {
+    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -301,6 +304,7 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
 }
 /* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
 function changeEmail($conn, $verifyPassword, $newEmail) {
+    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -334,6 +338,25 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
 
         die(header("location: ../../pages/profile/myProfile.php/?error=updateemailsuccess"));
     }
+}
+/* Change la langue */
+function changeLanguage($conn, $language){
+    session_start();
+    $sessionId = $_SESSION["userId"];
+
+    $sql = "UPDATE users SET usersLanguage=? WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            exit(); 
+        }
+        
+        mysqli_stmt_bind_param($stmt, "ii", $language, $sessionId);
+        mysqli_stmt_execute($stmt);  
+
+        $_SESSION["userLanguage"] = $language;
+
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=languechangesuccess'));
 }
 
 
@@ -490,11 +513,22 @@ function getEmail($conn, $selector, $validator){
 }
 
 /* Affiche toute les lignes de la FAQ */
-function showFAQ($conn){
-    $sql = "SELECT * FROM faq;";
-    $results = mysqli_query($conn,$sql);
+function showFAQ($conn, $language){
+    $sql = "SELECT * FROM faq WHERE faqLanguage=?;";
+    $stmt = mysqli_stmt_init($conn);
 
-    while ($rows = mysqli_fetch_assoc($results)) {
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $language);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+
+
+    while ($rows = mysqli_fetch_assoc($result)){
         echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
             echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'] . '</a>';
             echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
@@ -502,28 +536,76 @@ function showFAQ($conn){
     }
 }
 /* Affiche toute les lignes de la FAQ avec modif*/
-function showFAQAdmin($conn){
-    $sql = "SELECT * FROM faq;";
-    $results = mysqli_query($conn,$sql);
-    $row_count = mysqli_num_rows($results);
+function showFAQAdmin($conn, $language){
+    $sql = "SELECT * FROM faq WHERE faqLanguage=?;";
+    $stmt = mysqli_stmt_init($conn);
 
-    while ($rows = mysqli_fetch_assoc($results)) {
-        echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-            echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
-            echo '<i class="fas fa-edit"></i><button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
-            echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-        echo '</div>';
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $language);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $results = mysqli_stmt_get_result($stmt);
+
+    if($language == 1){
+    /* boucle sur toute les lignes de la bdd faq */
+        while ($rows = mysqli_fetch_assoc($results)) {
+            /* affiche chaque question avec sa réponse et les icones */
+            echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
+                echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
+                echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
+                echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
+                echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
+            echo '</div>';
+            /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
+            echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
+                echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
+                echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
+                    echo '<h4>Question</h4>';
+                    echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
+                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                    echo '<h4>Answer</h4>';
+                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
+                    echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
+                    echo '</form>';
+                echo '</div>';
+        }
+    } else {
+        while ($rows = mysqli_fetch_assoc($results)) {
+            /* affiche chaque question avec sa réponse et les icones */
+            echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
+                echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
+                echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
+                echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
+                echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
+            echo '</div>';
+            /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
+            echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
+                echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
+                echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
+                    echo '<h4>Question</h4>';
+                    echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
+                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                    echo '<h4>Réponse</h4>';
+                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
+                    echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
+                    echo '</form>';
+                echo '</div>';
+        }
     }
 }
 /* ajoute une question/reponse a la faq */
-function addQuestionFAQ($conn, $question, $answer){
-    $sql = "INSERT INTO faq (faqQuestion, faqAnswer) VALUES (?, ?);";
+function addQuestionFAQ($conn, $question, $answer, $language){
+    $sql = "INSERT INTO faq (faqQuestion, faqAnswer, faqLanguage) VALUES (?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
     }
 
-    mysqli_stmt_bind_param($stmt, "ss", $question, $answer);
+    mysqli_stmt_bind_param($stmt, "ssi", $question, $answer, $language);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -548,7 +630,7 @@ function removeQuestionFAQ($conn, $faqId){
 }
 /* modify un element de la faq */
 function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
-    $sql ="UPDATE faq SET faqQuestion=? AND faqAnswer=? WHERE faqId=?;";
+    $sql ="UPDATE faq SET faqQuestion=?, faqAnswer=? WHERE faqId=?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
