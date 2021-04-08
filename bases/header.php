@@ -65,6 +65,7 @@
         <li class="hover"><a href="/AutoKapt/pages/faq.php">FAQ</a></li>
         <li class="hover"><a href="/AutoKapt/pages/team.php">L'équipe</a></li>
         <li class="hover"><a href="/AutoKapt/pages/User/stress.php">Stress</a></li>
+        <li class="hover"><a href="/AutoKapt/pages/User/reflex.php">Reflexe</a></li>
         <li><input  type="search" class="searchTerm" placeholder="Search">
         </li>
         
