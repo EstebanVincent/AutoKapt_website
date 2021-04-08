@@ -11,7 +11,7 @@
 
 	</header>  
 
-	<section>
+	<section class="sectionFAQ">
 		<div class="container">
 			<div class="QA">
 

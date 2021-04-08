@@ -17,29 +17,20 @@ window.onload = function () {
         animationEnabled: true,
         theme: "light1", //"light2", "dark1", "dark2",
         title: {
-            text: "Stress BPM Statistics",
+            text: "Stress BPM Personal Statistics",
         },
         axisX: {
             title: "Date",
-            crosshair: {
-                enabled: true,
-                snapToDataPoint: true,
-            },
         },
         axisY: {
             title: "BPM",
-            includeZero: true,
-            crosshair: {
-                enabled: true,
-                snapToDataPoint: true,
-            },
-        },
-        toolTip: {
-            enabled: false,
         },
         data: [
             {
-                type: "area",
+                type: "splineArea",
+                showInLegend: true,
+                name: "Global",
+                color: "#FC2020",
                 dataPoints: dataBPM,
             },
         ],
@@ -48,33 +39,103 @@ window.onload = function () {
         animationEnabled: true,
         theme: "light1", //"light2", "dark1", "dark2"
         title: {
-            text: "Stress Temperature Statistics",
+            text: "Stress Temperature Personal Statistics",
         },
         axisX: {
             title: "Date",
-            crosshair: {
-                enabled: true,
-                snapToDataPoint: true,
-            },
         },
         axisY: {
             title: "Temperature",
-            includeZero: true,
-            crosshair: {
-                enabled: true,
-                snapToDataPoint: true,
-            },
+            suffix: "°C",
         },
-        toolTip: {
-            enabled: false,
+        legend: {
+            fontSize: 13,
         },
         data: [
             {
-                type: "area",
+                type: "splineArea",
+                showInLegend: true,
+                name: "Global",
+                color: "#FC2020",
                 dataPoints: dataTemp,
             },
         ],
     });
+    var chartBPMTotal = new CanvasJS.Chart("BPMStats", {
+        animationEnabled: true,
+        theme: "light1", //"light2", "dark1", "dark2"
+        title: {
+            text: "Stress BPM Global Statistics",
+        },
+        axisX: {
+            title: "BPM",
+        },
+        axisY: {
+            title: "Percentage",
+            suffix: "%",
+        },
+        toolTip: {
+            shared: true,
+        },
+        legend: {
+            fontSize: 13,
+        },
+        data: [
+            {
+                type: "splineArea",
+                showInLegend: true,
+                name: "Global",
+                color: "#FC2020",
+                dataPoints: dataBPMTotal,
+            },
+            {
+                type: "splineArea",
+                showInLegend: true,
+                name: "Perso",
+                color: "#2020FC",
+                dataPoints: dataBPMPerso,
+            },
+        ],
+    });
+    var chartTempTotal = new CanvasJS.Chart("TempStats", {
+        animationEnabled: true,
+        theme: "light1", //"light2", "dark1", "dark2"
+        title: {
+            text: "Stress Température Global Statistics",
+        },
+        axisX: {
+            title: "Température",
+            suffix: "°C",
+        },
+        axisY: {
+            title: "Percentage",
+            suffix: "%",
+        },
+        toolTip: {
+            shared: true,
+        },
+        legend: {
+            fontSize: 13,
+        },
+        data: [
+            {
+                type: "splineArea",
+                showInLegend: true,
+                name: "Global",
+                color: "#FC2020",
+                dataPoints: dataTempTotal,
+            },
+            {
+                type: "splineArea",
+                showInLegend: true,
+                name: "Perso",
+                color: "#2020FC",
+                dataPoints: dataTempPerso,
+            },
+        ],
+    });
+    chartBPMTotal.render();
     chartBPM.render();
+    chartTempTotal.render();
     chartTemp.render();
 };

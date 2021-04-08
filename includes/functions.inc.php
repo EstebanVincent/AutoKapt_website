@@ -671,9 +671,9 @@ function getBPMHistoryUser($conn, $sessionId){
 
     return resultToArray($results);
 }
-/* renvoie un array avec le BPM et le timestamp de l'user */
-function getBPMTotal($conn){
-    $sql = "SELECT stressBPM FROM stress;";
+/* renvoie un array de deux array avec les BPM globaux et de l'user */
+function getBPMTotal($conn, $sessionId){
+    $sql = "SELECT stressBPM AS x FROM stress;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -682,11 +682,44 @@ function getBPMTotal($conn){
     } else {
         mysqli_stmt_execute($stmt);
     }
-    $results = mysqli_stmt_get_result($stmt);
+    $resultTotal = mysqli_stmt_get_result($stmt);
 
-    return resultToArray($results);
+    $sql = "SELECT stressBPM AS x FROM test INNER JOIN stress USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $resultPerso = mysqli_stmt_get_result($stmt);
+
+    return [resultToArray($resultTotal), resultToArray($resultPerso)];
 }
-
+/* on considere les BPM de 50 à 150 avec un écart de 5 entre chaque */
+function BPMTotal2Chart($BPM){
+    $array = array();
+    /* on créer un array à 2 dimensions avec chaque ligne =  (maxBPM, pourcentage de test compris entre ce max et le précédent) */
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(50 + 5*$i, 0);
+    }
+    for ($i = 0; $i < count($BPM); $i++) { /* on parcours les BPM donné */
+        for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
+            if ($BPM[$i]['x'] <= $array[$j][0]){/* si le ième bpm est inf ou égal au bpmMax j */
+                $array[$j][1] += (1/count($BPM))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+                break;/* on sort du for j et on passe au i suivant */
+            }
+        }
+    }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
+}
 
 /* renvoie un array avec le BPM et le timestamp de l'user */
 function getTempHistoryUser($conn, $sessionId){
@@ -706,7 +739,7 @@ function getTempHistoryUser($conn, $sessionId){
 }
 /* renvoie un array avec le BPM et le timestamp de l'user */
 function getTempTotal($conn, $sessionId){
-    $sql = "SELECT stressTemp FROM stress;";
+    $sql = "SELECT stressTemp AS x FROM stress;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -715,13 +748,41 @@ function getTempTotal($conn, $sessionId){
     } else {
         mysqli_stmt_execute($stmt);
     }
-    $results = mysqli_stmt_get_result($stmt);
+    $resultTotal = mysqli_stmt_get_result($stmt);
 
-    return resultToArray($results);
+    $sql = "SELECT stressTemp AS x FROM test INNER JOIN stress USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $resultPerso = mysqli_stmt_get_result($stmt);
+
+    return [resultToArray($resultTotal), resultToArray($resultPerso)];
 }
-
-
-/* on considere les BPM de 50 à 150 avec un écart de 5 entre chaque */
-function BPMTotal2Chart($BPM){
-    
+/* on considere les températures de 35 à 40°C avec un écart de 0.25 entre chaque */
+function TempTotal2Chart($Temp){
+    $array = array();
+    /* on créer un array à 2 dimensions avec chaque ligne =  (maxTemp, pourcentage de test compris entre ce max et le précédent) */
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(35 + 0.25*$i, 0);
+    }
+    for ($i = 0; $i < count($Temp); $i++) { /* on parcours les BPM donné */
+        for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
+            if ($Temp[$i]['x'] <= $array[$j][0]){
+                $array[$j][1] += (1/count($Temp))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+                break;/* on sort du for j et on passe au i suivant */
+            }
+        }
+    }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
 }
