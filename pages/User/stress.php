@@ -11,22 +11,21 @@
 
 	</header> 
 <body>
-    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <div id="UserBPM" style="height: 370px; width: 100%;"></div>
+	<div id="UserTemp" style="height: 370px; width: 100%;"></div>
     <?php
     require_once '../../includes/dataBaseHandler.inc.php';
     require_once '../../includes/functions.inc.php';
 
-    $dataPoints = getBPMHistory($conn, $_SESSION["userId"]);
+    $dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
+	$dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
     ?>
 </body>
 <script>
-var data = <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>;
+var dataBPM = <?php echo json_encode($dataBPM, JSON_NUMERIC_CHECK); ?>;
+var dataTemp = <?php echo json_encode($dataTemp, JSON_NUMERIC_CHECK); ?>;
 </script>
-
-
-
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script src="../../js/BPM.js"></script>
+<script src="../../js/stress.js"></script>
 
 <?php
 $pathErrors = $_SERVER['DOCUMENT_ROOT'];

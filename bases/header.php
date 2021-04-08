@@ -12,6 +12,7 @@
   <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   <!-- <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.10-0/dist/css/ionicons.min.css"> -->
 </head>

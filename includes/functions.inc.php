@@ -654,8 +654,9 @@ function resultToArray($result) {
     return $rows;
 }
 
+
 /* renvoie un array avec le BPM et le timestamp de l'user */
-function getBPMHistory($conn, $sessionId){
+function getBPMHistoryUser($conn, $sessionId){
     $sql = "SELECT testDate AS x, stressBPM AS y FROM test INNER JOIN stress USING (testId) WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
 
@@ -669,4 +670,58 @@ function getBPMHistory($conn, $sessionId){
     $results = mysqli_stmt_get_result($stmt);
 
     return resultToArray($results);
+}
+/* renvoie un array avec le BPM et le timestamp de l'user */
+function getBPMTotal($conn){
+    $sql = "SELECT stressBPM FROM stress;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+
+
+/* renvoie un array avec le BPM et le timestamp de l'user */
+function getTempHistoryUser($conn, $sessionId){
+    $sql = "SELECT testDate AS x, stressTemp AS y FROM test INNER JOIN stress USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+/* renvoie un array avec le BPM et le timestamp de l'user */
+function getTempTotal($conn, $sessionId){
+    $sql = "SELECT stressTemp FROM stress;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+
+
+/* on considere les BPM de 50 à 150 avec un écart de 5 entre chaque */
+function BPMTotal2Chart($BPM){
+    
 }

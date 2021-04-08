@@ -109,19 +109,18 @@ footer {
     position: bottom;
     width: 100%;
     opacity: 0.9;
-    
 }
-.flex-container{
+.flex-container {
     display: flex;
-  flex-flow: row wrap;
-  
-  justify-content: space-around;
-  
-  padding: 0;
-  margin: 0;
-  list-style: none;
+    flex-flow: row wrap;
+
+    justify-content: space-around;
+
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
-.flex-container-child{
+.flex-container-child {
     padding: 5px;
     margin-top: 10px;
     margin-left: 10px;
@@ -132,7 +131,7 @@ footer {
     font-size: 3em;
     text-align: center;
 }
-.flex-container-child a:hover{
+.flex-container-child a:hover {
     background-color: dimgray;
     transition: 0.3s;
     margin-top: 10px;
@@ -140,7 +139,6 @@ footer {
     margin-right: 10px;
     border-radius: 10px;
 }
-
 
 /*************************** IMAGE PRINCIPALE ******************************* */
 #imagePrincipale {
