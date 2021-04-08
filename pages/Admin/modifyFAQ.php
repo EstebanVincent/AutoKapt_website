@@ -10,6 +10,8 @@
 	</div>
 
 	</header>  
+<body>
+	
 
 	<section>
 		<div class="container">
@@ -30,13 +32,20 @@
 					<input type="hidden" name="language" value= <?php echo $_SESSION["userLanguage"] ?>/>
 					<h4>Question</h4>
 					<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required></textarea>
-					<h4>Answer</h4>
+					<?php
+					if($_SESSION["userLanguage"] == 1){
+						echo '<h4>Answer</h4>';
+					} else {
+						echo '<h4>Réponse</h4>';
+					}
+					?>
 					<textarea form ="addQuestion" name="answer" rows="6" maxlength="280" minlength="20" required></textarea>
 					<button type="submit" name="addQuestion-submit">Confirm</button>
 				</form>
 			</div>
 		</div>
 	</section>
+</body>
 
 	<script src="../../js/modifyFAQ.js"></script>
 

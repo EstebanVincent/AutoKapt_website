@@ -550,53 +550,35 @@ function showFAQAdmin($conn, $language){
 
     $results = mysqli_stmt_get_result($stmt);
 
-    if($language == 1){
+    /* if($language == 1){ */
     /* boucle sur toute les lignes de la bdd faq */
-        while ($rows = mysqli_fetch_assoc($results)) {
-            /* affiche chaque question avec sa réponse et les icones */
-            echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-                echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
-                echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
-                echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
-                echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-            echo '</div>';
-            /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
-            echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
-                echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
-                echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
-                    echo '<h4>Question</h4>';
-                    echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
-                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+    while ($rows = mysqli_fetch_assoc($results)) {
+        /* affiche chaque question avec sa réponse et les icones */
+        echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
+            echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
+            echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
+            echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
+            echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
+        echo '</div>';
+        /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
+        echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
+            echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
+            echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
+                echo '<h4>Question</h4>';
+                echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
+                echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                if($language == 1){
                     echo '<h4>Answer</h4>';
-                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
-                    echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
-                    echo '</form>';
-                echo '</div>';
-        }
-    } else {
-        while ($rows = mysqli_fetch_assoc($results)) {
-            /* affiche chaque question avec sa réponse et les icones */
-            echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-                echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'];
-                echo '<button onclick="openModif(' . $rows['faqId'] . ')"><i class="fas fa-edit"></i></button></a>';
-                echo '<button onclick="deleteQuestion(' . $rows['faqId'] . ')"><i class="fas fa-trash"></i></button></a>';
-                echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-            echo '</div>';
-            /* le pop-up caché de modification, pour chaque itération de la boucle l'id du pop-up reprend l'id de la question afin de les diférentier */
-            echo '<div class="modifyQuestion-popup" id="modify' . $rows['faqId'] . '">';
-                echo '<button type="button" class="btn cancel" onclick="closeModif(' . $rows['faqId'] . ')"><i class="far fa-window-close"></i></button>';
-                echo '<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="modifyQuestion' . $rows['faqId'] . '" method="post">';
-                    echo '<h4>Question</h4>';
-                    echo '<input type="hidden" name="faqId" value="' . $rows['faqId'] . '">';
-                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newQuestion" rows="2" maxlength="140" minlength="20" required>' . $rows['faqQuestion'] . '</textarea>';
+                } else {
                     echo '<h4>Réponse</h4>';
-                    echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
-                    echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
-                    echo '</form>';
-                echo '</div>';
-        }
+                }
+                echo '<textarea form ="modifyQuestion' . $rows['faqId'] . '" name="newAnswer" rows="6" maxlength="280" minlength="20" required>' . $rows['faqAnswer'] . '</textarea>';
+                echo '<button type="submit" name="modifyQuestion-submit">Confirm</button>';
+                echo '</form>';
+            echo '</div>';
     }
 }
+
 /* ajoute une question/reponse a la faq */
 function addQuestionFAQ($conn, $question, $answer, $language){
     $sql = "INSERT INTO faq (faqQuestion, faqAnswer, faqLanguage) VALUES (?, ?, ?);";
@@ -662,4 +644,29 @@ function hintSearch($conn) {
             echo '</div>';
     }
     return $emails;
+}
+/* return le résultat sous forme d'array */
+function resultToArray($result) {
+    $rows = array();
+    while($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+/* renvoie un array avec le BPM et le timestamp de l'user */
+function getBPMHistory($conn, $sessionId){
+    $sql = "SELECT testDate AS x, stressBPM AS y FROM test INNER JOIN stress USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
 }

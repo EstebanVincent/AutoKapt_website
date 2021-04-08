@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/AutoKapt/style.css">
   <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
   <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.10-0/dist/css/ionicons.min.css"> -->
 </head>
@@ -62,6 +63,7 @@
         </li>
         <li class="hover"><a href="/AutoKapt/pages/faq.php">FAQ</a></li>
         <li class="hover"><a href="/AutoKapt/pages/team.php">L'équipe</a></li>
+        <li class="hover"><a href="/AutoKapt/pages/User/stress.php">Stress</a></li>
         <li><input  type="search" class="searchTerm" placeholder="Search">
         </li>
         
