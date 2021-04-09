@@ -412,3 +412,6 @@ textarea {
     display: flex;
     flex-direction: row;
 }
+.dark2 {
+    background-color: #32373a;
+}

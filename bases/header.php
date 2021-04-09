@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Infinite Mesure</title>
-        <link rel="stylesheet" href="/AutoKapt/CSS/styleHeader.css" />
+        <link rel="stylesheet" href="/AutoKapt/CSS/styleBases.css" />
         <link rel="stylesheet" href="/AutoKapt/CSS/style.css" />
         <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>

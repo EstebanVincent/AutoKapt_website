@@ -15,7 +15,7 @@ for (var i = 0; i < dataTemp.length; i++) {
 window.onload = function () {
     var chartBPM = new CanvasJS.Chart("UserBPM", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2",
+        theme: "dark2", //"light2", "dark1", "dark2",
         title: {
             text: "Stress BPM Personal Statistics",
         },
@@ -37,7 +37,7 @@ window.onload = function () {
     });
     var chartTemp = new CanvasJS.Chart("UserTemp", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Stress Temperature Personal Statistics",
         },
@@ -63,7 +63,7 @@ window.onload = function () {
     });
     var chartBPMTotal = new CanvasJS.Chart("BPMStats", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Stress BPM Global Statistics",
         },
@@ -99,7 +99,7 @@ window.onload = function () {
     });
     var chartTempTotal = new CanvasJS.Chart("TempStats", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Stress Température Global Statistics",
         },

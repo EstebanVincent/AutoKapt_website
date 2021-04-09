@@ -3,29 +3,25 @@
   $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
   include_once($pathHeader);
 ?>
-    <div id = "imagePrincipale">
-		<h1>Infinite Mesures</h1>
-		<div id = "firstLine"></div>
-		<h3>Mesure du Stress</h3>
-	</div>
-
-	</header> 
-<body>
-<section>
-	<h2>Mesure des BPM</h2>
-	<div class="graphs">
-		<div id="UserBPM" style="height: 370px; width: 100%;"></div>
-		<div id="BPMStats" style="height: 370px; width: 100%;"></div>
-	</div>
-</section>
-
-<section>
-	<h2>Mesure de la Temepérature</h2>
-	<div class="graphs">
-		<div id="UserTemp" style="height: 370px; width: 100%;"></div>
-		<div id="TempStats" style="height: 370px; width: 100%;"></div>
-	</div>
-</section>
+<div class="container-fluid bg-dark text-white-50">
+	<div class="py-2"></div>
+	<section class="dark2 py-2 border border-info border-3 rounded">
+		<h2>Mesure des BPM</h2>
+		<div class="graphs">
+			<div id="UserBPM" style="height: 370px; width: 100%;"></div>
+			<div id="BPMStats" style="height: 370px; width: 100%;"></div>
+		</div>
+	</section>
+	<div class="py-2"></div>
+	<section class="dark2 py-2 border border-info border-3 rounded">
+		<h2>Mesure de la Temepérature</h2>
+		<div class="graphs">
+			<div id="UserTemp" style="height: 370px; width: 100%;"></div>
+			<div id="TempStats" style="height: 370px; width: 100%;"></div>
+		</div>
+	</section>
+	<div class="py-2"></div>
+</div>
 	
 	
     <?php
@@ -45,7 +41,7 @@
 
 
     ?>
-</body>
+
 <script>
 var dataBPM = <?php echo json_encode($dataBPM, JSON_NUMERIC_CHECK); ?>;
 var dataBPMTotal = <?php echo json_encode($dataBPMTotal, JSON_NUMERIC_CHECK); ?>;
