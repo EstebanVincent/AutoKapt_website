@@ -1,0 +1,35 @@
+/* * {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    height: 100vh;
+}
+.navbar-style {
+    text-transform: uppercase;
+    background-color: black;
+} */
+.logo {
+    height: 48px;
+    padding: 2px 10px;
+}
+/* .icon-bar {
+    background: darkorange;
+}
+.navbar li a {
+    color: white;
+}*/
+ul.dropdown-menu a:hover {
+    background-color: #888992 !important;
+}
+.navbar .nav-item .dropdown-menu {
+    display: none;
+    /* text-transform: uppercase; */
+    /* background-color: black; */
+}
+.navbar .nav-item:hover .dropdown-menu {
+    display: block;
+}
+.navbar .nav-item .dropdown-menu a {
+    color: white;
+}
