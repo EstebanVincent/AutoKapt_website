@@ -853,3 +853,14 @@ function VisualTotal2Chart($Visual){
     }
     return $arrayFinal;
 }
+
+/* $data est le résult d'une fonction history User */
+function moyenne($conn, $data){
+    $size = count($data);
+    $total = 0;
+    for ($i = 0; $i < count($data); $i++) { /* on parcours les données */
+        $total += $data[$i]['y'];
+    }
+    $moy = $total/$size;
+    return $moy;
+}

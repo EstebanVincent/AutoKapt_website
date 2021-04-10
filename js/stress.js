@@ -1,3 +1,4 @@
+/* timestamp sql to date js */
 for (var i = 0; i < dataBPM.length; i++) {
     // Split timestamp into [ Y, M, D, h, m, s ]
     var t = dataBPM[i].x.split(/[- :]/);
@@ -11,7 +12,7 @@ for (var i = 0; i < dataTemp.length; i++) {
     // Apply each element to the Date function
     dataTemp[i].x = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 }
-
+/* on utilise canvasJS pour les graphs */
 window.onload = function () {
     var chartBPM = new CanvasJS.Chart("UserBPM", {
         animationEnabled: true,
