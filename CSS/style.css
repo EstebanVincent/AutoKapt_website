@@ -413,5 +413,14 @@ textarea {
     flex-direction: row;
 }
 .dark2 {
-    background-color: #32373a;
+    background-color: #32373a !important;
+}
+.accordion-body {
+    width: 90% !important;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+}
+.accordion-button {
+    text-align: justify !important;
 }

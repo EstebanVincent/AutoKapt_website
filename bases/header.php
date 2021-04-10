@@ -86,9 +86,8 @@
                               </ul>
                           </li>';
                         } 
-                        else {
-                          echo "<li class='nav-item'><a class='nav-link' href='/AutoKapt/pages/logIn/logIn.php'>Log in</a></li>";
-                        }
+                      } else {
+                        echo "<li class='nav-item'><a class='nav-link' href='/AutoKapt/pages/logIn/logIn.php'>Log in</a></li>";
                       }
 ?>
                         </ul>

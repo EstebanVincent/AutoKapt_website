@@ -529,10 +529,20 @@ function showFAQ($conn, $language){
 
 
     while ($rows = mysqli_fetch_assoc($result)){
-        echo '<div class="QA-item" id="question' .$rows['faqId'] . '">';
-            echo '<a class="Question" href="#question' .$rows['faqId'] . '">' . $rows['faqQuestion'] . '</a>';
-            echo '<div class="Answer"><p>' . $rows['faqAnswer'] . '</p></div>';
-        echo '</div>';
+        echo '
+        <div class="accordion-item bg-secondary text-white-50">
+				<h2 class="accordion-header pt-0" id="heading' .$rows['faqId'] . '">
+				<button class="accordion-button dark2 text-white-50" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' .$rows['faqId'] . '" aria-expanded="false" aria-controls="collapse' .$rows['faqId'] . '">
+                    ' . $rows['faqQuestion'] . '
+				</button>
+				</h2>
+				<div id="collapse' .$rows['faqId'] . '" class="accordion-collapse collapse" aria-labelledby="heading' .$rows['faqId'] . '" data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+                ' . $rows['faqAnswer'] . '
+				</div>
+				</div>
+			</div>
+        ';
     }
 }
 /* Affiche toute les lignes de la FAQ avec modif*/
