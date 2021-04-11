@@ -424,3 +424,9 @@ textarea {
 .accordion-button {
     text-align: justify !important;
 }
+.justify {
+    text-align: justify;
+}
+.unstyle {
+    text-decoration: none;
+}

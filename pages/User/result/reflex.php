@@ -29,8 +29,8 @@
 	
 	
     <?php
-    require_once '../../includes/dataBaseHandler.inc.php';
-    require_once '../../includes/functions.inc.php';
+    require_once '../../../includes/dataBaseHandler.inc.php';
+    require_once '../../../includes/functions.inc.php';
 
 	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
 
@@ -54,7 +54,7 @@ var dataVisualPerso = <?php echo json_encode($dataVisualPerso, JSON_NUMERIC_CHEC
 
 
 </script>
-<script src="../../js/reflex.js"></script>
+<script src="../../../js/reflex.js"></script>
 
 <?php
 $pathErrors = $_SERVER['DOCUMENT_ROOT'];

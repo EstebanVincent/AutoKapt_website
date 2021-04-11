@@ -874,3 +874,83 @@ function moyenne($conn, $data){
     $moy = $total/$size;
     return $moy;
 }
+
+/* Affiche le tablo des lignes de test de l'user */
+function showActivity($conn, $userId){
+    $sql = "SELECT testType, testDate FROM test WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $userId);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+    $array = resultToArray($result);
+
+    /* on replace les valeurs de 0 à 3 en type correspondant */
+    for ($i = 0; $i < count($array); $i++) {
+        switch ($array[$i]['testType']) {
+            case 0:
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-brain"></i></a> Stress';
+                break;
+            case 1:
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> Reflex';
+                break;
+            case 2:
+                $array[$i]['testType'] = 'Memory';
+                break;
+            case 3:
+                $array[$i]['testType'] = 'Audition';
+                break;
+        }
+    }
+    /* on parcours le tablo de la requete sql en partant de la fin */
+    for ($i = count($array) - 1; $i >= 0; $i--) {
+        /* temps écoulé depuis le test en question */
+        $time_ago = time_elapsed_string($array[$i]['testDate']);
+        $split_time = preg_split("/[\s]/", $array[$i]['testDate']);
+        $time = $split_time[0] . ' à ' . $split_time[1];
+            echo '
+            <tr>
+                <td class="align-middle"><h4>'. $array[$i]['testType'] .'</h4></td>
+                <td><p class="text-danger my-0">'. $time_ago .'</p><p class="my-0">'. $time .'</p></td>
+            </tr>
+            ';
+            
+    } 
+}
+
+/* fonction venant de stackoverflow */
+/* https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474 */
+function time_elapsed_string($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
+}

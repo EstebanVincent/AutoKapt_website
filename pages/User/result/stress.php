@@ -7,8 +7,8 @@
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once '../../includes/dataBaseHandler.inc.php';
-    require_once '../../includes/functions.inc.php';
+    require_once '../../../includes/dataBaseHandler.inc.php';
+    require_once '../../../includes/functions.inc.php';
 
 	$dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
 
@@ -45,7 +45,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button>
+				<a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
 			</div>
 		</div>
 	</section>
@@ -78,7 +78,7 @@ var dataTempTotal = <?php echo json_encode($dataTempTotal, JSON_NUMERIC_CHECK); 
 var dataTempPerso = <?php echo json_encode($dataTempPerso, JSON_NUMERIC_CHECK); ?>;
 
 </script>
-<script src="../../js/stress.js"></script>
+<script src="/AutoKapt/js/stress.js"></script>
 
 <?php
 $pathErrors = $_SERVER['DOCUMENT_ROOT'];
