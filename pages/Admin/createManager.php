@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Infinite Mesures</title>
-        <link rel="stylesheet" href="/AutoKapt/style.css">
-        <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
-    </head> 
-<body>
+<?php
+  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
+  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
+  include_once($pathHeader);
+?>
+
     <div id = "backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, blanditiis.</p>
@@ -31,5 +28,12 @@
     
     </div>
 
-</body>
-</html>
+<?php
+$pathErrors = $_SERVER['DOCUMENT_ROOT'];
+$pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
+include_once($pathErrors);
+
+$pathFooter = $_SERVER['DOCUMENT_ROOT'];
+$pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
+include_once($pathFooter);
+?>

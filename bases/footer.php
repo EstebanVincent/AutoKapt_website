@@ -75,6 +75,11 @@
                             <h5>CONTACT</h5>
                             <a href="#!" class="text-white-50 text-start">Contact Us by Email</a>
                         </li>
+                        <li>
+                            <h5>JSP</h5>
+                            <a href="#!" class="text-white-50 text-start">CGU</a><br>
+                            <a href="#!" class="text-white-50 text-start">Mentions Légales</a>
+                        </li>
                     </ul>
                 </div>
             </div>

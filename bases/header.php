@@ -9,9 +9,11 @@
         <title>Infinite Mesure</title>
         <link rel="stylesheet" href="/AutoKapt/CSS/styleBases.css" />
         <link rel="stylesheet" href="/AutoKapt/CSS/style.css" />
+        <link rel="stylesheet" href="/AutoKapt/CSS/styleForms.css" />
         <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
         <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Bootstrap 5 -->
         <link
@@ -57,6 +59,7 @@
                                     <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
                                     <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/createManager.php">Create Manager</a></li>
                                     <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyFAQ.php">Update FAQ</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyUsers.php">Update users</a></li>
                                     <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
                                 </ul>
                             </li>';

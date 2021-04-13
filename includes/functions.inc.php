@@ -954,3 +954,33 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+/* Affiche le tablo de tout les users ayant l'acces demandé */
+function showUsers($conn, $access){
+    $sql = "SELECT usersUsername, usersEmail, usersGender, usersAge, usersAccess FROM users WHERE usersAccess=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $access);
+        mysqli_stmt_execute($stmt);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+    $array = resultToArray($result);
+    
+    /* on parcours le tablo de la requete sql */
+    for ($i = 0; $i < count($array); $i++) {
+        echo '
+        <tr>
+            <td class="align-middle"><h4>'. $array[$i]['usersUsername'] .'</h4></td>
+            <td class="align-middle"><h4>'. $array[$i]['usersEmail'] .'</h4></td>
+            <td class="align-middle"><h4>'. $array[$i]['usersGender'] .'</h4></td>
+            <td class="align-middle"><h4>'. $array[$i]['usersAge'] .' years old</h4></td>
+        </tr>
+        ';
+            
+    } 
+}
