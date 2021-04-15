@@ -911,7 +911,7 @@ function showActivity($conn, $userId){
     /* on parcours le tablo de la requete sql en partant de la fin */
     for ($i = count($array) - 1; $i >= 0; $i--) {
         /* temps écoulé depuis le test en question */
-        $time_ago = time_elapsed_string($array[$i]['testDate']);
+        $time_ago = time_elapsed_string($array[$i]['testDate'], ' ago');
         $split_time = preg_split("/[\s]/", $array[$i]['testDate']);
         $time = $split_time[0] . ' à ' . $split_time[1];
             echo '
@@ -926,7 +926,7 @@ function showActivity($conn, $userId){
 
 /* fonction venant de stackoverflow */
 /* https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474 */
-function time_elapsed_string($datetime, $full = false) {
+function time_elapsed_string($datetime, $after, $full = false) {
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -952,12 +952,12 @@ function time_elapsed_string($datetime, $full = false) {
     }
 
     if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . ' ago' : 'just now';
+    return $string ? implode(', ', $string) . $after : 'just now';
 }
 
 /* Affiche le tablo de tout les users ayant l'acces demandé */
 function showUsers($conn, $access){
-    $sql = "SELECT usersUsername, usersEmail, usersGender, usersAge, usersAccess FROM users WHERE usersAccess=?;";
+    $sql = "SELECT usersUsername, usersEmail, usersGender, usersBirth, usersAccess FROM users WHERE usersAccess=?;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -978,7 +978,7 @@ function showUsers($conn, $access){
             <td class="align-middle"><h4>'. $array[$i]['usersUsername'] .'</h4></td>
             <td class="align-middle"><h4>'. $array[$i]['usersEmail'] .'</h4></td>
             <td class="align-middle"><h4>'. $array[$i]['usersGender'] .'</h4></td>
-            <td class="align-middle"><h4>'. $array[$i]['usersAge'] .' years old</h4></td>
+            <td class="align-middle"><h4>'. time_elapsed_string($array[$i]['usersBirth'], ' old') .'</h4></td>
         </tr>
         ';
             
