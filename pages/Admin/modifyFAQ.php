@@ -3,15 +3,6 @@
   $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
   include_once($pathHeader);
 ?>
-    <div id = "imagePrincipale">
-		<h1>Infinite Mesures</h1>
-		<div id = "firstLine"></div>
-		<h3>Foire aux Questions</h3>
-	</div>
-
-	</header>  
-<body>
-	
 
 	<section class="sectionFAQ">
 		<div class="container">
@@ -45,8 +36,6 @@
 			</div>
 		</div>
 	</section>
-</body>
-
 	<script src="../../js/modifyFAQ.js"></script>
 
   <?php
