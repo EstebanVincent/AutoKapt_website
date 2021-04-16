@@ -2,7 +2,7 @@ $(document).ready(function ($) {
     function create_html_table(tbl_data) {
         //--->create data table > start
         var tbl = "";
-        tbl += '<table class="table table-dark table-hover text-white-50 rounded overflow-hidden">';
+        tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden">';
 
         //--->create table header > start
         tbl += "<thead>";
@@ -34,7 +34,7 @@ $(document).ready(function ($) {
             tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
 
             //--->edit options > start
-            tbl += "<td>";
+            tbl += "<td class='align-middle'>";
             tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
             //only show this button if edit button is clicked
             tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
@@ -189,25 +189,34 @@ $(document).ready(function ($) {
     //--->button > delete > start
     $(document).on("click", ".btn_delete", function (event) {
         event.preventDefault();
-
         var ele_this = $(this);
-        var row_id = ele_this.attr("row_id");
-        var data_obj = {
-            call_type: "delete_row_entry",
-            row_id: row_id,
-        };
+        $.confirm({
+            title: "Deleting row",
+            content: "Are you sure ?",
+            buttons: {
+                confirm: function () {
+                    var row_id = ele_this.attr("row_id");
+                    var data_obj = {
+                        call_type: "delete_row_entry",
+                        row_id: row_id,
+                    };
 
-        ele_this.html('<p class="bg-secondary rounded">Please wait....deleting your entry</p>');
-        $.post(ajax_url, data_obj, function (data) {
-            var d1 = JSON.parse(data);
-            if (d1.status == "error") {
-                var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
-                $(".post_msg").html(msg);
-            } else if (d1.status == "success") {
-                ele_this.closest("tr").css("background", "red").slideUp("slow");
-                var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
-                $(".post_msg").html(msg);
-            }
+                    ele_this.html('<p class="bg-secondary rounded">Please wait....deleting your entry</p>');
+                    $.post(ajax_url, data_obj, function (data) {
+                        var d1 = JSON.parse(data);
+                        if (d1.status == "error") {
+                            var msg = "<h4>" + d1.msg + "</h4>";
+                            $(".post_msg").html(msg);
+                        } else if (d1.status == "success") {
+                            ele_this.closest("tr").css("background", "red").slideUp("slow");
+
+                            var msg = "<h4>" + d1.msg + "</h4>";
+                            $(".post_msg").html(msg);
+                        }
+                    });
+                },
+                cancel: function () {},
+            },
         });
     });
     //--->button > delete > end

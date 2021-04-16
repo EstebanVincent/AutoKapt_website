@@ -19,14 +19,12 @@
             <div class="post_msg text-info"> </div>
         </div>
 	</section>
-    <div class="py-3"></div>
+  <div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">
         <div class="card-body">
             <div class="card-title"><b>All Questions</b> </div>
             <div class="table_faq"></div>
 	    </div>
-	</section>
-		</div>
 	</section>
 	<div class="py-3"></div>
 </div>

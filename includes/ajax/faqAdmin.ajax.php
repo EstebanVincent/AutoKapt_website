@@ -7,7 +7,7 @@ require_once '../functions.inc.php';
 //--->get all faq > start
 if(isset($_GET['call_type']) && $_GET['call_type'] =="get_faq")
 {
-	$sql = "SELECT * FROM faq;";
+	$sql = "SELECT * FROM faq ORDER BY faqLanguage;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){

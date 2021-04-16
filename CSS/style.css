@@ -298,4 +298,5 @@ textarea {
 }
 table {
     table-layout: fixed;
+    text-align: justify;
 }

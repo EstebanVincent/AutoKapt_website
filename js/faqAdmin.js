@@ -2,13 +2,13 @@ $(document).ready(function ($) {
     function create_html_table(tbl_data) {
         //--->create data table > start
         var tbl = "";
-        tbl += '<table class="table table-dark table-hover text-white-50 rounded overflow-hidden table-faq">';
+        tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden table-faq">';
 
         //--->create table header > start
         tbl += "<thead>";
         tbl += "<tr>";
-        tbl += '<th style="width: 25%" scope="col">Question</th>';
-        tbl += '<th style="width: 50%" scope="col">Answer</th>';
+        tbl += '<th style="width: 32%" scope="col">Question</th>';
+        tbl += '<th style="width: 43%" scope="col">Answer</th>';
         tbl += '<th style="width: 8.33%" scope="col">Language</th>';
         tbl += '<th style="width: 16.66%" scope="col">Options</th>';
         tbl += "</tr>";
@@ -27,10 +27,13 @@ $(document).ready(function ($) {
             tbl += '<tr row_id="' + row_id + '">';
             tbl += '<td ><div class="row_data" edit_type="click" col_name="faqQuestion">' + val["faqQuestion"] + "</div></td>";
             tbl += '<td ><div class="row_data" edit_type="click" col_name="faqAnswer">' + val["faqAnswer"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="faqLanguage">' + val["faqLanguage"] + "</div></td>";
+            tbl +=
+                '<td class="align-middle"><div class="row_data" edit_type="click" col_name="faqLanguage">' +
+                val["faqLanguage"] +
+                "</div></td>";
 
             //--->edit options > start
-            tbl += "<td>";
+            tbl += "<td class='align-middle'>";
             tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
             //only show this button if edit button is clicked
             tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
@@ -190,25 +193,34 @@ $(document).ready(function ($) {
     //--->button > delete > start
     $(document).on("click", ".btn_delete", function (event) {
         event.preventDefault();
-
         var ele_this = $(this);
-        var row_id = ele_this.attr("row_id");
-        var data_obj = {
-            call_type: "delete_question_entry",
-            row_id: row_id,
-        };
+        $.confirm({
+            title: "Deleting row",
+            content: "Are you sure ?",
+            buttons: {
+                confirm: function () {
+                    var row_id = ele_this.attr("row_id");
+                    var data_obj = {
+                        call_type: "delete_question_entry",
+                        row_id: row_id,
+                    };
 
-        ele_this.html('<p class="bg-secondary rounded">Please wait....deleting your entry</p>');
-        $.post(ajax_url, data_obj, function (data) {
-            var d1 = JSON.parse(data);
-            if (d1.status == "error") {
-                var msg = "" + "<h4>" + d1.msg + "</h4>" + '<pre class="dark2 rounded">' + JSON.stringify(arr, null, 2) + "</pre>" + "";
-                $(".post_msg").html(msg);
-            } else if (d1.status == "success") {
-                ele_this.closest("tr").css("background", "red").slideUp("slow");
-                var msg = "" + "<h4>" + d1.msg + "</h4>" + '<pre class="dark2 rounded">' + JSON.stringify(arr, null, 2) + "</pre>" + "";
-                $(".post_msg").html(msg);
-            }
+                    ele_this.html('<p class="bg-secondary rounded">Please wait....deleting your entry</p>');
+                    $.post(ajax_url, data_obj, function (data) {
+                        var d1 = JSON.parse(data);
+                        if (d1.status == "error") {
+                            var msg = "<h4>" + d1.msg + "</h4>";
+                            $(".post_msg").html(msg);
+                        } else if (d1.status == "success") {
+                            ele_this.closest("tr").css("background", "red").slideUp("slow");
+
+                            var msg = "<h4>" + d1.msg + "</h4>";
+                            $(".post_msg").html(msg);
+                        }
+                    });
+                },
+                cancel: function () {},
+            },
         });
     });
     //--->button > delete > end
@@ -307,8 +319,7 @@ $(document).ready(function ($) {
                 tbl += '<a href="#" class="btn btn-link btn_edit" row_id="' + row_id + '" > Edit</a>';
                 tbl += '<a href="#" class="btn btn-link btn_save"  row_id="' + row_id + '" style="display:none;"> Save</a>';
                 tbl += '<a href="#" class="btn btn-link btn_cancel" row_id="' + row_id + '" style="display:none;"> Cancel</a>';
-                tbl +=
-                    '<a href="#" class="btn btn-link text-warning btn_delete" row_id="' + row_id + '" style="display:none;" > Delete</a>';
+                tbl += '<a href="#" class="btn btn-link text-danger btn_delete" row_id="' + row_id + '" style="display:none;" > Delete</a>';
 
                 if (d1.status == "error") {
                     var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
@@ -318,7 +329,7 @@ $(document).ready(function ($) {
                     $(".post_msg").html(msg);
 
                     ele_this.closest("td").html(tbl);
-                    ele.find(".new_row_data").removeClass("bg-secondary");
+                    ele.find(".new_row_data").attr("contenteditable", "false").removeClass("bg-secondary");
                     ele.find(".new_row_data").toggleClass("new_row_data row_data");
                 }
             });
