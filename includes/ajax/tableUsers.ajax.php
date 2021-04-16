@@ -1,11 +1,10 @@
 <?php
 
-    require_once 'includes/dataBaseHandler.inc.php';
-    require_once 'includes/functions.inc.php';
+require_once '../dataBaseHandler.inc.php';
+require_once '../functions.inc.php';
 
-    
 //--->get all users > start
-if(isset($_GET['call_type']) && $_GET['call_type'] =="get")
+if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 {
 	$sql = "SELECT * FROM users ORDER BY usersAccess;";
     $stmt = mysqli_stmt_init($conn);
@@ -56,15 +55,15 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="row_entry")
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        /* echo "error3";
-        exit(); */die(header("location: ../../pages/profile/myProfile.php/?change=updatepasswordsuccess"));
+        echo "error3";
+        exit();
     } else {
         mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $gender, $birth, $access, $id);
         mysqli_stmt_execute($stmt);
     }	
     echo json_encode(array(
         'status' => 'success', 
-        'msg' => 'updated row entry', 
+        'msg' => 'Successfully updated selected row', 
     ));
     die();
 }
@@ -93,8 +92,8 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="delete_row_entry")
 
     echo json_encode(array(
         'status' => 'success', 
-        'msg' => 'deleted entry', 
-));
+        'msg' => 'Successfully deleted selected row', 
+    ));
     die();
 	 
 }

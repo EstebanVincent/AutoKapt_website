@@ -17,9 +17,9 @@
             <table class="table table-dark table-hover rounded overflow-hidden">
                 <thead>
                     <tr class="text-white-50">
-                    <th scope="col">Test</th>
-                    <th scope="col">Actions</th>
-                    <th scope="col">Score</th>
+                    <th style="width: 33.33%" scope="col">Test</th>
+                    <th style="width: 33.33%" scope="col">Actions</th>
+                    <th style="width: 33.33%" scope="col">Score</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,8 +53,8 @@
             <table class="table table-dark text-white-50 table-hover rounded overflow-hidden">
                 <thead>
                     <tr>
-                    <th scope="col">Test</th>
-                    <th scope="col">Date</th>
+                    <th style="width: 50%" scope="col">Test</th>
+                    <th style="width: 50%" scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>

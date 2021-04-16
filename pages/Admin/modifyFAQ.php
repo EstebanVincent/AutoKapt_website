@@ -2,41 +2,35 @@
   $pathHeader = $_SERVER['DOCUMENT_ROOT'];
   $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
   include_once($pathHeader);
+
+  require_once '../../includes/dataBaseHandler.inc.php';
+  require_once '../../includes/functions.inc.php';
 ?>
-
-	<section class="sectionFAQ">
-		<div class="container">
-			<div class="QA">
-
-			<?php
-			require_once '../../includes/dataBaseHandler.inc.php';
-            require_once '../../includes/functions.inc.php';
-			showFAQAdmin($conn, $_SESSION["userLanguage"]);
-			?>
-			</div>
-            <p id="demo"></p>
-            <button type="button" class="open-button" onclick="openAdd()"><i class="fas fa-plus">Add question</i></button>
-
-			<div class="addQuestion-popup" id="add">
-				<button type="button" class="btn cancel" onclick="closeAdd()"><i class="far fa-window-close"></i></button>
-				<form action="../../includes/Admin/modifyFAQ.inc.php" class="form-container" id="addQuestion" method="post">
-					<input type="hidden" name="language" value= <?php echo $_SESSION["userLanguage"] ?>/>
-					<h4>Question</h4>
-					<textarea form ="addQuestion" name="question" rows="2" maxlength="140" minlength="20" required></textarea>
-					<?php
-					if($_SESSION["userLanguage"] == 1){
-						echo '<h4>Answer</h4>';
-					} else {
-						echo '<h4>Réponse</h4>';
-					}
-					?>
-					<textarea form ="addQuestion" name="answer" rows="6" maxlength="280" minlength="20" required></textarea>
-					<button type="submit" name="addQuestion-submit">Confirm</button>
-				</form>
-			</div>
+<div class="container-fluid bg-secondary text-white-50">
+	<div class="py-3"></div>
+	<section class="dark2 pb-2 mx-5 rounded">
+		<h2>F.A.Q.</h2>
+	</section>
+	<div class="py-3"></div>
+	<section class="dark2 py-2 mx-5 card">
+        <div class="card-body">
+            <div class="card-title"><b>HTML Table Edits/Upates</b> </div>
+            <p class="card-text">All the changes will be displayed below</p>
+            <div class="post_msg text-info"> </div>
+        </div>
+	</section>
+    <div class="py-3"></div>
+	<section class="dark2 py-2 mx-5 card">
+        <div class="card-body">
+            <div class="card-title"><b>All Questions</b> </div>
+            <div class="table_faq"></div>
+	    </div>
+	</section>
 		</div>
 	</section>
-	<script src="../../js/modifyFAQ.js"></script>
+	<div class="py-3"></div>
+</div>
+<script src="/AutoKapt/js/faqAdmin.js"></script>
 
   <?php
   $pathErrors = $_SERVER['DOCUMENT_ROOT'];

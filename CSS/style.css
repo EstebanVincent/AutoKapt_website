@@ -284,12 +284,18 @@ textarea {
     margin-left: auto;
     margin-right: auto;
 }
-.accordion-button {
-    text-align: justify !important;
+.accordion-header {
+    width: 90% !important;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
 }
 .justify {
     text-align: justify;
 }
 .unstyle {
     text-decoration: none;
+}
+table {
+    table-layout: fixed;
 }

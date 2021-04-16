@@ -11,7 +11,7 @@
 	</section>
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 rounded">
-		<div class="accordion py-0" id="accordionExample">
+		<div class="accordion py-0" id="accordionFAQ">
 <?php
 require_once '../includes/dataBaseHandler.inc.php';
 require_once '../includes/functions.inc.php';

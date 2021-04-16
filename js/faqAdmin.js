@@ -2,16 +2,14 @@ $(document).ready(function ($) {
     function create_html_table(tbl_data) {
         //--->create data table > start
         var tbl = "";
-        tbl += '<table class="table table-dark table-hover text-white-50 rounded overflow-hidden">';
+        tbl += '<table class="table table-dark table-hover text-white-50 rounded overflow-hidden table-faq">';
 
         //--->create table header > start
         tbl += "<thead>";
         tbl += "<tr>";
-        tbl += '<th style="width: 16.66%" scope="col">Username</th>';
-        tbl += '<th style="width: 33.33%" scope="col">Email</th>';
-        tbl += '<th style="width: 8.33%" scope="col">Gender</th>';
-        tbl += '<th style="width: 16.66%" scope="col">Date of Birth</th>';
-        tbl += '<th style="width: 8.33%" scope="col">Access</th>';
+        tbl += '<th style="width: 25%" scope="col">Question</th>';
+        tbl += '<th style="width: 50%" scope="col">Answer</th>';
+        tbl += '<th style="width: 8.33%" scope="col">Language</th>';
         tbl += '<th style="width: 16.66%" scope="col">Options</th>';
         tbl += "</tr>";
         tbl += "</thead>";
@@ -23,15 +21,13 @@ $(document).ready(function ($) {
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
             //you can replace with your database row id
-            var row_id = val["usersId"];
+            var row_id = val["faqId"];
 
             //loop through ajax row data
             tbl += '<tr row_id="' + row_id + '">';
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersUsername">' + val["usersUsername"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersEmail">' + val["usersEmail"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersGender">' + val["usersGender"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersBirth">' + val["usersBirth"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
+            tbl += '<td ><div class="row_data" edit_type="click" col_name="faqQuestion">' + val["faqQuestion"] + "</div></td>";
+            tbl += '<td ><div class="row_data" edit_type="click" col_name="faqAnswer">' + val["faqAnswer"] + "</div></td>";
+            tbl += '<td ><div class="row_data" edit_type="click" col_name="faqLanguage">' + val["faqLanguage"] + "</div></td>";
 
             //--->edit options > start
             tbl += "<td>";
@@ -51,8 +47,13 @@ $(document).ready(function ($) {
         tbl += "</table>";
         //--->create data table > end
 
+        //add new table row
+        tbl += '<div class="text-center">';
+        tbl += '<span class="btn btn-primary btn_new_row">Add New Row</span>';
+        tbl += "<div>";
+
         //out put table data
-        $(document).find(".table_users").html(tbl);
+        $(document).find(".table_faq").html(tbl);
 
         $(document).find(".btn_save").hide();
         $(document).find(".btn_cancel").hide();
@@ -60,10 +61,10 @@ $(document).ready(function ($) {
     }
 
     //variable de fonction
-    var ajax_url = "/AutoKapt/includes/ajax/tableUsers.ajax.php";
+    var ajax_url = "/AutoKapt/includes/ajax/faqAdmin.ajax.php";
 
     //--->create table via ajax call > start
-    $.getJSON(ajax_url, { call_type: "get_users" }, function (data) {
+    $.getJSON(ajax_url, { call_type: "get_faq" }, function (data) {
         //create table on page load
         create_html_table(data);
     });
@@ -169,7 +170,7 @@ $(document).ready(function ($) {
         $(".post_msg").html('<pre class="dark2 rounded">' + JSON.stringify(arr, null, 2) + "</pre>");
 
         //add call type for ajax call
-        arr["call_type"] = "row_entry";
+        arr["call_type"] = "question_entry";
 
         //call ajax api to update the database record
         $.post(ajax_url, arr, function (data) {
@@ -193,7 +194,7 @@ $(document).ready(function ($) {
         var ele_this = $(this);
         var row_id = ele_this.attr("row_id");
         var data_obj = {
-            call_type: "delete_row_entry",
+            call_type: "delete_question_entry",
             row_id: row_id,
         };
 
@@ -201,14 +202,127 @@ $(document).ready(function ($) {
         $.post(ajax_url, data_obj, function (data) {
             var d1 = JSON.parse(data);
             if (d1.status == "error") {
-                var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
+                var msg = "" + "<h4>" + d1.msg + "</h4>" + '<pre class="dark2 rounded">' + JSON.stringify(arr, null, 2) + "</pre>" + "";
                 $(".post_msg").html(msg);
             } else if (d1.status == "success") {
                 ele_this.closest("tr").css("background", "red").slideUp("slow");
-                var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
+                var msg = "" + "<h4>" + d1.msg + "</h4>" + '<pre class="dark2 rounded">' + JSON.stringify(arr, null, 2) + "</pre>" + "";
                 $(".post_msg").html(msg);
             }
         });
     });
     //--->button > delete > end
+
+    function add_question(question_data) {
+        //create an id = max id existant + 1
+        var row_id;
+        $.each(question_data, function (key, val) {
+            row_id = val;
+        });
+        var tbl_row = $(document).find(".table-faq").find("tr");
+        var tbl = "";
+        tbl += '<tr row_id="' + row_id + '">';
+        tbl +=
+            '<td ><div class="new_row_data faqQuestion bg-secondary  rounded" contenteditable="true" edit_type="click" col_name="faqQuestion"></div></td>';
+        tbl +=
+            '<td ><div class="new_row_data faqAnswer bg-secondary  rounded" contenteditable="true" edit_type="click" col_name="faqAnswer"></div></td>';
+        tbl +=
+            '<td ><div class="new_row_data faqLanguage bg-secondary  rounded" contenteditable="true" edit_type="click" col_name="faqLanguage"></div></td>';
+        //--->edit options > start
+        tbl += "<td>";
+        tbl += '  <a href="#" class="btn btn-link btn_new" row_id="' + row_id + '" > Add Entry</a>   | ';
+        tbl += '  <a href="#" class="btn btn-link btn_remove_new_entry" row_id="' + row_id + '"> Remove</a> ';
+        tbl += "</td>";
+        //--->edit options > end
+
+        tbl += "</tr>";
+        tbl_row.last().after(tbl);
+
+        $(document).find(".table-faq").find("tr").last().find(".faqQuestion").focus();
+    }
+    //--->button > add > start
+    $(document).on("click", ".btn_new_row", function (event) {
+        event.preventDefault();
+
+        $.getJSON(ajax_url, { call_type: "get_max_faqId" }, function (data) {
+            add_question(data);
+        });
+    });
+    //--->button > add > end
+
+    //--->button > remove > start
+    $(document).on("click", ".btn_remove_new_entry", function (event) {
+        event.preventDefault();
+
+        $(this).closest("tr").remove();
+    });
+    //--->button > remove > start
+
+    function alert_msg(msg) {
+        return '<span class="alert_msg text-danger">' + msg + "</span>";
+    }
+
+    //--->save new row > start
+    $(document).on("click", ".btn_new", function (event) {
+        event.preventDefault();
+
+        var ele_this = $(this);
+        var ele = ele_this.closest("tr");
+
+        //remove all old alerts
+        ele.find(".alert_msg").remove();
+
+        //get row id
+        var row_id = $(this).attr("row_id");
+
+        //get field names
+        var faqQuestion = ele.find(".faqQuestion");
+        var faqAnswer = ele.find(".faqAnswer");
+        var faqLanguage = ele.find(".faqLanguage");
+
+        if (faqQuestion.html() == "") {
+            faqQuestion.focus();
+            faqQuestion.after(alert_msg("Enter Question"));
+        } else if (faqAnswer.html() == "") {
+            faqAnswer.focus();
+            faqAnswer.after(alert_msg("Enter Answer"));
+        } else if (faqLanguage.html() == "") {
+            faqLanguage.focus();
+            faqLanguage.after(alert_msg("Enter Language"));
+        } else {
+            var data_obj = {
+                call_type: "new_question_entry",
+                row_id: row_id,
+                faqQuestion: faqQuestion.html(),
+                faqAnswer: faqAnswer.html(),
+                faqLanguage: faqLanguage.html(),
+            };
+
+            ele_this.html('<p class="bg-secondary rounded">Please wait....adding your new row</p>');
+
+            $.post(ajax_url, data_obj, function (data) {
+                var d1 = JSON.parse(data);
+
+                var tbl = "";
+                tbl += '<a href="#" class="btn btn-link btn_edit" row_id="' + row_id + '" > Edit</a>';
+                tbl += '<a href="#" class="btn btn-link btn_save"  row_id="' + row_id + '" style="display:none;"> Save</a>';
+                tbl += '<a href="#" class="btn btn-link btn_cancel" row_id="' + row_id + '" style="display:none;"> Cancel</a>';
+                tbl +=
+                    '<a href="#" class="btn btn-link text-warning btn_delete" row_id="' + row_id + '" style="display:none;" > Delete</a>';
+
+                if (d1.status == "error") {
+                    var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
+                    $(".post_msg").html(msg);
+                } else if (d1.status == "success") {
+                    var msg = "" + "<h4>" + d1.msg + '</h4><pre class="dark2 rounded">' + JSON.stringify(data_obj, null, 2) + "</pre>" + "";
+                    $(".post_msg").html(msg);
+
+                    ele_this.closest("td").html(tbl);
+                    ele.find(".new_row_data").removeClass("bg-secondary");
+                    ele.find(".new_row_data").toggleClass("new_row_data row_data");
+                }
+            });
+        }
+    });
+    //--->save new row > end
 });
