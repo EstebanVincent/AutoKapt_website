@@ -6,7 +6,7 @@
 
     Il définit la barre de navigation adaptée
  -->
-<?php
+ <?php
     require_once "head.php";
 ?>
     <body>
@@ -27,7 +27,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            
+
 <?php
                       if(isset($_SESSION["userUsername"])){
                         if($_SESSION["userAccess"] == 0){
@@ -51,31 +51,31 @@
                         else if($_SESSION["userAccess"] == 1){
                           echo 
                           '
-                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">Dashboard</a></li>
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">Dashboard</a></li>
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">Team</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
-                                <ul class="dropdown-menu bg-dark">
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php">Create User</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
-                                </ul>
-                            </li>
-                            ';
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
+                              <ul class="dropdown-menu bg-dark">
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php">Create User</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
+                              </ul>
+                          </li>
+                          ';
                         } 
                         else if($_SESSION["userAccess"] == 2){
                           echo 
                           '
-                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">Dashboard</a></li>
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">Dashboard</a></li>
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">Team</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
-                                <ul class="dropdown-menu bg-dark">
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
-                                </ul>
-                            </li>
-                            ';
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
+                              <ul class="dropdown-menu bg-dark">
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
+                              </ul>
+                          </li>
+                          ';
                         } 
                       } else {
                         echo
@@ -91,4 +91,3 @@
                 </div>
             </nav>
         </header>
-      

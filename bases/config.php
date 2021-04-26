@@ -1,15 +1,14 @@
-<!-- 
-    fichier inclut dans tout les fichiers php
-    il est inclu de base dans head
-    lui même inclu dans header
-
-    donc l'inclure dans les fichiers includes car head et header pas appelé dans ce dossier
-    en gros les fichiers en background
-
-    Il définit l'absolute path, le path serveur, la connection avec la base de donnée et initialise la session
-    il considère également la langue d'affichage
- -->
 <?php
+/* fichier inclut dans tout les fichiers php
+il est inclu de base dans head
+lui même inclu dans header
+
+donc l'inclure dans les fichiers includes car head et header pas appelé dans ce dossier
+en gros les fichiers en background
+
+Il définit l'absolute path, le path serveur, la connection avec la base de donnée et initialise la session */
+
+
     /* on défini les constantes */
     define('__ROOT__',$_SERVER['DOCUMENT_ROOT'].'/AutoKapt/');
     define('SERVER_NAME', $_SERVER['HTTP_HOST']);
