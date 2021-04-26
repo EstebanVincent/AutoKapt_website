@@ -5,8 +5,8 @@
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">
         <div class="card-body">
-            <div class="card-title"><b>Dashboard</b> </div>
-            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa quam excepturi autem animi, eveniet maxime dolor, iste odio, est laudantium consectetur possimus magni veritatis tenetur incidunt illum aperiam quos!</p>
+            <div class="card-title"><b><?php echo $lang['dashboard-title'] ?></b> </div>
+            <p class="card-text"><?php echo $lang['dashboard-p'] ?></p>
         </div>
 	</section>
     <div class="py-3"></div>
@@ -23,22 +23,22 @@
                 <tbody>
                     <tr class="text-white-50">
                         <td><h5>Stress</h5></td>
-                        <td><a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> Play</button></a><a href="/AutoKapt/pages/User/result/stress.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/stress.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>@mdo</td>
                     </tr>
                     <tr class="text-white-50">
-                        <td><h5>Reflex</h5></td>
-                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> Play</button></a><a href="/AutoKapt/pages/User/result/reflex.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><h5><?php echo $lang['dashboard-reflex'] ?></h5></td>
+                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/reflex.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>@fat</td>
                     </tr>
                     <tr class="text-white-50">
-                        <td><h5>Memory</h5></td>
-                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> Play</button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><h5><?php echo $lang['dashboard-memory'] ?></h5></td>
+                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>@twitter</td>
                     </tr>
                     <tr class="text-white-50">
-                        <td><h5>Audition</h5></td>
-                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> Play</button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><h5><?php echo $lang['dashboard-hearing'] ?></h5></td>
+                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>@twitter</td>
                     </tr>
                 </tbody>

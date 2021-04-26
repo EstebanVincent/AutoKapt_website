@@ -751,6 +751,8 @@ function moyenne($conn, $data){
 
 /* Affiche le tablo des lignes de test de l'user */
 function showActivity($conn, $userId){
+    global $lang; /* on récupere la var global donné par config */
+
     $sql = "SELECT testType, testDate FROM test WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
 
@@ -764,7 +766,7 @@ function showActivity($conn, $userId){
 
     $result = mysqli_stmt_get_result($stmt);
     $array = resultToArray($result);
-
+    
     /* on replace les valeurs de 0 à 3 en type correspondant */
     for ($i = 0; $i < count($array); $i++) {
         switch ($array[$i]['testType']) {
@@ -772,22 +774,22 @@ function showActivity($conn, $userId){
                 $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-brain"></i></a> Stress';
                 break;
             case 1:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> Reflex';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-reflex"];
                 break;
             case 2:
-                $array[$i]['testType'] = 'Memory';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-memory"];
                 break;
             case 3:
-                $array[$i]['testType'] = 'Audition';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
                 break;
         }
     }
     /* on parcours le tablo de la requete sql en partant de la fin */
     for ($i = count($array) - 1; $i >= 0; $i--) {
         /* temps écoulé depuis le test en question */
-        $time_ago = time_elapsed_string($array[$i]['testDate'], ' ago');
+        $time_ago = time_elapsed_string($array[$i]['testDate'], $lang["ago"]);
         $split_time = preg_split("/[\s]/", $array[$i]['testDate']);
-        $time = $split_time[0] . ' à ' . $split_time[1];
+        $time = $split_time[0] . $lang["at"] . $split_time[1];
             echo '
             <tr>
                 <td class="align-middle"><h4>'. $array[$i]['testType'] .'</h4></td>
@@ -801,6 +803,7 @@ function showActivity($conn, $userId){
 /* fonction venant de stackoverflow */
 /* https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474 */
 function time_elapsed_string($datetime, $after, $full = false) {
+    global $lang; /* on récupere la var global donné par config */
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -809,13 +812,13 @@ function time_elapsed_string($datetime, $after, $full = false) {
     $diff->d -= $diff->w * 7;
 
     $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
+        'y' => $lang["y"],
+        'm' => $lang["m"],
+        'w' => $lang["w"],
+        'd' => $lang["d"],
+        'h' => $lang["h"],
+        'i' => $lang["i"],
+        's' => $lang["s"],
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {
@@ -826,7 +829,11 @@ function time_elapsed_string($datetime, $after, $full = false) {
     }
 
     if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . $after : 'just now';
+    if ($lang["ago"] == "ago")
+        return $string ? implode(', ', $string) . ' ' . $after : 'just now';
+    else {
+        return $string ? $after  . ' ' . implode(', ', $string) : "à l'instant";
+    }
 }
 
 /* Affiche le tablo de tout les users ayant l'acces demandé */
