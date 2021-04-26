@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Password Recovery | AutoKapt</title>
-        <link rel="stylesheet" href="/AutoKapt/style.css">
-        <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
-    </head>
+<?php
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/head.php');
+?>
 <body>
     <div id = "backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
@@ -22,11 +17,8 @@
             </div>
             <input type="submit" name="password-recovery-submit" value="Send email">
         </form>
-
         <?php
-        $pathErrors = $_SERVER['DOCUMENT_ROOT'];
-        $pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-        include_once($pathErrors);
+        require_once(__ROOT__.'/AutoKapt/includes/errors.inc.php');
         ?>
 
     </div>

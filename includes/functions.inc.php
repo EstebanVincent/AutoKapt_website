@@ -1,6 +1,6 @@
 <?php
 /* session_start(); */
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 /* return true si match false sinon */
 function pwdMatch($password, $pwdRepeat) {
     $result;
@@ -457,7 +457,7 @@ function createManagerEmail($conn, $selector, $token){
     $message .= '<p>Here is your account creation link: </br>';
     $message .= '<a href="' . $url . '">' . $url . '</a></p>';
 
-    $headers = "From: Infinite Mesures <Infinite_Mesures@gmail.com>\r\n";
+    $headers = "From: Infinite Mesures <Infinite_Measures@gmail.com>\r\n";
     $headers .= "Reply-To: Infinite_Mesures@gmail.com\r\n";
     $headers .= "Content-type: text/html\r\n";
 

@@ -1,7 +1,5 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
@@ -143,17 +141,6 @@ $('#deleteAccount').click(function() {
   $('#delete').toggle();
 });
 </script>
-
-<!-- 
-Tes infos, changer mdp
-Graph evo dernier test
-Moyenne des tests
-Maybe ajouter une banderole pub?
-Ajouter section avis
-mode admin 
--->
 <?php
-  $pathFooter = $_SERVER['DOCUMENT_ROOT'];
-  $pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathFooter);
+require_once(__ROOT__.'bases/footer.php');
 ?>

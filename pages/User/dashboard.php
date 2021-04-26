@@ -1,7 +1,5 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
@@ -59,8 +57,8 @@
                 </thead>
                 <tbody>
 <?php
-require_once '../../includes/dataBaseHandler.inc.php';
-require_once '../../includes/functions.inc.php';
+require_once __ROOT__.'includes/dataBaseHandler.inc.php';
+require_once __ROOT__.'includes/functions.inc.php';
 
                     showActivity($conn, $_SESSION['userId'])
 
@@ -72,11 +70,6 @@ require_once '../../includes/functions.inc.php';
     <div class="py-3"></div>
 </div>
 <?php
-$pathErrors = $_SERVER['DOCUMENT_ROOT'];
-$pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathErrors);
-
-$pathFooter = $_SERVER['DOCUMENT_ROOT'];
-$pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathFooter);
+require_once(__ROOT__.'includes/errors.inc.php');
+require_once(__ROOT__.'bases/footer.php');
 ?>

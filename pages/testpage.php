@@ -1,8 +1,5 @@
-<!DOCTYPE php>
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 
 <div id = "imagePrincipale">
@@ -60,7 +57,5 @@
 
 
 <?php
-  $pathFooter = $_SERVER['DOCUMENT_ROOT'];
-  $pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathFooter);
+    require_once(__ROOT__.'bases/footer.php');
 ?>
