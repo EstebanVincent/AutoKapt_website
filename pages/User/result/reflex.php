@@ -27,7 +27,6 @@
 	
 	
     <?php
-    require_once __ROOT__.'includes/dataBaseHandler.inc.php';
     require_once __ROOT__.'includes/functions.inc.php';
 
 	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);

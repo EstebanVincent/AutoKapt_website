@@ -61,12 +61,12 @@
           </div>
           <h4>Insert new email</h4>
           <div class="element">
-            <input type="text" name="newUsername" required>
+            <input type="text" name="newEmail" required>
             <span></span>
             <label>New email</label>
           </div>
           <div class="element">
-            <input type="text" name="verifyNewUsername" required>
+            <input type="text" name="verifyNewEmail" required>
             <span></span>
             <label>Verify new email</label>
           </div>
@@ -85,12 +85,12 @@
           </div>
           <h4>Insert new password</h4>
           <div class="element">
-            <input type="text" name="newUsername" required>
+            <input type="text" name="newPassword" required>
             <span></span>
             <label>New password</label>
           </div>
           <div class="element">
-            <input type="text" name="verifyNewUsername" required>
+            <input type="text" name="verifyNewPassword" required>
             <span></span>
             <label>Verify new password</label>
           </div>

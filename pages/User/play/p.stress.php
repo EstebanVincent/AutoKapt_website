@@ -6,7 +6,6 @@
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once __ROOT__.'includes/dataBaseHandler.inc.php';
     require_once __ROOT__.'includes/functions.inc.php';
 
 	$dataBPMTotal = BPMTotal2Chart(getBPMTotal($conn, $_SESSION["userId"])[0]);

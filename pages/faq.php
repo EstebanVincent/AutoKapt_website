@@ -11,7 +11,6 @@
 	<section class="dark2 py-2 mx-5 rounded">
 		<div class="accordion py-0" id="accordionFAQ">
 <?php
-require_once __ROOT__.'includes/dataBaseHandler.inc.php';
 require_once __ROOT__.'includes/functions.inc.php';
 
 showFAQ($conn, $_SESSION['userLanguage'])

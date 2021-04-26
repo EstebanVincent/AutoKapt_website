@@ -57,7 +57,6 @@
                 </thead>
                 <tbody>
 <?php
-require_once __ROOT__.'includes/dataBaseHandler.inc.php';
 require_once __ROOT__.'includes/functions.inc.php';
 
                     showActivity($conn, $_SESSION['userId'])

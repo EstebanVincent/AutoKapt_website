@@ -1,12 +1,11 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
+require_once __ROOT__.'includes/functions.inc.php';
 
 if (isset($_POST["addQuestion-submit"])){
     $question = $_POST["question"];
     $answer = $_POST["answer"];
     $language = $_POST["language"];
-
-    require_once '../dataBaseHandler.inc.php';
-    require_once '../functions.inc.php';
 
     addQuestionFAQ($conn, $question, $answer, $language);
 }
@@ -14,9 +13,6 @@ else if (isset($_POST["modifyQuestion-submit"])){
     $newQuestion = $_POST["newQuestion"];
     $newAnswer = $_POST["newAnswer"];
     $faqId = $_POST["faqId"];
-
-    require_once '../dataBaseHandler.inc.php';
-    require_once '../functions.inc.php';
 
     modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer);
 } else {

@@ -1,10 +1,7 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 
-  require_once '../../includes/dataBaseHandler.inc.php';
-  require_once '../../includes/functions.inc.php';
+  require_once __ROOT__.'includes/functions.inc.php';
 ?>
 
 
@@ -37,7 +34,5 @@
 
 
 <?php
-  $pathFooter = $_SERVER['DOCUMENT_ROOT'];
-  $pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathFooter);
+require_once(__ROOT__.'bases/footer.php');
 ?>

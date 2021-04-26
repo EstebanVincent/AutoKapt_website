@@ -18,7 +18,7 @@
             <input type="submit" name="password-recovery-submit" value="Send email">
         </form>
         <?php
-        require_once(__ROOT__.'/AutoKapt/includes/errors.inc.php');
+        require_once(__ROOT__.'includes/errors.inc.php');
         ?>
 
     </div>

@@ -52,7 +52,7 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
     $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersBirth, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header("location: ../../pages/logIn/signUp.php/?error=stmtfailed"));
+        die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php/?error=stmtfailed"));
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -70,31 +70,29 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
 function logInUser($conn, $username, $password){
     $usernameExists = usernameExists($conn, $username, $username);/* 2 fois car comme ça check pas mail */
     if($usernameExists === false){
-        die(header("location: ../../pages/logIn/logIn.php/?error=wronglogin"));
+        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wronglogin"));
     }
     $passwordHashed =  $usernameExists["usersPassword"];
     $checkPassword = password_verify($password, $passwordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/logIn/logIn.php/?error=wrongpassword"));
+        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wrongpassword"));
     } else if ($checkPassword === true){
         session_start();
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
         $_SESSION["userAccess"] = $usernameExists["usersAccess"];
         $_SESSION["userLanguage"] = $usernameExists["usersLanguage"];
-        die(header("location: ../../home.php/?error=loginSuccess"));
+        die(header("location:". HTTP_SERVER ."home.php/?error=loginSuccess"));
     }
 }
 
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 30 min*/
 function passwordRecoveryEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
-
-    require_once '../dataBaseHandler.inc.php';
 
     $userEmail = $_POST["email"];
 
@@ -334,9 +332,10 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
         }
         
         mysqli_stmt_bind_param($stmt, "si", $newEmail, $sessionId);
-        mysqli_stmt_execute($stmt);  
+        $a = mysqli_stmt_execute($stmt);  
+        
 
-        die(header("location: ../../pages/profile/myProfile.php/?error=updateemailsuccess"));
+        die(header("location: ../../pages/profile/myProfile.php/?error=updatemailsuccess"));
     }
 }
 /* Change la langue */
@@ -362,11 +361,9 @@ function changeLanguage($conn, $language){
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createUserEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
-
-    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
@@ -414,11 +411,9 @@ function createUserEmail($conn, $selector, $token){
 }
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createManagerEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
-
-    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
