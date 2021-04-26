@@ -54,7 +54,7 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="question_entry")
         echo "error3";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "ssii", $question, $answer, $language, $id);
+        mysqli_stmt_bind_param($stmt, "sssi", $question, $answer, $language, $id);
         mysqli_stmt_execute($stmt);
     }	
     echo json_encode(array(

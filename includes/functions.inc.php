@@ -80,7 +80,6 @@ function logInUser($conn, $username, $password){
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
         $_SESSION["userAccess"] = $usernameExists["usersAccess"];
-        $_SESSION["userLanguage"] = $usernameExists["usersLanguage"];
         die(header("location:". HTTP_SERVER ."home.php/?error=loginSuccess"));
     }
 }
@@ -333,25 +332,6 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
         die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?error=updatemailsuccess"));
     }
 }
-/* Change la langue */
-function changeLanguage($conn, $language){
-    $sessionId = $_SESSION["userId"];
-
-    $sql = "UPDATE users SET usersLanguage=? WHERE usersId=?;";
-    $stmt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
-            exit(); 
-        }
-        
-        mysqli_stmt_bind_param($stmt, "ii", $language, $sessionId);
-        mysqli_stmt_execute($stmt);  
-
-        $_SESSION["userLanguage"] = $language;
-
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=languechangesuccess'));
-}
-
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createUserEmail($conn, $selector, $token){
@@ -510,7 +490,7 @@ function showFAQ($conn, $language){
         echo "error3";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "i", $language);
+        mysqli_stmt_bind_param($stmt, "s", $language);
         mysqli_stmt_execute($stmt);
     }
 

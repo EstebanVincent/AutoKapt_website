@@ -23,7 +23,7 @@
                             <form>
                                 <select class="form-control form-control-sm text-white-50 bg-dark" onchange="location = this.value;">
 <?php
-                                if($_SESSION["userLanguage"] == 1){
+                                if($_SESSION["lang"] == 'en'){
                                     echo 
                                     '
                                     <option value="/AutoKapt/includes/language/change2English.php">
@@ -33,7 +33,7 @@
                                         Francais
                                     </option>';
                                 
-                                } else if($_SESSION["userLanguage"] == 0){
+                                } else if($_SESSION["lang"] == 'fr'){
                                     echo 
                                     '
                                     <option value="/AutoKapt/includes/language/change2French.php">

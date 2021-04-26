@@ -13,7 +13,7 @@
 <?php
 require_once __ROOT__.'includes/functions.inc.php';
 
-showFAQ($conn, $_SESSION['userLanguage'])
+showFAQ($conn, $_SESSION['lang'])
 
 ?>
 		</div>
