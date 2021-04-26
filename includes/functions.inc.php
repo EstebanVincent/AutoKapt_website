@@ -1,5 +1,4 @@
 <?php
-/* session_start(); */
 require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 /* return true si match false sinon */
 function pwdMatch($password, $pwdRepeat) {
@@ -57,7 +56,7 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $hashedPassword , $gender, $birth, $access);
+    mysqli_stmt_bind_param($stmt, "sssssi", $username, $email, $hashedPassword , $gender, $birth, $access);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
@@ -78,7 +77,6 @@ function logInUser($conn, $username, $password){
     if (!$checkPassword){
         die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wrongpassword"));
     } else if ($checkPassword === true){
-        session_start();
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
         $_SESSION["userAccess"] = $usernameExists["usersAccess"];
@@ -226,7 +224,6 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
 
 /* deja dans le compte et verification du mdp donc deja secure */
 function changePassword($conn, $currentPassword, $newPassword){
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -264,7 +261,6 @@ function changePassword($conn, $currentPassword, $newPassword){
 }
 /* same et on change la valeur de l'username de la session en plus */
 function changeUsername($conn, $verifyPassword, $newUsername) {
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -302,7 +298,6 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
 }
 /* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
 function changeEmail($conn, $verifyPassword, $newEmail) {
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
@@ -340,7 +335,6 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
 }
 /* Change la langue */
 function changeLanguage($conn, $language){
-    session_start();
     $sessionId = $_SESSION["userId"];
 
     $sql = "UPDATE users SET usersLanguage=? WHERE usersId=?;";
