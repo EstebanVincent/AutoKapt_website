@@ -1,5 +1,7 @@
 <!-- 
     fichier inclut dans tout les fichiers php vue par l'utilisateur sauf les forms de log In
+
+    Il définit le footer du site
  -->
 <footer class="bg-dark text-center text-white-50">
     <div class="container">

@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h1>Infinite Measures</h1>
-            <p>Home</p>
+            <p><?php echo $lang['title'] ?></p>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
             Non, suscipit? Vitae culpa esse, animi voluptatibus voluptas
             non cupiditate ea soluta quo. Distinctio culpa, fugit excepturi
