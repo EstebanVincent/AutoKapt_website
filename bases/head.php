@@ -1,3 +1,12 @@
+<!-- 
+    fichier inclut dans tout les fichiers php vue par l'utilisateur
+    contient config
+    il est inclu de base dans header
+
+    donc l'inclure dans les fichiers de forms log In
+
+    Il définit le head du HTML avec les différentes libraries utilisées
+ -->
 <?php
     require_once "config.php";
 ?>

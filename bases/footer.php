@@ -1,3 +1,6 @@
+<!-- 
+    fichier inclut dans tout les fichiers php vue par l'utilisateur sauf les forms de log In
+ -->
 <footer class="bg-dark text-center text-white-50">
     <div class="container">
         <section class="">
