@@ -16,7 +16,7 @@ function usernameExists($conn, $username, $email) {
     $sql = "SELECT * FROM users WHERE usersUsername = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
 
@@ -62,7 +62,7 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
 
     mysqli_stmt_close($stmt);
 
-    die(header("location: ../home.php/?error=accountcreationsuccess"));
+    die(header("location:". HTTP_SERVER ."/home.php/?error=accountcreationsuccess"));
 }
 
 
@@ -136,7 +136,7 @@ function passwordRecoveryEmail($conn, $selector, $token){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
+    header("location: ". HTTP_SERVER ."pages/logIn/passwordRecovery.php?reset=success");
 }
 /* correspond au forget password en cliquant sur le lien du mail, donc utilisation de token pour eviter le hack, utilise les bdd users et pwdreset*/
 function changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat){
@@ -212,7 +212,7 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
                             } else {
                                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                                 mysqli_stmt_execute($stmt);
-                                header("location: ../../pages/logIn/logIn.php?newPassword=passwordupdated");
+                                header("location: ". HTTP_SERVER ."pages/logIn/logIn.php?newPassword=passwordupdated");
                             }
 
                         }
@@ -232,7 +232,7 @@ function changePassword($conn, $currentPassword, $newPassword){
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -245,13 +245,13 @@ function changePassword($conn, $currentPassword, $newPassword){
     $checkPassword = password_verify($currentPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersPassword=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -259,7 +259,7 @@ function changePassword($conn, $currentPassword, $newPassword){
         mysqli_stmt_bind_param($stmt, "si", $newPasswordHashed, $sessionId);
         mysqli_stmt_execute($stmt);  
 
-        die(header("location: ../../pages/profile/myProfile.php/?change=updatepasswordsuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updatepasswordsuccess"));
     }
 }
 /* same et on change la valeur de l'username de la session en plus */
@@ -270,7 +270,7 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -283,13 +283,13 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: " . $_SERVER['HTTP_REFERER'] . "?error=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersUsername=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         
@@ -297,7 +297,7 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
         mysqli_stmt_execute($stmt);  
 
         $_SESSION["userUsername"] = $newUsername;
-        die(header("location: ../../pages/profile/myProfile.php/?change=updateusernamesuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updateusernamesuccess"));
     }
 }
 /* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
@@ -308,7 +308,7 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -321,13 +321,13 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?change=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?change=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersEmail=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         
@@ -335,7 +335,7 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
         $a = mysqli_stmt_execute($stmt);  
         
 
-        die(header("location: ../../pages/profile/myProfile.php/?error=updatemailsuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?error=updatemailsuccess"));
     }
 }
 /* Change la langue */
@@ -346,7 +346,7 @@ function changeLanguage($conn, $language){
     $sql = "UPDATE users SET usersLanguage=? WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         
@@ -539,58 +539,6 @@ function showFAQ($conn, $language){
 			</div>
         ';
     }
-}
-
-/* ajoute une question/reponse a la faq */
-function addQuestionFAQ($conn, $question, $answer, $language){
-    $sql = "INSERT INTO faq (faqQuestion, faqAnswer, faqLanguage) VALUES (?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssi", $question, $answer, $language);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ../../pages/Admin/modifyFAQ.php?faq=addFAQ'));/* pas  lien http précédent car si 2 a la suite ca donne 2 
-    ?faq et ca fait de la merde */
-}
-/* enleve un element de la faq */
-function removeQuestionFAQ($conn, $faqId){
-    $sql = "DELETE FROM faq WHERE faqId=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "i", $faqId);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=removeQ'));
-}
-/* modify un element de la faq */
-function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
-    $sql ="UPDATE faq SET faqQuestion=?, faqAnswer=? WHERE faqId=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssi", $newQuestion, $newAnswer, $faqId);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=updateQ'));
-}
-
-/* envoi une alerte js en php */
-function php_alert($msg){
-    echo '<script>alert("' . $msg . '")</script>';
 }
 
 /* echo la table des email de users et return un array des emails */

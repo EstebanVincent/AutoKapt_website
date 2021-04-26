@@ -57,5 +57,5 @@ else if (isset($_POST["signUpUser-submit"])) {
   createUser($conn, $username, $email, $password, $gender, $birth, 2);
 }
 else {
-    die(header("location: ../../pages/logIn/signUp.php"));
+    die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php"));
 }

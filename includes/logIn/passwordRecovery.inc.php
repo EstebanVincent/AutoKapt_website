@@ -10,5 +10,5 @@ if(isset($_POST["password-recovery-submit"])){
 
     passwordRecoveryEmail($conn, $selector, $token);
 } else {
-    die(header("location: ../../home.php"));
+    die(header("location: ". HTTP_SERVER ."home.php"));
 }

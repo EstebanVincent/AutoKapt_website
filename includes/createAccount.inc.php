@@ -16,5 +16,5 @@ else if(isset($_POST["createUser-submit"])){
     createUserEmail($conn, $selector, $token);
 } 
 else {
-  die(header("location: ../../home.php"));
+  die(header("location: ". HTTP_SERVER ."home.php"));
 }

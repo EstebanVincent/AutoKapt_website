@@ -23,6 +23,6 @@ if (isset($_POST["createNewPassword-submit"])){
     changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat);
     
 } else {
-    header("location: ../../home.php?error=bite");
+    header("location: ". HTTP_SERVER ."home.php?error=bite");
     exit();
 }
