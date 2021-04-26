@@ -50,9 +50,9 @@
                               </datalist>
                         </div>
                         <div class="element">
-                            <input type="number" name="age"required>
+                            <input type="date" name="birth"required>
                             <span></span>
-                            <label>Age</label>
+                            <label>Date of birth</label>
                         </div>
                         <input type="submit" name="signUpManager-submit" value="Create Account">
                     </form>

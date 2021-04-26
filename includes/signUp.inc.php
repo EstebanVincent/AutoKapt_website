@@ -8,16 +8,16 @@ if (isset($_POST["signUpManager-submit"])) {
     $password = $_POST["password"];
     $pwdRepeat = $_POST["password-repeat"];
     $gender = $_POST["gender"];
-    $age = $_POST["age"];
+    $birth = $_POST["birth"];
 
     require_once 'dataBaseHandler.inc.php';
     require_once 'functions.inc.php';
 
     $email = getEmail($conn, $selector, $validator);
-
+    $a = pwdMatch($password, $pwdRepeat);
 
     if (!pwdMatch($password, $pwdRepeat)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'));
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'.$a.''));
     }
     if (usernameExists($conn, $username, $email) !== false){
         die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=usernameoremailtaken'));
@@ -27,18 +27,18 @@ if (isset($_POST["signUpManager-submit"])) {
     }
 
     
-    createUser($conn, $username, $email, $password, $gender, $age, 1, 0);
+    createUser($conn, $username, $email, $password, $gender, $birth, 1);
 }
 
 else if (isset($_POST["signUpUser-submit"])) {
-  $selector = $_POST["selector"];
-  $validator = $_POST["validator"];
-
-  $username = $_POST["username"];
-  $password = $_POST["password"];
-  $pwdRepeat = $_POST["password-repeat"];
-  $gender = $_POST["gender"];
-  $age = $_POST["age"];
+    $selector = $_POST["selector"];
+    $validator = $_POST["validator"];
+    
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $pwdRepeat = $_POST["password-repeat"];
+    $gender = $_POST["gender"];
+    $birth = $_POST["birth"];
 
   require_once 'dataBaseHandler.inc.php';
   require_once 'functions.inc.php';
@@ -57,7 +57,7 @@ else if (isset($_POST["signUpUser-submit"])) {
   }
 
   
-  createUser($conn, $username, $email, $password, $gender, $age, 2, 0);
+  createUser($conn, $username, $email, $password, $gender, $birth, 2);
 }
 else {
     die(header("location: ../../pages/logIn/signUp.php"));

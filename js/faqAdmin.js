@@ -8,8 +8,8 @@ $(document).ready(function ($) {
         tbl += "<thead>";
         tbl += "<tr>";
         tbl += '<th style="width: 32%" scope="col">Question</th>';
-        tbl += '<th style="width: 43%" scope="col">Answer</th>';
-        tbl += '<th style="width: 8.33%" scope="col">Language</th>';
+        tbl += '<th style="width: 39%" scope="col">Answer</th>';
+        tbl += '<th style="width: 12.33%" scope="col">Language</th>';
         tbl += '<th style="width: 16.66%" scope="col">Options</th>';
         tbl += "</tr>";
         tbl += "</thead>";

@@ -46,9 +46,9 @@
                 </datalist>
             </div>
             <div class="element">
-                <input type="number" name="age"required>
+                <input type="date" name="birth"required>
                 <span></span>
-                <label>Age</label>
+                <label>Date of birth</label>
             </div>
             <input type="submit" name="signUp-submit" value="Register">
         </form>
