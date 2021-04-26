@@ -48,8 +48,8 @@ function pwdLongEnough($password) {
 
 
 /* crée l'user dans la bdd users */
-function createUser($conn, $username, $email, $password, $gender, $age, $access, $language) {
-    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersAge, usersAccess, usersLanguage) VALUES (?, ?, ?, ?, ?, ?, ?);";
+function createUser($conn, $username, $email, $password, $gender, $birth, $access) {
+    $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersBirth, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
         die(header("location: ../../pages/logIn/signUp.php/?error=stmtfailed"));
@@ -57,7 +57,7 @@ function createUser($conn, $username, $email, $password, $gender, $age, $access,
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssssiii", $username, $email, $hashedPassword , $gender, $age, $access, $language);
+    mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $hashedPassword , $gender, $birth, $access);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
