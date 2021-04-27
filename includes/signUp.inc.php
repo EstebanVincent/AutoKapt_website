@@ -40,8 +40,8 @@ else if (isset($_POST["signUpUser-submit"])) {
     $gender = $_POST["gender"];
     $birth = $_POST["birth"];
 
-  $email = getEmail($conn, $selector, $validator);
-
+    $email = getEmail($conn, $selector, $validator);
+    
 
   if (!pwdMatch($password, $pwdRepeat)){
       die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'));
