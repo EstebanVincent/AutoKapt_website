@@ -101,16 +101,16 @@ def main_test(UserID):
 
 def test_stress(Id):
     TestID = "\'" + str(Id) + "\'"
-    BPM = "\'"+str(random.randint(50,140))+"\'"
-    Temp = "\'"+str(random.randint(36,38)+random.randint(0,9)/10)+"0\'"
+    BPM = "\'"+str(random.randint(80,110))+"\'"
+    Temp = "\'"+str(random.randint(36,37)+random.randint(0,9)/10)+"0\'"
     Request = BPM+","+Temp+","+TestID
     execute_query(db, "INSERT INTO stress (stressBPM,stressTemp,testId) VALUES (" + Request + ")")
 
 
 def test_reflex(Id):
     TestID = "\'" + str(Id) + "\'"
-    Visual = "\'"+str(random.randint(150,500))+"\'"
-    Sound = "\'"+str(random.randint(150,500))+"\'"
+    Visual = "\'"+str(random.randint(200,350))+"\'"
+    Sound = "\'"+str(random.randint(200,350))+"\'"
     Request= Visual+","+Sound+","+TestID
     execute_query(db, "INSERT INTO reflex (reflexVisual,reflexSound,testId) VALUES (" + Request + ")")
 
@@ -149,7 +149,7 @@ autokapt = create_db_connection("localhost", "root", "", "autokapt")
 
 db=autokapt
 
-create_user(100,LastBotUser()+1)
+create_user(200,LastBotUser()+1)
 """
 #execute_query(test,"INSERT INTO users (usersUsername,usersEmail,usersPassword,usersGender,usersBirth,usersAccess) VALUES ('BotTest','bottest@bot.com','$2y$10$5R20WipkZsk5MOWy3k9Wpur.KkNii01TET2Sneiw5NkRsfp6GhpMe','Male','1987-02-18',2)")
 # Returns a list of lists and then creates a pandas DataFrame
