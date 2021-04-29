@@ -132,6 +132,7 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="new_question_entry")
         } else {
             mysqli_stmt_bind_param($stmt, "sss", $question, $answer, $language);
             $success = mysqli_stmt_execute($stmt);
+            $error = mysqli_stmt_error($stmt);
         }	
         if($success){
             echo json_encode(array(
@@ -141,8 +142,8 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="new_question_entry")
             die();
         } else {
             echo json_encode(array(
-                'status' => 'error', 
-                'msg' => 'requete refusé par database', 
+                'status' => 'success', 
+                'msg' => 'requete refusé par database : '. $error, 
             ));
             die();
         }
