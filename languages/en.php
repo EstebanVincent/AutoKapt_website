@@ -25,8 +25,9 @@
         /* footer */
         "footer-title1" => "About",
         "footer-p" => "C'est du en",
-        "footer-title2" => "jsp",
+        "footer-title2" => "Media",
         "footer-title3" => "Need Help?",
+        "footer-title4" => "Legal Section",
         "footer-follow" => "Follow us on",
         "footer-select" => "Select Language",
         "footer-faq" => "FREQUENTLY ASKED QUESTIONS",

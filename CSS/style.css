@@ -350,3 +350,22 @@ table {
     text-shadow: none;
     opacity: 1;
 }
+/******************** Log In ************************ */
+#backgroundLogIn{
+    height: 100%;
+    width: 100%;
+    background: url(/AutoKapt/images/electrocardiogram.jpg);
+    
+}
+
+#logInContainer{
+    border: 4px gray;
+    border-radius: 15px;
+    width: 75%;
+    height: 40%;
+    background-color: whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}

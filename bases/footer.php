@@ -87,7 +87,7 @@
                             <a href="#!" class="text-white-50 text-start"><?php echo $lang['footer-contact'] ?></a>
                         </li>
                         <li>
-                            <h5>JSP</h5>
+                            <h5><?php echo $lang['footer-title4'] ?></h5>
                             <a href="#!" class="text-white-50 text-start">CGU</a><br>
                             <a href="#!" class="text-white-50 text-start"><?php echo $lang['footer-mention'] ?></a>
                         </li>

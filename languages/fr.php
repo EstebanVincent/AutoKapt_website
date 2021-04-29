@@ -25,8 +25,9 @@
         /* footer */
         "footer-title1" => "A propos",
         "footer-p" => "C'est du fr",
-        "footer-title2" => "jsp",
+        "footer-title2" => "Media",
         "footer-title3" => "Besoin d'aide?",
+        "footer-title4" => "Section Légale",
         "footer-follow" => "Suivez nous sur",
         "footer-select" => "Selection langage",
         "footer-faq" => "FOIRE AUX QUESTIONS",
