@@ -15,9 +15,9 @@
       <img src="/AutoKapt/images/reflexe.png" alt="ImgReflexe" class="testpage-imgL"></img>
         <div>
         <p class = "testpage-titre">Mesure du stresse</p>
-        <p class="testpage-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-         Fugit, animi. Delectus dolores nihil vero dolorum molestiae
-         consequatur alias eaque aut.</p>
+        <p class="testpage-text">Il vous sera demandé de placer votre doigt dans un tube opaque qui déterminera votre rythme cardiaque par transparence au travers dudit doigt.
+         Il vous sera également demandé de pincer un capteur de température entre vos doigts pour informer le système de votre température corporelle actuelle.
+          Ces données permettront ainsi de déterminer votre niveau de stress.</p>
          </div>
     </div>
 

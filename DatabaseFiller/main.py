@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-import pandas as pd
 import random
 
 def create_server_connection(host_name, user_name, user_password):
@@ -99,46 +98,67 @@ def main_test(UserID):
             test_audition(TestID)
 
 
-def test_stress(Id):
+def test_stress(Id,BPMmin=40,BPMmax=140,TEMPmin=36,TEMPmax=39):
     TestID = "\'" + str(Id) + "\'"
-    BPM = "\'"+str(random.randint(50,140))+"\'"
-    Temp = "\'"+str(random.randint(36,38)+random.randint(0,9)/10)+"0\'"
+    if BPMmin<BPMmax:
+        BPM = "\'" + str(random.randint(BPMmin, BPMmax)) + "\'"
+    else:
+        BPM = "\'"+str(random.randint(50,140))+"\'"
+    if TEMPmin<TEMPmax:
+        TempTest = random.randint(int(TEMPmin),int(TEMPmax-1))+random.randint(0,9)/10
+    else:
+        TempTest = random.randint(36,38)+random.randint(0,9)/10
+    Temp = "\'" + str(TempTest) + "0\'"
     Request = BPM+","+Temp+","+TestID
     execute_query(db, "INSERT INTO stress (stressBPM,stressTemp,testId) VALUES (" + Request + ")")
 
 
-def test_reflex(Id):
+def test_reflex(Id,VISUALmin=150,VISUALmax=500,SOUNDmin=150,SOUNDmax=500):
     TestID = "\'" + str(Id) + "\'"
-    Visual = "\'"+str(random.randint(150,500))+"\'"
-    Sound = "\'"+str(random.randint(150,500))+"\'"
+    if VISUALmin<VISUALmax:
+        Visual ="\'"+str(random.randint(VISUALmin,VISUALmax))+"\'"
+    else:
+        Visual = "\'"+str(random.randint(150,500))+"\'"
+    if SOUNDmin<SOUNDmax:
+        Sound = "\'"+str(random.randint(SOUNDmin,SOUNDmax))+"\'"
+    else:
+        Sound = "\'"+str(random.randint(150,500))+"\'"
     Request= Visual+","+Sound+","+TestID
     execute_query(db, "INSERT INTO reflex (reflexVisual,reflexSound,testId) VALUES (" + Request + ")")
 
-def test_memory(Id):
+def test_memory(Id,SCOREmin=0,SCOREmax=100):
     TestID = "\'" + str(Id) + "\'"
-    temp = random.randint(0,100)
-    if temp<50:
-        temp2=random.randint(0,100)
-        if temp+temp2<=100:
-            Score = "\'" + str(temp+temp2) + "\'"
-        else:
-            Score = "\'" + str(temp) + "\'"
+    if SCOREmax!=100 or SCOREmin!=0:
+        temp = random.randint(SCOREmin,SCOREmax)
+        Score = "\'" + str(temp) + "\'"
     else:
-        Score = "\'"+str(temp)+"\'"
+        temp = random.randint(0,100)
+        if temp<50:
+            temp2=random.randint(0,100)
+            if temp+temp2<=100:
+                Score = "\'" + str(temp+temp2) + "\'"
+            else:
+                Score = "\'" + str(temp) + "\'"
+        else:
+            Score = "\'"+str(temp)+"\'"
     Request= Score+","+TestID
     execute_query(db, "INSERT INTO memory (memoryRythm,testId) VALUES (" + Request + ")")
 
-def test_audition(Id):
+def test_audition(Id,SCOREmin=0,SCOREmax=100):
     TestID = "\'" + str(Id) + "\'"
-    temp = random.randint(0, 100)
-    if temp < 50:
-        temp2 = random.randint(0, 100)
-        if temp + temp2 <= 100:
-            Score = "\'" + str(temp + temp2) + "\'"
+    if SCOREmax!=100 or SCOREmin!=0:
+        temp = random.randint(SCOREmin,SCOREmax)
+        Score = "\'" + str(temp) + "\'"
+    else:
+        temp = random.randint(0, 100)
+        if temp < 50:
+            temp2 = random.randint(0, 100)
+            if temp + temp2 <= 100:
+                Score = "\'" + str(temp + temp2) + "\'"
+            else:
+                Score = "\'" + str(temp) + "\'"
         else:
             Score = "\'" + str(temp) + "\'"
-    else:
-        Score = "\'" + str(temp) + "\'"
     Request = Score + "," + TestID
     execute_query(db, "INSERT INTO audition (auditionScore,testId) VALUES (" + Request + ")")
 
@@ -150,17 +170,5 @@ autokapt = create_db_connection("localhost", "root", "", "autokapt")
 db=autokapt
 
 create_user(100,LastBotUser()+1)
-"""
-#execute_query(test,"INSERT INTO users (usersUsername,usersEmail,usersPassword,usersGender,usersBirth,usersAccess) VALUES ('BotTest','bottest@bot.com','$2y$10$5R20WipkZsk5MOWy3k9Wpur.KkNii01TET2Sneiw5NkRsfp6GhpMe','Male','1987-02-18',2)")
-# Returns a list of lists and then creates a pandas DataFrame
-from_db = []
-#results = read_query(db, "SELECT * FROM users")
-for result in results:
-    result = list(result)
-    from_db.append(result)
 
-columns = ["id", "Username", "Email", "Password", "Gender","Birth","Access"]
-df = pd.DataFrame(from_db, columns=columns)
-print(df)
-"""
 
