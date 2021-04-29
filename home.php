@@ -14,7 +14,7 @@
             a, aspernatur iste illum tempora eaque?</p>
         </div>
         <div class="col-sm-6">
-            <img src="/AutoKapt/images/background.jpg" class="img-responsive" />
+            <img src="/AutoKapt/images/vieux.jpg" class="img-responsive" />
         </div>
     </div>
 </section>
