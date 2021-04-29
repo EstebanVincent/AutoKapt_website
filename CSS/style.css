@@ -16,7 +16,7 @@ h2 {
     text-align: center;
     padding-top: 30px;
     font-size: 2em;
-    color: honeydew;
+    color: white;
 }
 h3_2{
     text-align: center;
@@ -30,6 +30,9 @@ a {
     color: black;
 }
 
+p{
+    margin-left: 35 px;
+}
 /*************************** FOOTER ******************************* */
 footer {
     position: bottom;
@@ -95,7 +98,7 @@ h3 {
     text-shadow: 1px 3px 2px black;
 }
 /*************************** IMAGE ******************************* */
-#image{
+#imageSet{
     margin-top: auto;
     margin-bottom: auto;
 }
