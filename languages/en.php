@@ -19,10 +19,10 @@
         "dashboard-hearing" => "Hearing",
         'play' => 'Play',
 
-        /*  */
+        /* Home */
         "accueil-title2" => "Our duty",
         "accueil-title3" => " A Team dedicated to innovation !",
-        "accueil-para1" => "designing a measurement system for driving schools to check whether a person is fit to drive.",
+        "accueil-para1" => "Designing a measurement system for driving schools to check whether a person is fit to drive.",
         "accueil-para2" => "We are developing a revolutionary application that will allow several tests to be carried out, such as stress measurement, reflexes measurment or even a hearing and memory test.",
         "accueil-para3" =>"We want to protect people from the dangers of the road at all costs. Our aim is to prevent people who are dangerous, not only to others but above all to themselves, from touching a steering wheel when they have a physical or mental problem.", 
         "accueil-para4" =>"We seek to maintain a constant evolution to allow our users to benefit from tests that is fast, safe and easy to use.",
