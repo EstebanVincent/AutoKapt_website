@@ -45,7 +45,15 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="row_entry")
 		die();
     } else {
         mysqli_stmt_bind_param($stmt, "i", $id);
-        mysqli_stmt_execute($stmt);
+        $success = mysqli_stmt_execute($stmt);
+        $error = mysqli_stmt_error($stmt);
+        if (!$success) {
+            echo json_encode(array(
+                'status' => 'error', 
+                'msg' => 'requete refusé par database : '. $error, 
+            ));
+            die();
+        }
     }
 
     $result = mysqli_stmt_get_result($stmt);
@@ -59,13 +67,22 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="row_entry")
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $gender, $birth, $access, $id);
-        mysqli_stmt_execute($stmt);
+        $success = mysqli_stmt_execute($stmt);
+        $error = mysqli_stmt_error($stmt);
     }	
-    echo json_encode(array(
-        'status' => 'success', 
-        'msg' => 'Successfully updated selected row', 
-    ));
-    die();
+    if($success){
+        echo json_encode(array(
+            'status' => 'success', 
+            'msg' => 'Successfully updated selected row', 
+        ));
+        die();
+    } else {
+        echo json_encode(array(
+            'status' => 'success', 
+            'msg' => 'requete refusé par database : '. $error, 
+        ));
+        die();
+    }
 }
 //--->update a whole row > end
 
@@ -87,14 +104,21 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="delete_row_entry")
 		die();
     }
     mysqli_stmt_bind_param($stmt, "i", $row_id);
-    mysqli_stmt_execute($stmt);
-    
-
-    echo json_encode(array(
-        'status' => 'success', 
-        'msg' => 'Successfully deleted selected row', 
-    ));
-    die();
-	 
+    $success = mysqli_stmt_execute($stmt);
+    $error = mysqli_stmt_error($stmt);
+	
+    if($success){
+        echo json_encode(array(
+            'status' => 'success', 
+            'msg' => 'Successfully deleted selected row', 
+        ));
+        die();
+    } else {
+        echo json_encode(array(
+            'status' => 'success', 
+            'msg' => 'requete refusé par database : '. $error, 
+        ));
+        die();
+    }
 }
 //--->delete row entry  > end

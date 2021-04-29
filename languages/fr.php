@@ -36,7 +36,6 @@
 
         /* nav */
         "nav-dashboard" => "Tableau de bord",
-        "nav-team" => "Equipe",
         "nav-profile" => "Mon profile",
         "nav-create-manager" => "Créer un responsable",
         "nav-create-user" => "Créer un utilisateur",
@@ -46,7 +45,8 @@
         "nav-login" => "Connexion",
         
         /* testpage */
-        "testdesc-maintitle" => "Les différents tests",
+        "testdesc-title" => "Les différents tests",
+        "testdesc-desc" => "Les différents tests sont présentés ci-dessous",
         "testdesc-stress-title" => "Mesure du stresse",
         "testdesc-stress-desc" => "Il vous sera demandé de placer votre doigt dans un tube opaque qui déterminera votre rythme cardiaque par transparence au travers dudit doigt.
         Il vous sera également demandé de pincer un capteur de température entre vos doigts pour informer le système de votre température corporelle actuelle.

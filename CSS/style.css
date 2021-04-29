@@ -345,20 +345,21 @@ table {
 .testpage-text {
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 25px;
     color: black;
     text-shadow: none;
     opacity: 1;
 }
 /******************** Log In ************************ */
-#backgroundLogIn{
+#backgroundLogIn {
     height: 100%;
     width: 100%;
     background: url(/AutoKapt/images/electrocardiogram.jpg);
-    
 }
 
-#logInContainer{
+#logInContainer {
     border: 4px gray;
     border-radius: 15px;
     width: 75%;

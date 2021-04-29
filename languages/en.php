@@ -36,7 +36,6 @@
 
         /* nav */
         "nav-dashboard" => "Dashboard",
-        "nav-team" => "Team",
         "nav-profile" => "My profil",
         "nav-create-manager" => "Create Manager",
         "nav-create-user" => "Create User",
@@ -46,7 +45,8 @@
         "nav-login" => "Log in",
 
         /* testpage */
-        "testdesc-maintitle" => "The different tests",
+        "testdesc-title" => "The different tests",
+        "testdesc-desc" => "The different test are presented down-below",
         "testdesc-stress-title" => "Stress measurment",
         "testdesc-stress-desc" => "You will be asked to place your finger inside of an opaque tube which will determine your heart rate by transparency through your finger.
         You will also be asked to pinch a temperature sensor between your fingers to inform the system of your current body temperature.
