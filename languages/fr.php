@@ -20,7 +20,17 @@
         'play' => 'Jouer',
 
         /*  */
-        "title" => "baguette",
+        "accueil-title2" => "Notre mission : ",
+        "accueil-title3" => "Une équipe consacrée à l'innovation !",
+        "accueil-para1" => "concevoir un système de mesure s’adressant à des auto-écoles pour vérifier si une personne est apte à conduire.",
+        "accueil-para2" => "Nous développons une application révolutionnaire qui permettra de réaliser plusieurs tests comme la mesure du stresse, la mesure des reflèxes ou encore un test d'audition et de mémoire.",
+        "accueil-para3" => "Nous voulons à tout prix protéger les personnes du danger de la route. Notre objectif est d'empêcher les personnes qui sont dangereuses, pour les autres mais avant tout pour elles-même, de toucher un volant lorsque celle-ci présente un problème physique ou psychique.", 
+        "accueil-para4" => "Nous cherchons à maintenir une constante évolution pour permettre à nos utilisateurs de bénéficier de tests à la fois rapide, sûre et facile d'utilisation.",
+        "accueil-para5" => "Nous souhaitons aider aux mieux les auto-écoles à gérer les futurs conducteurs en leur simplifiant la vie. Notre site permet aisément au moniteur d'auto-école de savoir si un apprenti conducteur présente des difficultés dans un domaine.",
+        "accueil-pilier1" =>"Protéger",
+        "accueil-pilier2" =>"Innover",
+        "accueil-pilier3" =>"Aider",
+
 
         /* footer */
         "footer-title1" => "A propos",

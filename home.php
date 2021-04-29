@@ -6,12 +6,23 @@
     <div class="row">
         <div class="col-sm-6">
             <h1>Infinite Measures</h1>
-            <p><?php echo $lang['title'] ?></p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Non, suscipit? Vitae culpa esse, animi voluptatibus voluptas
-            non cupiditate ea soluta quo. Distinctio culpa, fugit excepturi
-            id molestiae enim consequatur adipisci porro maiores, esse omnis
-            a, aspernatur iste illum tempora eaque?</p>
+            
+            <h2> <?php echo $lang['accueil-title2'] ?>:<br />
+            <?php echo $lang['accueil-para1'] ?></h2>
+           
+            <p><?php echo $lang['accueil-para2'] ?> </p>
+            
+            <h3><?php echo $lang['accueil-title3'] ?></h3>
+
+            <ul>`
+                <li><strong> <?php echo $lang['accueil-pilier1'] ?></strong><br />
+                <?php echo $lang['accueil-para3'] ?></li>
+                <li><strong> <?php echo $lang['accueil-pilier2'] ?></strong><br />   
+                <?php echo $lang['accueil-para4'] ?></li>
+                <li><strong><?php echo $lang['accueil-pilier3'] ?></strong><br />
+                <?php echo $lang['accueil-para5'] ?></li>
+            </ul>
+
         </div>
         <div class="col-sm-6">
             <img src="/AutoKapt/images/vieux.jpg" class="img-responsive" />
