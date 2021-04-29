@@ -5,7 +5,7 @@
 <div id = "imagePrincipale">
       <h1>APP G9E</h1>
       <div id = "firstLine"></div>
-      <h3>Les différents tests</h3>
+      <h3><?php echo $lang['testdesc-maintitle'] ?></h3>
 
 
 
