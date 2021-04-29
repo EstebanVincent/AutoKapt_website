@@ -316,6 +316,9 @@ table {
     background-color: lightgray;
     margin: 10px 10px;
 }
+.testpage-title {
+    margin: 10px 10px;
+}
 
 .testpage-imgR {
     height: 240px;

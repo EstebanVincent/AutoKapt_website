@@ -5,10 +5,10 @@
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
   <div class="testpagemain">
-    <div class="testpage rounded dark2" >
-        <div>
-        <p class = "testpage-titre text-white-50 ms-4"><?php echo $lang['testdesc-title'] ?></p>
-        <p class="testpage-text text-white-50 justify"><?php echo $lang['testdesc-desc'] ?></p>
+    <div class="testpage-title rounded dark2" >
+        <div class="text-center">
+        <p class = "testpage-titre text-info"><?php echo $lang['testdesc-title'] ?></p>
+        <p class="testpage-text text-info"><?php echo $lang['testdesc-desc'] ?></p>
          </div>
     </div>
     <div class="testpage rounded dark2" >
