@@ -457,7 +457,7 @@ function getEmail($conn, $selector, $validator){
         /* on recupere le résultat */
         $result = mysqli_stmt_get_result($stmt);
         if(!$row = mysqli_fetch_assoc($result)){ /* transforme le résultat en array */
-            echo "u need to re-submit your reset request";
+            echo "Time given for account creation is over";
             exit();
         } else  {
             /* le token validator est passé en binaire */

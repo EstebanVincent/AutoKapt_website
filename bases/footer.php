@@ -3,23 +3,26 @@
 
     Il définit le footer du site
  -->
+
+<?php
+    require_once "config.php";
+?>
+
 <footer class="bg-dark text-center text-white-50">
     <div class="container">
         <section class="">
             <div class="row">
                 <div class="col">
-                    <h2>About</h2>
+                    <h2><?php echo $lang['footer-title1'] ?></h2>
                     <p class="align-justify">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos neque incidunt voluptatem fuga impedit modi
-                        voluptate? Voluptates, exercitationem, beatae sapiente nam excepturi temporibus odit possimus ratione quo
-                        fugit iure. Sit.
+                        <?php echo $lang['footer-p'] ?>
                     </p>
                 </div>
                 <div class="col">
-                    <h2>JSP lol</h2>
+                    <h2><?php echo $lang['footer-title2'] ?></h2>
                     <ul class="list-unstyled">
                         <li>
-                            <h5>LANGUAGE SELECT</h5>
+                            <h5><?php echo $lang['footer-select'] ?></h5>
                             <form>
                                 <select class="form-control form-control-sm text-white-50 bg-dark" onchange="location = this.value;">
 <?php
@@ -48,7 +51,7 @@
                             </form>
                         </li>
                         <li>
-                            <h5>FOLLOW US ON</h5>
+                            <h5><?php echo $lang['footer-follow'] ?></h5>
                             <!-- Facebook -->
                             <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
 
@@ -66,24 +69,27 @@
 
                             <!-- Github -->
                             <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
+
+                            <!-- Youtube -->
+                            <a class="btn btn-outline-secondary btn-floating m-1" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" role="button"><i class="fab fa-youtube"></i></a>
                         </li>
                     </ul>
                 </div>
                 <div class="col text-start">
-                    <h2>Need some help?</h2>
+                    <h2><?php echo $lang['footer-title3'] ?></h2>
                     <ul class="list-unstyled">
                         <li>
-                            <h5>COMMONLY ASKED QUESTIONS</h5>
+                            <h5><?php echo $lang['footer-faq'] ?></h5>
                             <a href="/AutoKapt/pages/faq.php" class="text-white-50">FAQ</a>
                         </li>
                         <li>
                             <h5>CONTACT</h5>
-                            <a href="#!" class="text-white-50 text-start">Contact Us by Email</a>
+                            <a href="#!" class="text-white-50 text-start"><?php echo $lang['footer-contact'] ?></a>
                         </li>
                         <li>
                             <h5>JSP</h5>
                             <a href="#!" class="text-white-50 text-start">CGU</a><br>
-                            <a href="#!" class="text-white-50 text-start">Mentions Légales</a>
+                            <a href="#!" class="text-white-50 text-start"><?php echo $lang['footer-mention'] ?></a>
                         </li>
                     </ul>
                 </div>
