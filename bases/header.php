@@ -35,13 +35,13 @@
                           '
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/createManager.php">'. $lang["nav-create-manager"] .'</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyFAQ.php">'. $lang["nav-update-faq"] .'</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyUsers.php">'. $lang["nav-update-user"] .'</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php"><i class="fas fa-id-card"></i> '. $lang["nav-profile"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/createManager.php"><i class="fas fa-plus-circle"></i> '. $lang["nav-create-manager"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyFAQ.php"><i class="far fa-question-circle"></i> '. $lang["nav-update-faq"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyUsers.php"><i class="fas fa-users"></i> '. $lang["nav-update-user"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php"><i class="fas fa-sign-out-alt"></i> '. $lang["nav-logout"] .'</a></li>
                                 </ul>
                             </li>
                             ';
@@ -52,11 +52,11 @@
                           '
                           <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
                           <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
+                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php">'. $lang["nav-create-user"] .'</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php"><i class="fas fa-id-card"></i> '. $lang["nav-profile"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php"><i class="fas fa-plus-circle"></i> '. $lang["nav-create-user"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php"><i class="fas fa-sign-out-alt"></i> '. $lang["nav-logout"] .'</a></li>
                               </ul>
                           </li>
                           ';
@@ -66,10 +66,10 @@
                           '
                           <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
                           <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
+                              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php"><i class="fas fa-id-card"></i> '. $lang["nav-profile"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php"><i class="fas fa-sign-out-alt"></i> '. $lang["nav-logout"] .'</a></li>
                               </ul>
                           </li>
                           ';
