@@ -20,7 +20,7 @@
         'play' => 'Jouer',
 
         /*  */
-        "accueil-title2" => "Notre mission : ",
+        "accueil-title2" => "Notre mission ",
         "accueil-title3" => "Une équipe consacrée à l'innovation !",
         "accueil-para1" => "concevoir un système de mesure s’adressant à des auto-écoles pour vérifier si une personne est apte à conduire.",
         "accueil-para2" => "Nous développons une application révolutionnaire qui permettra de réaliser plusieurs tests comme la mesure du stresse, la mesure des reflèxes ou encore un test d'audition et de mémoire.",
