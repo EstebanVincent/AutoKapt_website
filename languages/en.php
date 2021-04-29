@@ -20,7 +20,17 @@
         'play' => 'Play',
 
         /*  */
-        "title" => "bread",
+        "accueil-title2" => "Our duty",
+        "accueil-title3" => " A Team dedicated to innovation !",
+        "accueil-para1" => "designing a measurement system for driving schools to check whether a person is fit to drive.",
+        "accueil-para2" => "We are developing a revolutionary application that will allow several tests to be carried out, such as stress measurement, reflexes measurment or even a hearing and memory test.",
+        "accueil-para3" =>"We want to protect people from the dangers of the road at all costs. Our aim is to prevent people who are dangerous, not only to others but above all to themselves, from touching a steering wheel when they have a physical or mental problem.", 
+        "accueil-para4" =>"We seek to maintain a constant evolution to allow our users to benefit from tests that is fast, safe and easy to use.",
+        "accueil-para5" =>"We want to help driving schools manage their student drivers by making their lives easier. Our site makes it easy for the driving instructor to know if a learner driver has difficulties in a particular area.",
+        "accueil-pilier1" =>"Protect",
+        "accueil-pilier2" =>"Innovate",
+        "accueil-pilier3" =>"Help",
+
         
         /* footer */
         "footer-title1" => "About",
