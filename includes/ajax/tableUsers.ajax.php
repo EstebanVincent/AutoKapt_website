@@ -22,6 +22,25 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 }
 //--->get all users > end
 
+if(isset($_POST["search-submit"]))
+{
+    $likeUsername = $_POST["likeUsername"];
+
+    $sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+    $allUsers = resultToArray($result);
+	echo json_encode($allUsers);
+}
+
 //--->update a whole row  > start
 if(isset($_POST['call_type']) && $_POST['call_type'] =="row_entry")
 {	

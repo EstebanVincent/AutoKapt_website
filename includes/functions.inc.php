@@ -857,7 +857,7 @@ function showDatalistUsername($conn){
     $result = mysqli_query($conn, $sql);
     echo '
     <label for="exampleDataList" class="form-label">Search users by username</label>
-    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type username to search...">
+    <input name="likeUsername" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type username to search...">
     <datalist id="datalistOptions">
     ';
     while ($row = mysqli_fetch_assoc($result)) {
