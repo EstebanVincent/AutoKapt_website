@@ -17,13 +17,13 @@
 	</div>
 </section>
 
-<!-- <section>
-	<h2>Mesure de la Temepérature</h2>
+<section>
+	<h2>Mesure des reflexes sonores</h2>
 	<div class="graphs">
-		<div id="UserTemp" style="height: 370px; width: 100%;"></div>
-		<div id="TempStats" style="height: 370px; width: 100%;"></div>
+		<div id="UserSound" style="height: 370px; width: 100%;"></div>
+		<div id="SoundStats" style="height: 370px; width: 100%;"></div>
 	</div>
-</section> -->
+</section>
 	
 	
     <?php
@@ -34,11 +34,11 @@
 	$dataVisualTotal = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[0]);
 	$dataVisualPerso = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[1]);
 
+	$dataSound = getSoundHistoryUser($conn, $_SESSION["userId"]);
 
-	/* $dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
+	$dataSoundTotal = SoundTotal2Chart(getSoundTotal($conn, $_SESSION["userId"])[0]);
+	$dataSoundPerso = SoundTotal2Chart(getSoundTotal($conn, $_SESSION["userId"])[1]);
 
-	$dataTempTotal = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[0]);
-	$dataTempPerso = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[1]); */
 
 
     ?>
@@ -48,10 +48,12 @@ var dataVisual = <?php echo json_encode($dataVisual, JSON_NUMERIC_CHECK); ?>;
 var dataVisualTotal = <?php echo json_encode($dataVisualTotal, JSON_NUMERIC_CHECK); ?>;
 var dataVisualPerso = <?php echo json_encode($dataVisualPerso, JSON_NUMERIC_CHECK); ?>;
 
-
+var dataSound = <?php echo json_encode($dataSound, JSON_NUMERIC_CHECK); ?>;
+var dataSoundTotal = <?php echo json_encode($dataSoundTotal, JSON_NUMERIC_CHECK); ?>;
+var dataSoundPerso = <?php echo json_encode($dataSoundPerso, JSON_NUMERIC_CHECK); ?>;
 
 </script>
-<script src="/AutoKapt/js/reflex.js"></script>
+<script src="/AutoKapt/js/result/reflex.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');

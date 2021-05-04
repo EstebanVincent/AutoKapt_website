@@ -37,7 +37,7 @@ require_once __ROOT__.'includes/functions.inc.php';
 	</section>
     <div class="py-3"></div>
 </div>
-<script src="/AutoKapt/js/tableUsers.js"></script>
+<script src="/AutoKapt/js/admin/tableUsers.js"></script>
 
 
 <?php

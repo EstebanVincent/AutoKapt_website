@@ -25,7 +25,7 @@
 	</section>
 	<div class="py-3"></div>
 </div>
-<script src="/AutoKapt/js/faqAdmin.js"></script>
+<script src="/AutoKapt/js/admin/faqAdmin.js"></script>
 
   <?php
 require_once(__ROOT__.'includes/errors.inc.php');
