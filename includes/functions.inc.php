@@ -515,20 +515,6 @@ function showFAQ($conn, $language){
     }
 }
 
-/* echo la table des email de users et return un array des emails */
-function hintSearch($conn) {
-    $sql = "SELECT usersEmail FROM users;";
-    $results = mysqli_query($conn,$sql);
-    /* $rows = mysqli_fetch_assoc($results);
-    echo $rows['usersEmail']; */
-    $emails[] = $rows['usersEmail'];
-    while ($rows = mysqli_fetch_assoc($results)) {
-        echo '<div class="QA-item" id="question">';
-        echo '<a class="Question" href="#question">' . $rows['usersEmail'] . '</a>';
-            echo '</div>';
-    }
-    return $emails;
-}
 /* return le résultat sous forme d'array */
 function resultToArray($result) {
     $rows = array();
@@ -930,4 +916,20 @@ function showUsers($conn, $access){
         ';
             
     } 
+}
+
+function showDatalistUsername($conn){
+    $sql = "SELECT usersUsername FROM users WHERE usersEmail NOT LIKE '%@bot.fr'";
+    $result = mysqli_query($conn, $sql);
+    echo '
+    <label for="exampleDataList" class="form-label">Search users by username</label>
+    <input name="likeUsername" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type username to search...">
+    <datalist id="datalistOptions">
+    ';
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<option value=' . $row["usersUsername"] . '>';
+     }
+    echo '
+    </datalist>
+    ';
 }
