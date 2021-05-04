@@ -17,7 +17,7 @@ if (isset($_POST["signUpManager-submit"])) {
     $a = pwdMatch($password, $pwdRepeat);
 
     if (!pwdMatch($password, $pwdRepeat)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'.$a.''));
+        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'));
     }
     if (usernameExists($conn, $username, $email) !== false){
         die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=usernameoremailtaken'));

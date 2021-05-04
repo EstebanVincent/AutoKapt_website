@@ -3,9 +3,28 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 require_once __ROOT__.'includes/functions.inc.php';
 
 //--->get all users > start
-if(isset($_POST['call_type']) && $_POST['call_type'] =="get_users")
+if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 {
-	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $_POST['search'] ."%' ORDER BY usersAccess;";
+    if(isset($_GET['search']))
+    {
+        $tempo = unserialize($_GET['search']);
+        $likeUsername = $tempo['username'];
+
+        $sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "error3";
+            exit();
+        } else {
+            mysqli_stmt_execute($stmt);
+        }
+
+        $result = mysqli_stmt_get_result($stmt);
+        $allUsers = resultToArray($result);
+        echo json_encode($allUsers);
+    } else {
+	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' ORDER BY usersAccess;";
     /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 
@@ -19,6 +38,7 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="get_users")
     $result = mysqli_stmt_get_result($stmt);
     $allUsers = resultToArray($result);
 	echo json_encode($allUsers);
+    }
 }
 //--->get all users > end
 

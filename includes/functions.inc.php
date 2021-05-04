@@ -888,7 +888,7 @@ function time_elapsed_string($datetime, $after, $full = false) {
     }
 }
 
-/* Affiche le tablo de tout les users ayant l'acces demandé */
+/* Affiche le tablo de tout les ussers ayant l'acces demandé */
 function showUsers($conn, $access){
     $sql = "SELECT usersUsername, usersEmail, usersGender, usersBirth, usersAccess FROM users WHERE usersAccess=?;";
     $stmt = mysqli_stmt_init($conn);
