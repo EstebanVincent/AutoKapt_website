@@ -8,10 +8,9 @@
         <div class="col-sm-6">
             <h1>Infinite Measures</h1>
             
-            <h2> <?php echo $lang['accueil-title2'] ?>:<br />
-            <?php echo $lang['accueil-para1'] ?></h2>
-           
-            <p><?php echo $lang['accueil-para2'] ?> </p>
+            <h2> <?php echo $lang['accueil-title2'] ?>:<br /></h2>
+            <p class="justify"><?php echo $lang['accueil-para1'] ?>
+           <?php echo $lang['accueil-para2'] ?> </p>
             
             <h3_2><?php echo $lang['accueil-title3'] ?></h3_2>
 
@@ -28,7 +27,8 @@
 
         </div>
         <div class="col-sm-6">
-           <img src="/AutoKapt/images/vieux.jpg" class="img-responsive" /></div>
+        <div class="imageSet">
+           <img src="/AutoKapt/images/vieux.jpg" class="img-responsive" />
         </div>
     </div>
 </section>
