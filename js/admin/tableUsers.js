@@ -22,7 +22,6 @@ $(document).ready(function ($) {
 
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            //you can replace with your database row id
             var row_id = val["usersId"];
 
             //loop through ajax row data
@@ -58,6 +57,35 @@ $(document).ready(function ($) {
         $(document).find(".btn_cancel").hide();
         $(document).find(".btn_delete").hide();
     }
+    function create_form(form_data) {
+        //--->create form > start
+        var form = "";
+        form += '<form action="/AutoKapt/includes/Admin/search.inc.php" method="POST">';
+        form += '<label for="searchUsername" class="form-label">Search users by username</label>';
+        form +=
+            '<input name="likeUsername" class="form-control" list="datalistOptions" id="searchUsername" placeholder="Type username to search...">';
+        form += '<datalist id="datalistOptions">';
+
+        $.each(form_data, function (index, val) {
+            var option = val["usersUsername"];
+            form += "<option value=" + option + ">";
+        });
+        form += "</datalist>";
+        form += '<div class="text-center">';
+        form += '<input class="btn btn-primary mt-3" name="search-submit" type="submit" value="Search">';
+        form += '<input class="btn btn-primary mt-3" name="see-all-submit" type="submit" value="See All">';
+        form += "</div>";
+        form += "";
+        form += "</form>";
+        //--->create form > end
+
+        //out put form
+        $(document).find(".form").html(form);
+
+        /* $(document).find(".btn_save").hide();
+        $(document).find(".btn_cancel").hide();
+        $(document).find(".btn_delete").hide(); */
+    }
 
     //variable de fonction
     var ajax_url = "/AutoKapt/includes/ajax/tableUsers.ajax.php";
@@ -66,6 +94,13 @@ $(document).ready(function ($) {
     var urlTotal = window.location.href;
     var test = urlTotal.split("php");
     ajax_url += test[1];
+
+    //--->create form via ajax call > start
+    $.getJSON(ajax_url, { call_type: "get_usernames" }, function (data) {
+        //create form on page load
+        create_form(data);
+    });
+    //--->create form via ajax call > end
 
     //--->create table via ajax call > start
     $.getJSON(ajax_url, { call_type: "get_users" }, function (data) {

@@ -20,7 +20,6 @@ $(document).ready(function ($) {
 
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            //you can replace with your database row id
             var row_id = val["faqId"];
 
             //loop through ajax row data

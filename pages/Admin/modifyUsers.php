@@ -9,16 +9,7 @@
         <div class="card-body">
             <div class="card-title"><b>Gérer les utilisateurs</b> </div>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa quam excepturi autem animi, eveniet maxime dolor, iste odio, est laudantium consectetur possimus magni veritatis tenetur incidunt illum aperiam quos!</p>
-            <form action="/AutoKapt/includes/Admin/search.inc.php" method="POST">
-<?php
-require_once __ROOT__.'includes/functions.inc.php';
-            showDatalistUsername($conn);
-?>
-            <div class="text-center">
-                <input class="btn btn-primary mt-3" name="search-submit" type="submit" value="Search">
-                <input class="btn btn-primary mt-3" name="see-all-submit" type="submit" value="See All">
-            </div>
-            </form>
+            <div class="form"></div>
         </div>
 	</section>
     <div class="py-3"></div>
