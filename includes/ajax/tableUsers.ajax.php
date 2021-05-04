@@ -25,10 +25,10 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_usernames")
 //--->get all users > start
 if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 {
-    if(isset($_GET['search']))
+    /* petite search */
+    if(isset($_GET['username']))
     {
-        $tempo = unserialize($_GET['search']);
-        $likeUsername = $tempo['username'];
+        $likeUsername = $_GET['username'];
 
         $sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
         $stmt = mysqli_stmt_init($conn);
@@ -43,7 +43,88 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
         $result = mysqli_stmt_get_result($stmt);
         $allUsers = resultToArray($result);
         echo json_encode($allUsers);
-    } else {
+    }
+    /* grosse search */
+    else if(isset($_GET['search']))
+    {
+        $global = unserialize($_GET['search']);
+        $username = $global['username'];
+        $email = $global['email'];
+        $ageMin = $global['ageMin'];
+        $ageMax = $global['ageMax'];
+        $gender = $global['gender'];
+        $access = $global['access'];
+
+        if(empty($ageMin)){
+            if(empty($ageMax)){
+                if(empty($access)){
+                    /* 3 empty */
+                    $sql = "SELECT * FROM users 
+                    WHERE usersEmail NOT LIKE '%@bot.fr'
+                    AND usersUsername LIKE '%". $username ."%' 
+                    AND usersEmail LIKE '%". $email ."%' 
+                    AND usersGender LIKE '%". $gender ."%' 
+                    ;"; 
+                }
+                /* min et max empty */
+                $sql = "SELECT * FROM users 
+                WHERE usersEmail NOT LIKE '%@bot.fr'
+                AND usersUsername LIKE '%". $username ."%' 
+                AND usersEmail LIKE '%". $email ."%' 
+                AND usersGender LIKE '%". $gender ."%' 
+                AND usersAccess = ". $access ."
+                ;"; 
+            }
+            /* min empty */
+            $sql = "SELECT * FROM users 
+            WHERE usersEmail NOT LIKE '%@bot.fr'
+            AND usersUsername LIKE '%". $username ."%' 
+            AND usersEmail LIKE '%". $email ."%'
+            AND usersGender LIKE '%". $gender ."%'  
+            AND usersAccess = ". $access ."
+            AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax
+            ;"; 
+        } else {
+            if(empty($ageMax)){
+                /* max empty */
+                $sql = "SELECT * FROM users 
+            WHERE usersEmail NOT LIKE '%@bot.fr'
+            AND usersUsername LIKE '%". $username ."%' 
+            AND usersEmail LIKE '%". $email ."%' 
+            AND usersGender LIKE '%". $gender ."%' 
+            AND usersAccess = ". $access ."
+            AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin
+            ;"; 
+            } else {
+                /* no empty */
+                $sql = "SELECT * FROM users 
+                WHERE usersEmail NOT LIKE '%@bot.fr'
+                AND usersUsername LIKE '%". $username ."%' 
+                AND usersEmail LIKE '%". $email ."%' 
+                AND usersGender LIKE '%". $gender ."%' 
+                AND usersAccess = ". $access ."
+                AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax
+                AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin
+            ;";
+            } 
+        }
+
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "error3";
+            exit();
+        } else {
+            mysqli_stmt_execute($stmt);
+        }
+
+        $result = mysqli_stmt_get_result($stmt);
+        $allUsers = resultToArray($result);
+        echo json_encode($allUsers);
+    } 
+    /* 0 search */
+    else 
+    {
 	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' ORDER BY usersAccess;";
     /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);

@@ -106,8 +106,9 @@ $(document).ready(function ($) {
         /* recherche genre */
         form += '<div class="row">';
         form += '<div class="col-6">';
-        form += '<label for="selectGender" name="gender" class="form-label">Select Gender</label>';
-        form += '<select id="selectGender" class="form-select">';
+        form += '<label for="selectGender" class="form-label">Select Gender</label>';
+        form += '<select id="selectGender" name="gender" class="form-select">';
+        form += "<option value=''>Select Gender</option>";
         form += "<option>Male</option>";
         form += "<option>Female</option>";
         form += "<option>Others</option>";
@@ -116,15 +117,16 @@ $(document).ready(function ($) {
 
         /* recherche access */
         form += '<div class="col-6">';
-        form += '<label for="selectAccess" name="access" class="form-label">Select Access</label>';
-        form += '<select id="selectAccess" class="form-select">';
-        form += "<option>Admin</option>";
-        form += "<option>Manager</option>";
-        form += "<option>User</option>";
+        form += '<label for="selectAccess" class="form-label">Select Access</label>';
+        form += '<select id="selectAccess" name="access" class="form-select">';
+        form += "<option value=''>Select Access</option>";
+        form += "<option value='0'>Admin</option>";
+        form += "<option value='1'>Manager</option>";
+        form += "<option value='2'>User</option>";
         form += "</select>";
         form += "</div>";
         form += "</div>";
-        form += '<input class="btn_big_search btn btn-primary mt-3" name="search-submit" type="submit" value="Search">';
+        form += '<input class="btn_big_search btn btn-primary mt-3" name="adv-search-submit" type="submit" value="Search">';
         form += "</div>";
         form += "</div>";
         form += "</form>";
@@ -136,8 +138,6 @@ $(document).ready(function ($) {
 
         $(document).find(".btn_reset").hide();
         $(document).find(".div_adv_search").hide();
-        /* $(document).find(".btn_cancel").hide();
-        $(document).find(".btn_delete").hide(); */
     }
 
     //variable de fonction
