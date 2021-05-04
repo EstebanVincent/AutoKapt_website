@@ -15,7 +15,7 @@ for (var i = 0; i < dataSound.length; i++) {
 window.onload = function () {
     var chartVisual = new CanvasJS.Chart("UserVisual", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2",
+        theme: "dark2", //"light2", "dark1", "dark2",
         title: {
             text: "Visual Reflex Personal Statistics",
         },
@@ -37,7 +37,7 @@ window.onload = function () {
     });
     var chartSound = new CanvasJS.Chart("UserSound", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Sound Reflex Personal Statistics",
         },
@@ -62,7 +62,7 @@ window.onload = function () {
     });
     var chartVisualTotal = new CanvasJS.Chart("VisualStats", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Visual Reflex Global Statistics",
         },
@@ -98,7 +98,7 @@ window.onload = function () {
     });
     var chartSoundTotal = new CanvasJS.Chart("SoundStats", {
         animationEnabled: true,
-        theme: "light1", //"light2", "dark1", "dark2"
+        theme: "dark2", //"light2", "dark1", "dark2"
         title: {
             text: "Sound Reflex Global Statistics",
         },
