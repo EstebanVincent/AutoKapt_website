@@ -18,5 +18,5 @@ if(isset($_POST["search-submit"])){
 
     $result = mysqli_stmt_get_result($stmt);
     $allUsers = resultToArray($result);
-	echo json_encode($allUsers);
-} 
+	$likeUsers = json_encode($allUsers);
+}

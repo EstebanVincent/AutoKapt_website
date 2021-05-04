@@ -1,4 +1,8 @@
 $(document).ready(function ($) {
+    /* function updateTable() {
+        var val = document.getElementById("searchUsername").value;
+        return val;
+    } */
     function create_html_table(tbl_data) {
         //--->create data table > start
         var tbl = "";
@@ -61,11 +65,17 @@ $(document).ready(function ($) {
 
     //variable de fonction
     var ajax_url = "/AutoKapt/includes/ajax/tableUsers.ajax.php";
+    var val = searchValue; /* la voir cmt transmettre la data */
+    var search = {
+        call_type: "get_users",
+        search: val,
+    };
 
     //--->create table via ajax call > start
-    $.getJSON(ajax_url, { call_type: "get_users" }, function (data) {
+    $.post(ajax_url, search, function (data) {
+        var table = JSON.parse(data);
         //create table on page load
-        create_html_table(data);
+        create_html_table(table);
     });
     //--->create table via ajax call > end
 
