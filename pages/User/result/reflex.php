@@ -53,7 +53,7 @@ var dataSoundTotal = <?php echo json_encode($dataSoundTotal, JSON_NUMERIC_CHECK)
 var dataSoundPerso = <?php echo json_encode($dataSoundPerso, JSON_NUMERIC_CHECK); ?>;
 
 </script>
-<script src="/AutoKapt/js/reflex.js"></script>
+<script src="/AutoKapt/js/result/reflex.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');
