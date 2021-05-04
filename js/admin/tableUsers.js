@@ -38,7 +38,7 @@ $(document).ready(function ($) {
             //only show this button if edit button is clicked
             tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
             tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
-            tbl += '<a href="#" class="btn_delete btn btn-link1 text-danger" row_id="' + row_id + '"> Delete</a>';
+            tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
             tbl += "</td>";
             //--->edit options > end
             tbl += "</tr>";
@@ -61,9 +61,10 @@ $(document).ready(function ($) {
         //--->create form > start
         var form = "";
         form += '<form action="/AutoKapt/includes/Admin/search.inc.php" method="POST">';
-        form += '<label for="searchUsername" class="form-label">Search users by username</label>';
-        form +=
-            '<input name="likeUsername" class="form-control" list="datalistOptions" id="searchUsername" placeholder="Type username to search...">';
+        /* premiere ligne tjr visible */
+        form += '<div class="row">';
+        form += '<div class="col-8">';
+        form += '<input name="likeUsername" class="form-control" list="datalistOptions" placeholder="Search for username...">';
         form += '<datalist id="datalistOptions">';
 
         $.each(form_data, function (index, val) {
@@ -71,19 +72,71 @@ $(document).ready(function ($) {
             form += "<option value=" + option + ">";
         });
         form += "</datalist>";
-        form += '<div class="text-center">';
-        form += '<input class="btn btn-primary mt-3" name="search-submit" type="submit" value="Search">';
-        form += '<input class="btn btn-primary mt-3" name="see-all-submit" type="submit" value="See All">';
         form += "</div>";
-        form += "";
+        form += '<div class="col-2 text-center">';
+        form += '<input class="btn_search btn btn-primary mt-3" name="search-submit" type="submit" value="Search">';
+        form += '<input class="btn_reset btn btn-primary mt-3" name="see-all-submit" type="submit" value="Reset">';
+        form += "</div>";
+        form += '<div class="col-2 text-center">';
+        form += '<input class="btn_adv_search btn btn-primary mt-3" type="button" value="Advanced search">';
+        form += "</div>";
+        form += "</div>";
+
+        /* lignes suivantes visibles uniquement si advanced search */
+        form += '<div class="div_adv_search">';
+        form += '<div class="row">';
+
+        /* recherche email */
+        form += "<p>";
+        form += '<label for="searchEmail" class="form-label">Email</label>';
+        form += '<input name="likeEmail" class="form-control" id="searchEmail" placeholder="Search for Email...">';
+        form += "</p>";
+
+        /* recherche age */
+        form += '<div class="row">';
+        form += '<label for="searchAge" class="form-label">Age between</label>';
+        form += '<div class="col-6">';
+        form += '<input name="ageMin" class="form-control" id="searchAge" placeholder="Minimum age">';
+        form += "</div>";
+        form += '<div class="col-6">';
+        form += '<input name="ageMax" class="form-control" placeholder="Maximum age">';
+        form += "</div>";
+        form += "</div>";
+
+        /* recherche genre */
+        form += '<div class="row">';
+        form += '<div class="col-6">';
+        form += '<label for="selectGender" name="gender" class="form-label">Select Gender</label>';
+        form += '<select id="selectGender" class="form-select">';
+        form += "<option>Male</option>";
+        form += "<option>Female</option>";
+        form += "<option>Others</option>";
+        form += "</select>";
+        form += "</div>";
+
+        /* recherche access */
+        form += '<div class="col-6">';
+        form += '<label for="selectAccess" name="access" class="form-label">Select Access</label>';
+        form += '<select id="selectAccess" class="form-select">';
+        form += "<option>Admin</option>";
+        form += "<option>Manager</option>";
+        form += "<option>User</option>";
+        form += "</select>";
+        form += "</div>";
+        form += "</div>";
+        form += '<input class="btn_big_search btn btn-primary mt-3" name="search-submit" type="submit" value="Search">';
+        form += "</div>";
+        form += "</div>";
         form += "</form>";
+
         //--->create form > end
 
         //out put form
         $(document).find(".form").html(form);
 
-        /* $(document).find(".btn_save").hide();
-        $(document).find(".btn_cancel").hide();
+        $(document).find(".btn_reset").hide();
+        $(document).find(".div_adv_search").hide();
+        /* $(document).find(".btn_cancel").hide();
         $(document).find(".btn_delete").hide(); */
     }
 
@@ -260,4 +313,20 @@ $(document).ready(function ($) {
         });
     });
     //--->button > delete > end
+
+    //--->button > advanced search > start
+    $(document).on("click", ".btn_adv_search", function (event) {
+        event.preventDefault();
+
+        $(document).find(".btn_adv_search").toggleClass("btn-primary");
+        $(document).find(".btn_adv_search").toggleClass("btn-danger");
+        $(document).find(".div_adv_search").toggle();
+        $(document).find(".btn_search").toggle();
+        $(document).find(".btn_reset").toggle();
+
+        /* $.getJSON(ajax_url, { call_type: "get_max_faqId" }, function (data) {
+            add_question(data);
+        }); */
+    });
+    //--->button > advanced search > end
 });
