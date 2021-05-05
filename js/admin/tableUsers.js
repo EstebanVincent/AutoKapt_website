@@ -2,13 +2,11 @@ $(document).ready(function ($) {
     var urlTotal = window.location.href;
     function create_html_table(tbl_data) {
         /* on définit nos variables */
-        var page_tempo1 = urlTotal.split("page=");
-        var page_tempo2 = page_tempo1[1].split("&");
-        var current_page = page_tempo2[0];
+        var page_tempo = urlTotal.split("page=");
+        var current_page = page_tempo[1].split("&")[0];
 
-        var entries_tempo1 = urlTotal.split("entries=");
-        var entries_tempo2 = entries_tempo1[1].split("&");
-        var current_entries = entries_tempo2[0];
+        var entries_tempo = urlTotal.split("entries=");
+        var current_entries = entries_tempo[1].split("&")[0];
 
         var entries_per_page = current_entries;
 
@@ -30,8 +28,7 @@ $(document).ready(function ($) {
         } else {
             //--->create data table > start
             var tbl = "";
-            tbl += '<label for="nb_entries" class="form-label"> entries per page</label>';
-            tbl += '<select id="nb_entries" class="form-control form-control-sm text-white-50 bg-dark" onchange="location = this.value;">';
+            tbl += '<select id="nb_entries" class="text-white-50 bg-dark" onchange="location = this.value;">';
             switch (parseInt(entries_per_page, 10)) {
                 case 10:
                     tbl += '<option value="' + change_entries(10) + '" selected>10</option>';
@@ -59,6 +56,7 @@ $(document).ready(function ($) {
                     break;
             }
             tbl += "</select>";
+            tbl += '<label for="nb_entries" class="form-label align-middle">&nbsp&nbsp entries per page</label>';
             tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden">';
 
             //--->create table header > start
@@ -292,14 +290,14 @@ $(document).ready(function ($) {
         var new_url = url_split.join("");
         return new_url;
     }
-
+    /* retourne le lien de la recherche actuelle à la page 1 avec le nb d'entries par page demandé */
     function change_entries(new_entries) {
         var url_without_autokapt = urlTotal.split("/AutoKapt/")[1];
-        var url_visible = url_without_autokapt.split("entries=")[0];
+        var url_visible = url_without_autokapt.split("?")[0];
         var url_hidden_part = url_without_autokapt.split("entries=")[1];
         var url_search = url_hidden_part.split("&")[1];
 
-        var url_split = ["/AutoKapt/", url_visible, "entries=", new_entries, "&", url_search];
+        var url_split = ["/AutoKapt/", url_visible, "?page=1&", "entries=", new_entries, "&", url_search];
         var new_url = url_split.join("");
         return new_url;
     }
