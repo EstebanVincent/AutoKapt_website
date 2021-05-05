@@ -6,9 +6,7 @@ $(document).ready(function ($) {
         var current_page = page_tempo[1].split("&")[0];
 
         var entries_tempo = urlTotal.split("entries=");
-        var current_entries = entries_tempo[1].split("&")[0];
-
-        var entries_per_page = current_entries;
+        var entries_per_page = entries_tempo[1].split("&")[0];
 
         var current_page_min_entry = (current_page - 1) * entries_per_page;
         var current_page_max_entry = current_page * entries_per_page - 1;
@@ -16,6 +14,18 @@ $(document).ready(function ($) {
         var number_pages = Math.ceil(number_entries / entries_per_page);
 
         if (current_page < 1 || current_page > number_pages) {
+            /* si on dépasse des pages possibles */
+            $.confirm({
+                title: "Attention",
+                content: "Merci de ne pas toucher à l'url",
+                buttons: {
+                    confirm: function () {
+                        window.location.replace("http://localhost/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                    },
+                },
+            });
+        } else if (entries_per_page != "10" && entries_per_page != "20" && entries_per_page != "50" && entries_per_page != "100") {
+            /* si on dépasse des entries possibles */
             $.confirm({
                 title: "Attention",
                 content: "Merci de ne pas toucher à l'url",
@@ -26,7 +36,9 @@ $(document).ready(function ($) {
                 },
             });
         } else {
+            /* si tout va bien */
             //--->create data table > start
+            /* $(document).find("#option10").setAttribute("selected", true); */
             var tbl = "";
             tbl += '<select id="nb_entries" class="text-white-50 bg-dark" onchange="location = this.value;">';
             switch (parseInt(entries_per_page, 10)) {
@@ -142,48 +154,57 @@ $(document).ready(function ($) {
                 tbl += '<div class="btn-toolbar" role="toolbar">';
                 /* start */
                 tbl += '<div class="btn-group me-2" role="group">';
-                tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-left"></i></button>';
-                tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-dark">1</button></a>';
+                tbl +=
+                    '<button id="btn-previous" type="button" class="btn btn-dark"><a class="link-light" href="' +
+                    change_page(parseInt(current_page, 10) - 1) +
+                    '"><i class="fas fa-angle-left"></i></a></button>';
+                tbl +=
+                    '<button id="btn-start" type="button" class="btn btn-dark"><a class="link-light text-decoration-none" href="' +
+                    change_page(1) +
+                    '">1</a></button>';
                 tbl += "</div>";
                 /* current */
                 tbl += '<div class="btn-group me-2" role="group">';
-                tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
+                tbl += '<button id="btn-point1" type="button" class="btn btn-dark disabled">...</button>';
                 tbl +=
                     '<a href="' +
                     change_page(current_page - 2) +
-                    '"><button type="button" class="btn btn-dark">' +
+                    '"><button id="btn-remove2" type="button" class="btn btn-dark">' +
                     (current_page - 2) +
                     "</button></a>";
                 tbl +=
                     '<a href="' +
                     change_page(current_page - 1) +
-                    '"><button type="button" class="btn btn-dark">' +
+                    '"><button id="btn-remove1" type="button" class="btn btn-dark">' +
                     (current_page - 1) +
                     "</button></a>";
-                tbl += '<button type="button" class="btn btn-danger disabled">' + current_page + "</button>";
+                tbl += '<button id="btn-current" type="button" class="btn btn-primary disabled">' + current_page + "</button>";
                 tbl +=
                     '<a href="' +
                     change_page(parseInt(current_page, 10) + 1) +
-                    '"><button type="button" class="btn btn-dark">' +
+                    '"><button id="btn-add1" type="button" class="btn btn-dark">' +
                     (parseInt(current_page, 10) + 1) +
                     "</button></a>";
                 tbl +=
                     '<a href="' +
                     change_page(parseInt(current_page, 10) + 2) +
-                    '"><button type="button" class="btn btn-dark">' +
+                    '"><button id="btn-add2" type="button" class="btn btn-dark">' +
                     (parseInt(current_page, 10) + 2) +
                     "</button></a>";
-                tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
+                tbl += '<button id="btn-point2" type="button" class="btn btn-dark disabled">...</button>';
                 tbl += "</div>";
                 /* end */
                 tbl += '<div class="btn-group me-2" role="group">';
                 tbl +=
-                    '<a href="' +
+                    '<button id="btn-end" type="button" class="btn btn-dark"><a class="link-light text-decoration-none" href="' +
                     change_page(number_pages) +
-                    '"><button type="button" class="btn btn-dark">' +
+                    '">' +
                     number_pages +
-                    "</button></a>";
-                tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-right"></i></button>';
+                    "</a></button>";
+                tbl +=
+                    '<button id="btn-next" type="button" class="btn btn-dark"><a class="link-light" href="' +
+                    change_page(parseInt(current_page, 10) + 1) +
+                    '"><i class="fas fa-angle-right"></i></a></button>';
                 tbl += "</div>";
                 tbl += "</div>";
             }
@@ -196,6 +217,82 @@ $(document).ready(function ($) {
         $(document).find(".btn_save").hide();
         $(document).find(".btn_cancel").hide();
         $(document).find(".btn_delete").hide();
+
+        if (parseInt(number_pages, 10) > 5) {
+            if (current_page == "1") {
+                $(document).find("#btn-previous").addClass("disabled");
+                $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-point1").hide();
+            }
+            if (current_page == "2") {
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+            }
+            if (current_page == "3") {
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+            }
+            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 2) {
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 1) {
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == number_pages) {
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-point2").hide();
+            }
+        } else if (number_pages == "3") {
+            /* 3 pages */
+            if (current_page == "1") {
+                $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-previous").addClass("disabled");
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-remove1").hide();
+            }
+            if (current_page == "2") {
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-remove1").hide();
+            }
+            if (current_page == "3") {
+                $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-add1").hide();
+            }
+            $(document).find("#btn-add2").hide();
+            $(document).find("#btn-remove2").hide();
+            $(document).find("#btn-point1").hide();
+            $(document).find("#btn-point2").hide();
+        } else {
+            /* 2 pages */
+            if (current_page == "1") {
+                $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-previous").addClass("disabled");
+            }
+            if (current_page == "2") {
+                $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-next").addClass("disabled");
+            }
+            $(document).find("#btn-add2").hide();
+            $(document).find("#btn-add1").hide();
+            $(document).find("#btn-remove1").hide();
+            $(document).find("#btn-remove2").hide();
+            $(document).find("#btn-point1").hide();
+            $(document).find("#btn-point2").hide();
+            $(document).find("#btn-current").hide();
+        }
     }
     function create_form(form_data) {
         //--->create form > start
@@ -284,9 +381,10 @@ $(document).ready(function ($) {
         var url_without_autokapt = urlTotal.split("/AutoKapt/")[1];
         var url_visible = url_without_autokapt.split("page=")[0];
         var url_hidden_part = url_without_autokapt.split("page=")[1];
-        var url_search = url_hidden_part.split("&")[1];
+        var old_page = url_hidden_part.split("&")[0];
+        var url_after = url_hidden_part.replace(old_page, ""); /* enleve la première occurence de old_page */
 
-        var url_split = ["/AutoKapt/", url_visible, "page=", new_page, "&", url_search];
+        var url_split = ["/AutoKapt/", url_visible, "page=", new_page, url_after];
         var new_url = url_split.join("");
         return new_url;
     }
@@ -484,10 +582,6 @@ $(document).ready(function ($) {
         $(document).find(".div_adv_search").toggle();
         $(document).find(".btn_search").toggle();
         $(document).find(".btn_reset").toggle();
-
-        /* $.getJSON(ajax_url, { call_type: "get_max_faqId" }, function (data) {
-            add_question(data);
-        }); */
     });
     //--->button > advanced search > end
 });
