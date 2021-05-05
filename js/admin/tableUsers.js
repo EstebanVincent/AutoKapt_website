@@ -2,112 +2,196 @@ $(document).ready(function ($) {
     var urlTotal = window.location.href;
     function create_html_table(tbl_data) {
         /* on définit nos variables */
-        var tempo1 = urlTotal.split("page=");
-        var tempo2 = tempo1[1].split("&");
+        var page_tempo1 = urlTotal.split("page=");
+        var page_tempo2 = page_tempo1[1].split("&");
+        var current_page = page_tempo2[0];
 
-        var current_page = tempo2[0];
-        var current_page_min_entry = (current_page - 1) * 20;
-        var current_page_max_entry = current_page * 20 - 1;
+        var entries_tempo1 = urlTotal.split("entries=");
+        var entries_tempo2 = entries_tempo1[1].split("&");
+        var current_entries = entries_tempo2[0];
+
+        var entries_per_page = current_entries;
+
+        var current_page_min_entry = (current_page - 1) * entries_per_page;
+        var current_page_max_entry = current_page * entries_per_page - 1;
         var number_entries = tbl_data.length;
-        var number_pages = Math.ceil(number_entries / 20);
+        var number_pages = Math.ceil(number_entries / entries_per_page);
 
-        //--->create data table > start
-        var tbl = "";
-        tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden">';
-
-        //--->create table header > start
-        tbl += "<thead>";
-        tbl += "<tr>";
-        tbl += '<th style="width: 16.66%" scope="col">Username</th>';
-        tbl += '<th style="width: 33.33%" scope="col">Email</th>';
-        tbl += '<th style="width: 8.33%" scope="col">Gender</th>';
-        tbl += '<th style="width: 16.66%" scope="col">Date of Birth</th>';
-        tbl += '<th style="width: 8.33%" scope="col">Access</th>';
-        tbl += '<th style="width: 16.66%" scope="col">Options</th>';
-        tbl += "</tr>";
-        tbl += "</thead>";
-        //--->create table header > end
-
-        //--->create table body > start
-        tbl += "<tbody>";
-
-        //--->create table body rows > start
-        $.each(tbl_data, function (index, val) {
-            if (index >= current_page_min_entry) {
-                var row_id = val["usersId"];
-
-                //loop through ajax row data
-                tbl += '<tr row_id="' + row_id + '">';
-                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersUsername">' + val["usersUsername"] + "</div></td>";
-                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersEmail">' + val["usersEmail"] + "</div></td>";
-                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersGender">' + val["usersGender"] + "</div></td>";
-                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersBirth">' + val["usersBirth"] + "</div></td>";
-                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
-
-                //--->edit options > start
-                tbl += "<td class='align-middle'>";
-                tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
-                //only show this button if edit button is clicked
-                tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
-                tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
-                tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
-                tbl += "</td>";
-                //--->edit options > end
-                tbl += "</tr>";
-            }
-
-            return index < current_page_max_entry;
-        });
-        //--->create table body rows > end
-        tbl += "</tbody>";
-        //--->create table body > end
-        tbl += "</table>";
-        //--->create data table > end
-
-        //--->create nav page > start
-
-        tbl += '<div class="row">';
-        tbl += '<div class="col-4">';
-        tbl += "<p>";
-        /* on fait gaf si il n'y a pas 20 lignes dans la page */
-        if (current_page_max_entry > number_entries) {
-            tbl += "Showing " + current_page_min_entry + " to " + number_entries + " of " + number_entries + " entries";
+        if (current_page < 1 || current_page > number_pages) {
+            $.confirm({
+                title: "Attention",
+                content: "Merci de ne pas toucher à l'url",
+                buttons: {
+                    confirm: function () {
+                        window.location.replace("http://localhost/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                    },
+                },
+            });
         } else {
-            tbl += "Showing " + current_page_min_entry + " to " + current_page_max_entry + " of " + number_entries + " entries";
-        }
-        tbl += "</p>";
-        tbl += "</div>";
-        tbl += '<div class="col-2"></div>';
-        tbl += '<div class="col-6">';
-        /* navigation entre pages uniquement si plus de 20 résults */
-        if (number_pages > 1) {
-            tbl += '<div class="btn-toolbar" role="toolbar">';
-            /* start */
-            tbl += '<div class="btn-group me-2" role="group">';
-            tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-left"></i></button>';
-            tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-dark">1</button></a>';
-            tbl += "</div>";
-            /* current */
-            tbl += '<div class="btn-group me-2" role="group">';
-            tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
-            tbl += '<button type="button" class="btn btn-dark">' + (current_page - 2) + "</button>";
-            tbl += '<button type="button" class="btn btn-dark">' + (current_page - 1) + "</button>";
-            tbl += '<button type="button" class="btn btn-danger disabled">' + current_page + "</button>";
-            tbl += '<button type="button" class="btn btn-dark">' + (parseInt(current_page, 10) + 1) + "</button>";
-            tbl += '<button type="button" class="btn btn-dark">' + (parseInt(current_page, 10) + 2) + "</button>";
-            tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
-            tbl += "</div>";
-            /* end */
-            tbl += '<div class="btn-group me-2" role="group">';
-            tbl +=
-                '<a href="' + change_page(number_pages) + '"><button type="button" class="btn btn-dark">' + number_pages + "</button></a>";
-            tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-right"></i></button>';
-            tbl += "</div>";
-            tbl += "</div>";
-        }
-        tbl += "</div>";
-        //--->create nav page > end
+            //--->create data table > start
+            var tbl = "";
+            tbl += '<label for="nb_entries" class="form-label"> entries per page</label>';
+            tbl += '<select id="nb_entries" class="form-control form-control-sm text-white-50 bg-dark" onchange="location = this.value;">';
+            switch (parseInt(entries_per_page, 10)) {
+                case 10:
+                    tbl += '<option value="' + change_entries(10) + '" selected>10</option>';
+                    tbl += '<option value="' + change_entries(20) + '">20</option>';
+                    tbl += '<option value="' + change_entries(50) + '">50</option>';
+                    tbl += '<option value="' + change_entries(100) + '">100</option>';
+                    break;
+                case 20:
+                    tbl += '<option value="' + change_entries(10) + '">10</option>';
+                    tbl += '<option value="' + change_entries(20) + '" selected>20</option>';
+                    tbl += '<option value="' + change_entries(50) + '">50</option>';
+                    tbl += '<option value="' + change_entries(100) + '">100</option>';
+                    break;
+                case 50:
+                    tbl += '<option value="' + change_entries(10) + '">10</option>';
+                    tbl += '<option value="' + change_entries(20) + '">20</option>';
+                    tbl += '<option value="' + change_entries(50) + '" selected>50</option>';
+                    tbl += '<option value="' + change_entries(100) + '">100</option>';
+                    break;
+                case 100:
+                    tbl += '<option value="' + change_entries(10) + '">10</option>';
+                    tbl += '<option value="' + change_entries(20) + '">20</option>';
+                    tbl += '<option value="' + change_entries(50) + '">50</option>';
+                    tbl += '<option value="' + change_entries(100) + '" selected>100</option>';
+                    break;
+            }
+            tbl += "</select>";
+            tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden">';
 
+            //--->create table header > start
+            tbl += "<thead>";
+            tbl += "<tr>";
+            tbl += '<th style="width: 16.66%" scope="col">Username</th>';
+            tbl += '<th style="width: 33.33%" scope="col">Email</th>';
+            tbl += '<th style="width: 8.33%" scope="col">Gender</th>';
+            tbl += '<th style="width: 16.66%" scope="col">Date of Birth</th>';
+            tbl += '<th style="width: 8.33%" scope="col">Access</th>';
+            tbl += '<th style="width: 16.66%" scope="col">Options</th>';
+            tbl += "</tr>";
+            tbl += "</thead>";
+            //--->create table header > end
+
+            //--->create table body > start
+            tbl += "<tbody>";
+
+            //--->create table body rows > start
+            $.each(tbl_data, function (index, val) {
+                if (index >= current_page_min_entry) {
+                    var row_id = val["usersId"];
+
+                    //loop through ajax row data
+                    tbl += '<tr row_id="' + row_id + '">';
+                    tbl += '<td ><div class="row_data" edit_type="click" col_name="usersUsername">' + val["usersUsername"] + "</div></td>";
+                    tbl += '<td ><div class="row_data" edit_type="click" col_name="usersEmail">' + val["usersEmail"] + "</div></td>";
+                    tbl += '<td ><div class="row_data" edit_type="click" col_name="usersGender">' + val["usersGender"] + "</div></td>";
+                    tbl += '<td ><div class="row_data" edit_type="click" col_name="usersBirth">' + val["usersBirth"] + "</div></td>";
+                    tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
+
+                    //--->edit options > start
+                    tbl += "<td class='align-middle'>";
+                    tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
+                    //only show this button if edit button is clicked
+                    tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
+                    tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
+                    tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
+                    tbl += "</td>";
+                    //--->edit options > end
+                    tbl += "</tr>";
+                }
+
+                return index < current_page_max_entry;
+            });
+            //--->create table body rows > end
+            tbl += "</tbody>";
+            //--->create table body > end
+            tbl += "</table>";
+            //--->create data table > end
+
+            //--->create nav page > start
+
+            tbl += '<div class="row">';
+            tbl += '<div class="col-4">';
+            tbl += "<p>";
+            /* on fait gaf si il n'y a pas entries_per_page lignes dans la page */
+            if (parseInt(current_page_max_entry, 10) + 1 > number_entries) {
+                tbl +=
+                    "Showing " +
+                    (parseInt(current_page_min_entry, 10) + 1) +
+                    " to " +
+                    number_entries +
+                    " of " +
+                    number_entries +
+                    " entries";
+            } else {
+                tbl +=
+                    "Showing " +
+                    (parseInt(current_page_min_entry, 10) + 1) +
+                    " to " +
+                    (parseInt(current_page_max_entry, 10) + 1) +
+                    " of " +
+                    number_entries +
+                    " entries";
+            }
+            tbl += "</p>";
+            tbl += "</div>";
+            tbl += '<div class="col-2"></div>';
+            tbl += '<div class="col-6">';
+            /* navigation entre pages uniquement si plus de entries_per_page résults */
+            if (number_pages > 1) {
+                tbl += '<div class="btn-toolbar" role="toolbar">';
+                /* start */
+                tbl += '<div class="btn-group me-2" role="group">';
+                tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-left"></i></button>';
+                tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-dark">1</button></a>';
+                tbl += "</div>";
+                /* current */
+                tbl += '<div class="btn-group me-2" role="group">';
+                tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
+                tbl +=
+                    '<a href="' +
+                    change_page(current_page - 2) +
+                    '"><button type="button" class="btn btn-dark">' +
+                    (current_page - 2) +
+                    "</button></a>";
+                tbl +=
+                    '<a href="' +
+                    change_page(current_page - 1) +
+                    '"><button type="button" class="btn btn-dark">' +
+                    (current_page - 1) +
+                    "</button></a>";
+                tbl += '<button type="button" class="btn btn-danger disabled">' + current_page + "</button>";
+                tbl +=
+                    '<a href="' +
+                    change_page(parseInt(current_page, 10) + 1) +
+                    '"><button type="button" class="btn btn-dark">' +
+                    (parseInt(current_page, 10) + 1) +
+                    "</button></a>";
+                tbl +=
+                    '<a href="' +
+                    change_page(parseInt(current_page, 10) + 2) +
+                    '"><button type="button" class="btn btn-dark">' +
+                    (parseInt(current_page, 10) + 2) +
+                    "</button></a>";
+                tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
+                tbl += "</div>";
+                /* end */
+                tbl += '<div class="btn-group me-2" role="group">';
+                tbl +=
+                    '<a href="' +
+                    change_page(number_pages) +
+                    '"><button type="button" class="btn btn-dark">' +
+                    number_pages +
+                    "</button></a>";
+                tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-right"></i></button>';
+                tbl += "</div>";
+                tbl += "</div>";
+            }
+            tbl += "</div>";
+            //--->create nav page > end
+        }
         //out put table data
         $(document).find(".table_users").html(tbl);
 
@@ -209,12 +293,23 @@ $(document).ready(function ($) {
         return new_url;
     }
 
+    function change_entries(new_entries) {
+        var url_without_autokapt = urlTotal.split("/AutoKapt/")[1];
+        var url_visible = url_without_autokapt.split("entries=")[0];
+        var url_hidden_part = url_without_autokapt.split("entries=")[1];
+        var url_search = url_hidden_part.split("&")[1];
+
+        var url_split = ["/AutoKapt/", url_visible, "entries=", new_entries, "&", url_search];
+        var new_url = url_split.join("");
+        return new_url;
+    }
+
     //variable de fonction
     var ajax_url = "/AutoKapt/includes/ajax/tableUsers.ajax.php";
 
-    /* on transfert le get à l'ajax */
-    var hidden = urlTotal.split("php");
-    ajax_url += hidden[1];
+    /* on transfert les get à l'ajax */
+    var hidden = urlTotal.split("php")[1];
+    ajax_url += hidden;
 
     //--->create form via ajax call > start
     $.getJSON(ajax_url, { call_type: "get_usernames" }, function (data) {
