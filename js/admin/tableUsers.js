@@ -25,10 +25,12 @@ $(document).ready(function ($) {
         var tempo1 = urlTotal.split("page=");
         var tempo2 = tempo1[1].split("&");
         var page = tempo2[0];
+        var min_entry = (page - 1) * 20;
+        var max_entry = page * 20 - 1;
 
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            if (index >= (page - 1) * 20) {
+            if (index >= min_entry) {
                 var row_id = val["usersId"];
 
                 //loop through ajax row data
@@ -51,15 +53,52 @@ $(document).ready(function ($) {
                 tbl += "</tr>";
             }
 
-            return index <= page * 20;
+            return index < max_entry;
         });
         //--->create table body rows > end
         tbl += "</tbody>";
         //--->create table body > end
-
         tbl += "</table>";
-
         //--->create data table > end
+
+        //--->create nav page > start
+
+        var number_row = tbl_data.length;
+        var number_pages = Math.floor(number_row / 20) + 1;
+        tbl += '<div class="row">';
+        tbl += '<div class="col-4">';
+        tbl += "<p>";
+        tbl += "Showing " + min_entry + " to " + max_entry + " of " + number_row + " entries";
+        tbl += "</p>";
+        tbl += "</div>";
+        tbl += '<div class="col-2"></div>';
+        tbl += '<div class="col-6">';
+        tbl += '<div class="btn-toolbar" role="toolbar">';
+        /* start */
+        tbl += '<div class="btn-group me-2" role="group">';
+        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-double-left"></i></button>';
+        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-left"></i></button>';
+        tbl += '<button type="button" class="btn btn-primary">1</button>';
+        tbl += "</div>";
+        /* current */
+        tbl += '<div class="btn-group me-2" role="group">';
+        tbl += '<button type="button" class="btn btn-primary">...</button>';
+        tbl += '<button type="button" class="btn btn-primary">' + (page - 1) + "</button>";
+        tbl += '<button type="button" class="btn btn-danger">' + page + "</button>";
+        tbl += '<button type="button" class="btn btn-primary">' + (parseInt(page, 10) + 1) + "</button>";
+        tbl += '<button type="button" class="btn btn-primary">...</button>';
+        tbl += "</div>";
+        /* end */
+        tbl += '<div class="btn-group me-2" role="group">';
+        if (number_pages > 2) {
+            tbl += '<button type="button" class="btn btn-primary">' + number_pages + "</button>";
+        }
+        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>';
+        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-double-right"></i></button>';
+        tbl += "</div>";
+        tbl += "</div>";
+        tbl += "</div>";
+        //--->create nav page > end
 
         //out put table data
         $(document).find(".table_users").html(tbl);

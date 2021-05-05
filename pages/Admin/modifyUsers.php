@@ -2,7 +2,6 @@
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 
-
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">

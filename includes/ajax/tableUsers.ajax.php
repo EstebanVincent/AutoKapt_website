@@ -89,7 +89,7 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
     /* tous les users default */
     else 
     {
-	$sql = "SELECT * FROM users ORDER BY usersAccess;";
+	$sql = "SELECT * FROM users;";
     /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 
