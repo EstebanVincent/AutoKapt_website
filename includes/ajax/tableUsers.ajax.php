@@ -30,7 +30,7 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
     {
         $likeUsername = $_GET['username'];
 
-        $sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
+        $sql = "SELECT * FROM users WHERE usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
         $stmt = mysqli_stmt_init($conn);
 
         if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -57,8 +57,7 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 
         /* requete de base */
         $sql = "SELECT * FROM users 
-                WHERE usersEmail NOT LIKE '%@bot.fr'
-                AND usersUsername LIKE '%". $username ."%' 
+                WHERE usersUsername LIKE '%". $username ."%' 
                 AND usersEmail LIKE '%". $email ."%' 
                 AND usersGender LIKE '%". $gender ."%'
                 AND usersAccess LIKE '%". $access ."%'";

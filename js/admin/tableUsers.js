@@ -68,35 +68,44 @@ $(document).ready(function ($) {
         tbl += '<div class="row">';
         tbl += '<div class="col-4">';
         tbl += "<p>";
-        tbl += "Showing " + min_entry + " to " + max_entry + " of " + number_row + " entries";
+        /* on fait gaf si il n'y a pas 20 lignes dans la page */
+        if (max_entry > number_row) {
+            tbl += "Showing " + min_entry + " to " + number_row + " of " + number_row + " entries";
+        } else {
+            tbl += "Showing " + min_entry + " to " + max_entry + " of " + number_row + " entries";
+        }
         tbl += "</p>";
         tbl += "</div>";
         tbl += '<div class="col-2"></div>';
         tbl += '<div class="col-6">';
-        tbl += '<div class="btn-toolbar" role="toolbar">';
-        /* start */
-        tbl += '<div class="btn-group me-2" role="group">';
-        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-double-left"></i></button>';
-        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-left"></i></button>';
-        tbl += '<button type="button" class="btn btn-primary">1</button>';
-        tbl += "</div>";
-        /* current */
-        tbl += '<div class="btn-group me-2" role="group">';
-        tbl += '<button type="button" class="btn btn-primary">...</button>';
-        tbl += '<button type="button" class="btn btn-primary">' + (page - 1) + "</button>";
-        tbl += '<button type="button" class="btn btn-danger">' + page + "</button>";
-        tbl += '<button type="button" class="btn btn-primary">' + (parseInt(page, 10) + 1) + "</button>";
-        tbl += '<button type="button" class="btn btn-primary">...</button>';
-        tbl += "</div>";
-        /* end */
-        tbl += '<div class="btn-group me-2" role="group">';
-        if (number_pages > 2) {
-            tbl += '<button type="button" class="btn btn-primary">' + number_pages + "</button>";
+        /* navigation entre pages uniquement si plus de 20 résults */
+        if (number_pages > 1) {
+            tbl += '<div class="btn-toolbar" role="toolbar">';
+            /* start */
+            tbl += '<div class="btn-group me-2" role="group">';
+            tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-left"></i></button>';
+            tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-primary">1</button></a>';
+            tbl += "</div>";
+            /* current */
+            tbl += '<div class="btn-group me-2" role="group">';
+            tbl += '<button type="button" class="btn btn-primary">...</button>';
+            tbl += '<button type="button" class="btn btn-primary">' + (page - 1) + "</button>";
+            tbl += '<button type="button" class="btn btn-danger disabled">' + page + "</button>";
+            tbl += '<button type="button" class="btn btn-primary">' + (parseInt(page, 10) + 1) + "</button>";
+            tbl += '<button type="button" class="btn btn-primary">...</button>';
+            tbl += "</div>";
+            /* end */
+            tbl += '<div class="btn-group me-2" role="group">';
+            tbl +=
+                '<a href="' +
+                change_page(number_pages) +
+                '"><button type="button" class="btn btn-primary">' +
+                number_pages +
+                "</button></a>";
+            tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>';
+            tbl += "</div>";
+            tbl += "</div>";
         }
-        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>';
-        tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-double-right"></i></button>';
-        tbl += "</div>";
-        tbl += "</div>";
         tbl += "</div>";
         //--->create nav page > end
 
@@ -188,6 +197,16 @@ $(document).ready(function ($) {
 
         $(document).find(".btn_reset").hide();
         $(document).find(".div_adv_search").hide();
+    }
+    /* retourne le lien de la recherche actuelle à la page demandée */
+    function change_page(new_page) {
+        var url_without_autokapt = urlTotal.split("/AutoKapt/")[1];
+        var tempo1 = url_without_autokapt.split("page=");
+        var tempo2 = tempo1[1].split("&");
+
+        var url_split = ["/AutoKapt/", tempo1[0], "page=", new_page, "&", tempo2[1]];
+        var new_url = url_split.join("");
+        return new_url;
     }
 
     //variable de fonction
