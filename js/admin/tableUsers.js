@@ -1,6 +1,16 @@
 $(document).ready(function ($) {
     var urlTotal = window.location.href;
     function create_html_table(tbl_data) {
+        /* on définit nos variables */
+        var tempo1 = urlTotal.split("page=");
+        var tempo2 = tempo1[1].split("&");
+
+        var current_page = tempo2[0];
+        var current_page_min_entry = (current_page - 1) * 20;
+        var current_page_max_entry = current_page * 20 - 1;
+        var number_entries = tbl_data.length;
+        var number_pages = Math.ceil(number_entries / 20);
+
         //--->create data table > start
         var tbl = "";
         tbl += '<table class="table table-dark table-hover table-bordered text-white-50 rounded overflow-hidden">';
@@ -21,16 +31,9 @@ $(document).ready(function ($) {
         //--->create table body > start
         tbl += "<tbody>";
 
-        /* get le numéro de la page */
-        var tempo1 = urlTotal.split("page=");
-        var tempo2 = tempo1[1].split("&");
-        var page = tempo2[0];
-        var min_entry = (page - 1) * 20;
-        var max_entry = page * 20 - 1;
-
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            if (index >= min_entry) {
+            if (index >= current_page_min_entry) {
                 var row_id = val["usersId"];
 
                 //loop through ajax row data
@@ -53,7 +56,7 @@ $(document).ready(function ($) {
                 tbl += "</tr>";
             }
 
-            return index < max_entry;
+            return index < current_page_max_entry;
         });
         //--->create table body rows > end
         tbl += "</tbody>";
@@ -63,16 +66,14 @@ $(document).ready(function ($) {
 
         //--->create nav page > start
 
-        var number_row = tbl_data.length;
-        var number_pages = Math.floor(number_row / 20) + 1;
         tbl += '<div class="row">';
         tbl += '<div class="col-4">';
         tbl += "<p>";
         /* on fait gaf si il n'y a pas 20 lignes dans la page */
-        if (max_entry > number_row) {
-            tbl += "Showing " + min_entry + " to " + number_row + " of " + number_row + " entries";
+        if (current_page_max_entry > number_entries) {
+            tbl += "Showing " + current_page_min_entry + " to " + number_entries + " of " + number_entries + " entries";
         } else {
-            tbl += "Showing " + min_entry + " to " + max_entry + " of " + number_row + " entries";
+            tbl += "Showing " + current_page_min_entry + " to " + current_page_max_entry + " of " + number_entries + " entries";
         }
         tbl += "</p>";
         tbl += "</div>";
@@ -83,26 +84,24 @@ $(document).ready(function ($) {
             tbl += '<div class="btn-toolbar" role="toolbar">';
             /* start */
             tbl += '<div class="btn-group me-2" role="group">';
-            tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-left"></i></button>';
-            tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-primary">1</button></a>';
+            tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-left"></i></button>';
+            tbl += '<a href="' + change_page(1) + '"><button type="button" class="btn btn-dark">1</button></a>';
             tbl += "</div>";
             /* current */
             tbl += '<div class="btn-group me-2" role="group">';
-            tbl += '<button type="button" class="btn btn-primary">...</button>';
-            tbl += '<button type="button" class="btn btn-primary">' + (page - 1) + "</button>";
-            tbl += '<button type="button" class="btn btn-danger disabled">' + page + "</button>";
-            tbl += '<button type="button" class="btn btn-primary">' + (parseInt(page, 10) + 1) + "</button>";
-            tbl += '<button type="button" class="btn btn-primary">...</button>';
+            tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
+            tbl += '<button type="button" class="btn btn-dark">' + (current_page - 2) + "</button>";
+            tbl += '<button type="button" class="btn btn-dark">' + (current_page - 1) + "</button>";
+            tbl += '<button type="button" class="btn btn-danger disabled">' + current_page + "</button>";
+            tbl += '<button type="button" class="btn btn-dark">' + (parseInt(current_page, 10) + 1) + "</button>";
+            tbl += '<button type="button" class="btn btn-dark">' + (parseInt(current_page, 10) + 2) + "</button>";
+            tbl += '<button type="button" class="btn btn-dark disabled">...</button>';
             tbl += "</div>";
             /* end */
             tbl += '<div class="btn-group me-2" role="group">';
             tbl +=
-                '<a href="' +
-                change_page(number_pages) +
-                '"><button type="button" class="btn btn-primary">' +
-                number_pages +
-                "</button></a>";
-            tbl += '<button type="button" class="btn btn-primary"><i class="fas fa-angle-right"></i></button>';
+                '<a href="' + change_page(number_pages) + '"><button type="button" class="btn btn-dark">' + number_pages + "</button></a>";
+            tbl += '<button type="button" class="btn btn-dark"><i class="fas fa-angle-right"></i></button>';
             tbl += "</div>";
             tbl += "</div>";
         }
@@ -201,10 +200,11 @@ $(document).ready(function ($) {
     /* retourne le lien de la recherche actuelle à la page demandée */
     function change_page(new_page) {
         var url_without_autokapt = urlTotal.split("/AutoKapt/")[1];
-        var tempo1 = url_without_autokapt.split("page=");
-        var tempo2 = tempo1[1].split("&");
+        var url_visible = url_without_autokapt.split("page=")[0];
+        var url_hidden_part = url_without_autokapt.split("page=")[1];
+        var url_search = url_hidden_part.split("&")[1];
 
-        var url_split = ["/AutoKapt/", tempo1[0], "page=", new_page, "&", tempo2[1]];
+        var url_split = ["/AutoKapt/", url_visible, "page=", new_page, "&", url_search];
         var new_url = url_split.join("");
         return new_url;
     }
