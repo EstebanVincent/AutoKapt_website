@@ -54,22 +54,23 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
         $ageMax = $global['ageMax'];
         $gender = $global['gender'];
         $access = $global['access'];
+
         /* requete de base */
         $sql = "SELECT * FROM users 
                 WHERE usersEmail NOT LIKE '%@bot.fr'
                 AND usersUsername LIKE '%". $username ."%' 
                 AND usersEmail LIKE '%". $email ."%' 
-                AND usersGender LIKE '%". $gender ."%'";
-                
-        if(!empty($access)){
-            $sql .= "AND usersAccess = '". $access ."'";
-        }
+                AND usersGender LIKE '%". $gender ."%'
+                AND usersAccess LIKE '%". $access ."%'";
+        
+        /* on rajoute ces where au besoin */
         if(!empty($ageMin)){
             $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin ";
         }
         if(!empty($ageMax)){
             $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax";
         }
+        /* on ferme la requete */
         $sql .= ";";
 
         $stmt = mysqli_stmt_init($conn);
@@ -85,10 +86,10 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
         $allUsers = resultToArray($result);
         echo json_encode($allUsers);
     } 
-    /* 0 search */
+    /* tous les users default */
     else 
     {
-	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' ORDER BY usersAccess;";
+	$sql = "SELECT * FROM users ORDER BY usersAccess;";
     /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 

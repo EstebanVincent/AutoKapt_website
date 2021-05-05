@@ -1,4 +1,5 @@
 $(document).ready(function ($) {
+    var urlTotal = window.location.href;
     function create_html_table(tbl_data) {
         //--->create data table > start
         var tbl = "";
@@ -20,34 +21,44 @@ $(document).ready(function ($) {
         //--->create table body > start
         tbl += "<tbody>";
 
+        /* get le numéro de la page */
+        var tempo1 = urlTotal.split("page=");
+        var tempo2 = tempo1[1].split("&");
+        var page = tempo2[0];
+
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            var row_id = val["usersId"];
+            if (index >= (page - 1) * 20) {
+                var row_id = val["usersId"];
 
-            //loop through ajax row data
-            tbl += '<tr row_id="' + row_id + '">';
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersUsername">' + val["usersUsername"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersEmail">' + val["usersEmail"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersGender">' + val["usersGender"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersBirth">' + val["usersBirth"] + "</div></td>";
-            tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
+                //loop through ajax row data
+                tbl += '<tr row_id="' + row_id + '">';
+                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersUsername">' + val["usersUsername"] + "</div></td>";
+                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersEmail">' + val["usersEmail"] + "</div></td>";
+                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersGender">' + val["usersGender"] + "</div></td>";
+                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersBirth">' + val["usersBirth"] + "</div></td>";
+                tbl += '<td ><div class="row_data" edit_type="click" col_name="usersAccess">' + val["usersAccess"] + "</div></td>";
 
-            //--->edit options > start
-            tbl += "<td class='align-middle'>";
-            tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
-            //only show this button if edit button is clicked
-            tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
-            tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
-            tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
-            tbl += "</td>";
-            //--->edit options > end
-            tbl += "</tr>";
+                //--->edit options > start
+                tbl += "<td class='align-middle'>";
+                tbl += '<span class="btn_edit" > <a href="#" class="btn btn-link " row_id="' + row_id + '" > Edit</a> </span>';
+                //only show this button if edit button is clicked
+                tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
+                tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
+                tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
+                tbl += "</td>";
+                //--->edit options > end
+                tbl += "</tr>";
+            }
+
+            return index <= page * 20;
         });
         //--->create table body rows > end
         tbl += "</tbody>";
         //--->create table body > end
 
         tbl += "</table>";
+
         //--->create data table > end
 
         //out put table data
@@ -144,9 +155,8 @@ $(document).ready(function ($) {
     var ajax_url = "/AutoKapt/includes/ajax/tableUsers.ajax.php";
 
     /* on transfert le get à l'ajax */
-    var urlTotal = window.location.href;
-    var test = urlTotal.split("php");
-    ajax_url += test[1];
+    var hidden = urlTotal.split("php");
+    ajax_url += hidden[1];
 
     //--->create form via ajax call > start
     $.getJSON(ajax_url, { call_type: "get_usernames" }, function (data) {
