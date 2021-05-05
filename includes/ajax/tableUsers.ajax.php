@@ -54,60 +54,23 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
         $ageMax = $global['ageMax'];
         $gender = $global['gender'];
         $access = $global['access'];
-
-        if(empty($ageMin)){
-            if(empty($ageMax)){
-                if(empty($access)){
-                    /* 3 empty */
-                    $sql = "SELECT * FROM users 
-                    WHERE usersEmail NOT LIKE '%@bot.fr'
-                    AND usersUsername LIKE '%". $username ."%' 
-                    AND usersEmail LIKE '%". $email ."%' 
-                    AND usersGender LIKE '%". $gender ."%' 
-                    ;"; 
-                }
-                /* min et max empty */
-                $sql = "SELECT * FROM users 
+        /* requete de base */
+        $sql = "SELECT * FROM users 
                 WHERE usersEmail NOT LIKE '%@bot.fr'
                 AND usersUsername LIKE '%". $username ."%' 
                 AND usersEmail LIKE '%". $email ."%' 
-                AND usersGender LIKE '%". $gender ."%' 
-                AND usersAccess = ". $access ."
-                ;"; 
-            }
-            /* min empty */
-            $sql = "SELECT * FROM users 
-            WHERE usersEmail NOT LIKE '%@bot.fr'
-            AND usersUsername LIKE '%". $username ."%' 
-            AND usersEmail LIKE '%". $email ."%'
-            AND usersGender LIKE '%". $gender ."%'  
-            AND usersAccess = ". $access ."
-            AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax
-            ;"; 
-        } else {
-            if(empty($ageMax)){
-                /* max empty */
-                $sql = "SELECT * FROM users 
-            WHERE usersEmail NOT LIKE '%@bot.fr'
-            AND usersUsername LIKE '%". $username ."%' 
-            AND usersEmail LIKE '%". $email ."%' 
-            AND usersGender LIKE '%". $gender ."%' 
-            AND usersAccess = ". $access ."
-            AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin
-            ;"; 
-            } else {
-                /* no empty */
-                $sql = "SELECT * FROM users 
-                WHERE usersEmail NOT LIKE '%@bot.fr'
-                AND usersUsername LIKE '%". $username ."%' 
-                AND usersEmail LIKE '%". $email ."%' 
-                AND usersGender LIKE '%". $gender ."%' 
-                AND usersAccess = ". $access ."
-                AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax
-                AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin
-            ;";
-            } 
+                AND usersGender LIKE '%". $gender ."%'";
+                
+        if(!empty($access)){
+            $sql .= "AND usersAccess = '". $access ."'";
         }
+        if(!empty($ageMin)){
+            $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin ";
+        }
+        if(!empty($ageMax)){
+            $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax";
+        }
+        $sql .= ";";
 
         $stmt = mysqli_stmt_init($conn);
 
