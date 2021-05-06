@@ -72,5 +72,7 @@
         "testdesc-audition-desc" => "Le test d’audition enverra dans votre casque une note,
         vous devrez ainsi reproduire cette note dans le microphone le plus fidèlement possible à l’aide de votre smartphone.
         Il vous sera ainsi attribué un score sur 100 en fonction de la fidélité à la note initiale.",
+
+        "golden-title" => "Livre d'Or des Rick Roll",
     );
 ?>

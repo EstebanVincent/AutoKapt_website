@@ -72,5 +72,7 @@
         "testdesc-audition-desc" => "The hearing test will send a note to your headphones,
         you will need to reproduce this note into the microphone as closely as possible using your smartphone.
         You will thus be assigned a score out of 100 depending on the fidelity to the initial note.",
+
+        "golden-title" => "Golden Book of Rick Roll",
     );
 ?>
