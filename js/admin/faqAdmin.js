@@ -20,7 +20,6 @@ $(document).ready(function ($) {
 
         //--->create table body rows > start
         $.each(tbl_data, function (index, val) {
-            //you can replace with your database row id
             var row_id = val["faqId"];
 
             //loop through ajax row data
@@ -38,7 +37,7 @@ $(document).ready(function ($) {
             //only show this button if edit button is clicked
             tbl += '<a href="#" class="btn_save btn btn-link"  row_id="' + row_id + '"> Save </a>';
             tbl += '<a href="#" class="btn_cancel btn btn-link" row_id="' + row_id + '"> Cancel </a>';
-            tbl += '<a href="#" class="btn_delete btn btn-link1 text-danger" row_id="' + row_id + '"> Delete</a>';
+            tbl += '<a href="#" class="btn_delete btn btn-link text-danger" row_id="' + row_id + '"> Delete</a>';
             tbl += "</td>";
             //--->edit options > end
             tbl += "</tr>";

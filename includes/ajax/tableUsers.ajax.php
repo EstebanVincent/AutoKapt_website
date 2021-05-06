@@ -2,10 +2,10 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 require_once __ROOT__.'includes/functions.inc.php';
 
-//--->get all users > start
-if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
+//--->get all usernames > start
+if(isset($_GET['call_type']) && $_GET['call_type'] =="get_usernames")
 {
-	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' ORDER BY usersAccess;";
+	$sql = "SELECT usersUsername FROM users WHERE usersEmail NOT LIKE '%@bot.fr';";
     /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 
@@ -20,13 +20,76 @@ if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
     $allUsers = resultToArray($result);
 	echo json_encode($allUsers);
 }
-//--->get all users > end
+//--->get all usernames > end
 
-if(isset($_POST["search-submit"]))
+//--->get all users > start
+if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 {
-    $likeUsername = $_POST["likeUsername"];
+    /* petite search */
+    if(isset($_GET['username']))
+    {
+        $likeUsername = $_GET['username'];
 
-    $sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' AND usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
+        $sql = "SELECT * FROM users WHERE usersUsername LIKE '%". $likeUsername ."%' ORDER BY usersAccess;";
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "error3";
+            exit();
+        } else {
+            mysqli_stmt_execute($stmt);
+        }
+
+        $result = mysqli_stmt_get_result($stmt);
+        $allUsers = resultToArray($result);
+        echo json_encode($allUsers);
+    }
+    /* grosse search */
+    else if(isset($_GET['search']))
+    {
+        $global = unserialize($_GET['search']);
+        $username = $global['username'];
+        $email = $global['email'];
+        $ageMin = $global['ageMin'];
+        $ageMax = $global['ageMax'];
+        $gender = $global['gender'];
+        $access = $global['access'];
+
+        /* requete de base */
+        $sql = "SELECT * FROM users 
+                WHERE usersUsername LIKE '%". $username ."%' 
+                AND usersEmail LIKE '%". $email ."%' 
+                AND usersGender LIKE '%". $gender ."%'
+                AND usersAccess LIKE '%". $access ."%'";
+        
+        /* on rajoute ces where au besoin */
+        if(!empty($ageMin)){
+            $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) >= $ageMin ";
+        }
+        if(!empty($ageMax)){
+            $sql .= "AND FLOOR(DATEDIFF(NOW(), usersBirth)/360) <= $ageMax";
+        }
+        /* on ferme la requete */
+        $sql .= ";";
+
+        $stmt = mysqli_stmt_init($conn);
+
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            echo "error3";
+            exit();
+        } else {
+            mysqli_stmt_execute($stmt);
+        }
+
+        $result = mysqli_stmt_get_result($stmt);
+        $allUsers = resultToArray($result);
+        echo json_encode($allUsers);
+    } 
+    /* tous les users default */
+    else 
+    {
+	$sql = "SELECT * FROM users;";
+    /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -39,7 +102,9 @@ if(isset($_POST["search-submit"]))
     $result = mysqli_stmt_get_result($stmt);
     $allUsers = resultToArray($result);
 	echo json_encode($allUsers);
+    }
 }
+//--->get all users > end
 
 //--->update a whole row  > start
 if(isset($_POST['call_type']) && $_POST['call_type'] =="row_entry")

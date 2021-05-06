@@ -23,8 +23,12 @@
         <link rel="stylesheet" href="/AutoKapt/CSS/style.css" />
         <link rel="stylesheet" href="/AutoKapt/CSS/styleForms.css" />
         <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
+        <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
+
+        <!-- CanvasJs -->
         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
