@@ -30,6 +30,9 @@ a {
     color: black;
 }
 
+p{
+    margin-left: 35 px;
+}
 /*************************** FOOTER ******************************* */
 footer {
     position: bottom;
