@@ -15,7 +15,7 @@
     <div class="py-3"></div>
 </div>
 <script>
-window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+/* window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); */
 </script>
 
 <?php

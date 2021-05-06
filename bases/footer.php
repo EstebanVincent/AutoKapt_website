@@ -71,7 +71,7 @@
                             <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
 
                             <!-- Youtube -->
-                            <a class="btn btn-outline-secondary btn-floating m-1" href="/AutoKapt/pages/bonus/goldenBook.php" role="button"><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-secondary btn-floating m-1" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="window.open('/AutoKapt/pages/bonus/goldenBook.php');" role="button"><i class="fab fa-youtube"></i></a>
                         </li>
                     </ul>
                 </div>
