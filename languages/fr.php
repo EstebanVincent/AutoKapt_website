@@ -53,7 +53,36 @@
         "nav-update-user" => "Modifier les utilisateurs",
         "nav-logout" => "Deconnexion",
         "nav-login" => "Connexion",
-        
+
+        /* modifyUser */
+        "modif-user1" => "Dans cette page vous pouvez effectuer une recherche avancée sur les utilisateurs. Mais aussi modifier ou supprimer des utilisateurs.",
+        "modif-user2" => "Tous les changements seront affichés ci-dessous.",
+        "modif-user3" => "Tous les utilisateurs.",
+
+        /* myProfil */
+        "profile1" => "Information Personnel",
+        "profile-username" => "Nom d'utilisateur= Test",
+        "profile-email" => "Email = Lorem ipsum dolor sit amet.",
+        "profile-genre" => "Genre = Homme",
+        "profile-age" => "Age = 22 ans",
+        "change-user" => "Changer le nom d'utilisateur",
+        "change-mail" => "Changer l'email",
+        "change-mdp" => "Changer le mot de passe",
+        "supp-compte" => "Supprimer votre compte",
+        "verif-mdp" => "Verifier votre mot de passe",
+        "Insert-user" => "Entrer un nouveau nom d'utilisateur",
+        "new-user" => "nouveau nom d'utilisateur",
+        "verif-newuser" => "Verifier votre nouveau nom d'utilisateur",
+        "insert-mail" => "Entrer un nouveau email",
+        "new-mail" => "Nouveau email",
+        "verif-mail" => "Verifier votre nouveau mail",
+        "insert-mdp" => "Entrer un nouveau mot de passe",
+        "new-mdp" => "Nouveau mot de passe",
+        "verif-newmdp" => "Verifier votre nouveau mot de passe",
+        "profile-para" => "Paramètres",
+        "profile-question" => "Etes vous sure de vouloir supprimer votre compte ?",
+
+
         /* testpage */
         "testdesc-title" => "Les différents tests",
         "testdesc-desc" => "Les différents tests sont présentés ci-dessous",

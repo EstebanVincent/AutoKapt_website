@@ -54,9 +54,37 @@
         "nav-logout" => "Log out",
         "nav-login" => "Log in",
 
+        /* modifyUser */
+        "modif-user1" => "On this page you can perform an advanced search on users. But also edit or delete users.",
+        "modif-user2" => "All the changes will be displayed below.",
+        "modif-user3" => "All users",
+
+        /* myProfil */
+        "profile1" => "Personal Information",
+        "profile-username" => "Username = Test",
+        "profile-email" => "Email = Lorem ipsum dolor sit amet.",
+        "profile-genre" => "Gender = Male",
+        "profile-age" => "Age = 22 years",
+        "change-user" => "Change username",
+        "change-mail" => "Change email",
+        "change-mdp" => "Change password",
+        "supp-compte" => "Delete account",
+        "verif-mdp" => "Verify password",
+        "Insert-user" => "Insert new username",
+        "new-user" => "New username",
+        "verif-newuser" => "Verify new username",
+        "insert-mail" => "Insert new email",
+        "new-mail" => "New email",
+        "verif-mail" => "Verify new email",
+        "insert-mdp" => "Insert new password",
+        "new-mdp" => "New password",
+        "verif-newmdp" => "Verify new password",
+        "profile-para" => "Settings",
+        "profile-question" => "Are you sure you want to delete your account ?",
+ 
         /* testpage */
-        "testdesc-title" => "The different tests",
         "testdesc-desc" => "The different test are presented down-below",
+        "testdesc-title" => "The different tests",
         "testdesc-stress-title" => "Stress measurment",
         "testdesc-stress-desc" => "You will be asked to place your finger inside of an opaque tube which will determine your heart rate by transparency through your finger.
         You will also be asked to pinch a temperature sensor between your fingers to inform the system of your current body temperature.
