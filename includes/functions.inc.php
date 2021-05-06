@@ -887,3 +887,31 @@ function time_elapsed_string($datetime, $after, $full = false) {
         return $string ? $after  . ' ' . implode(', ', $string) : "à l'instant";
     }
 }
+
+function IP_2_db($conn){
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $sql = "INSERT INTO bonus (bonusIp) VALUES (?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        die(header("location: ". HTTP_SERVER ."home.php"));
+    }
+
+
+    mysqli_stmt_bind_param($stmt, "s", $ip);
+    mysqli_stmt_execute($stmt);
+}
+function got_trolled($conn){
+    $sql = "SELECT * FROM bonus;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+    $array = resultToArray($result);
+    echo count($array);
+}

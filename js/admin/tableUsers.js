@@ -236,6 +236,12 @@ $(document).ready(function ($) {
                 $(document).find("#btn-remove2").hide();
                 $(document).find("#btn-point1").hide();
             }
+            if (current_page == "4") {
+                $(document).find("#btn-point1").hide();
+            }
+            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 3) {
+                $(document).find("#btn-point2").hide();
+            }
             if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 2) {
                 $(document).find("#btn-add2").hide();
                 $(document).find("#btn-point2").hide();
@@ -251,6 +257,78 @@ $(document).ready(function ($) {
                 $(document).find("#btn-add2").hide();
                 $(document).find("#btn-add1").hide();
                 $(document).find("#btn-current").hide();
+                $(document).find("#btn-point2").hide();
+            }
+        } else if (number_pages == "5") {
+            /* 5 pages */
+            if (current_page == "1") {
+                $(document).find("#btn-previous").addClass("disabled");
+                $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-point1").hide();
+            }
+            if (current_page == "2") {
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == "3") {
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == "4") {
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-point2").hide();
+                $(document).find("#btn-point1").hide();
+            }
+            if (current_page == "5") {
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-point2").hide();
+            }
+        } else if (number_pages == "4") {
+            /* 4 pages */
+            if (current_page == "1") {
+                $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-previous").addClass("disabled");
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == "2") {
+                $(document).find("#btn-remove1").hide();
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == "3") {
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-remove2").hide();
+                $(document).find("#btn-point1").hide();
+                $(document).find("#btn-point2").hide();
+            }
+            if (current_page == "4") {
+                $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
+                $(document).find("#btn-next").addClass("disabled");
+                $(document).find("#btn-current").hide();
+                $(document).find("#btn-add1").hide();
+                $(document).find("#btn-add2").hide();
+                $(document).find("#btn-point1").hide();
                 $(document).find("#btn-point2").hide();
             }
         } else if (number_pages == "3") {
