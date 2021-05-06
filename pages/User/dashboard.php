@@ -33,12 +33,12 @@
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-memory'] ?></h5></td>
-                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>sql a faire</td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-hearing'] ?></h5></td>
-                        <td><a href=""><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/pages/User/play/p.audition.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>sql a faire</td>
                     </tr>
                 </tbody>
