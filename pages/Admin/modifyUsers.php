@@ -9,6 +9,15 @@
         <div class="card-body">
             <div class="card-title"><b>Gérer les utilisateurs</b> </div>
             <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ipsa quam excepturi autem animi, eveniet maxime dolor, iste odio, est laudantium consectetur possimus magni veritatis tenetur incidunt illum aperiam quos!</p>
+            <form action="/AutoKapt/includes/ajax/tableUsers.ajax.php" method="POST">
+<?php
+require_once __ROOT__.'includes/functions.inc.php';
+            showDatalistUsername($conn);
+?>
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" name="search-submit" value="Search">
+            </div>
+            </form>
         </div>
 	</section>
     <div class="py-3"></div>
@@ -28,7 +37,7 @@
 	</section>
     <div class="py-3"></div>
 </div>
-<script src="/AutoKapt/js/tableUsers.js"></script>
+<script src="/AutoKapt/js/admin/tableUsers.js"></script>
 
 
 <?php

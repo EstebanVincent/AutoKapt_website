@@ -19,7 +19,7 @@
         "dashboard-hearing" => "Audition",
         'play' => 'Jouer',
 
-        /*  */
+        /* Home */
         "accueil-title2" => "Notre mission ",
         "accueil-title3" => "Une équipe consacrée à l'innovation !",
         "accueil-para1" => "Concevoir un système de mesure s’adressant à des auto-écoles pour vérifier si une personne est apte à conduire.",

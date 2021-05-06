@@ -12,19 +12,19 @@ ul {
 li {
     list-style-type: none;
 }
-h2 {
+/* h2 {
     text-align: center;
     padding-top: 30px;
     font-size: 2em;
-    color: white;
-}
-h3_2{
+    color: honeydew;
+} */
+h3_2 {
     text-align: center;
     color: white;
     font-size: 3em;
     text-shadow: 1px 3px 2px black;
 }
-    
+
 a {
     text-decoration: none;
     color: black;
@@ -98,7 +98,7 @@ h3 {
     text-shadow: 1px 3px 2px black;
 }
 /*************************** IMAGE ******************************* */
-#imageSet{
+#image {
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -320,7 +320,6 @@ table {
 .testpagemain {
     display: flex;
     justify-content: space-around;
-    margin: 20px 20px;
     flex-direction: column;
 }
 .testpage {
@@ -387,4 +386,8 @@ table {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.center {
+    align-items: center;
 }

@@ -515,20 +515,6 @@ function showFAQ($conn, $language){
     }
 }
 
-/* echo la table des email de users et return un array des emails */
-function hintSearch($conn) {
-    $sql = "SELECT usersEmail FROM users;";
-    $results = mysqli_query($conn,$sql);
-    /* $rows = mysqli_fetch_assoc($results);
-    echo $rows['usersEmail']; */
-    $emails[] = $rows['usersEmail'];
-    while ($rows = mysqli_fetch_assoc($results)) {
-        echo '<div class="QA-item" id="question">';
-        echo '<a class="Question" href="#question">' . $rows['usersEmail'] . '</a>';
-            echo '</div>';
-    }
-    return $emails;
-}
 /* return le résultat sous forme d'array */
 function resultToArray($result) {
     $rows = array();
@@ -738,6 +724,72 @@ function VisualTotal2Chart($Visual){
     return $arrayFinal;
 }
 
+/* renvoie un array avec le reflexe sound et le timestamp de l'user */
+function getSoundHistoryUser($conn, $sessionId){
+    $sql = "SELECT testDate AS x, reflexSound AS y FROM test INNER JOIN reflex USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+/* renvoie un array de deux array avec les reflexes sound globaux et de l'user */
+function getSoundTotal($conn, $sessionId){
+    $sql = "SELECT reflexSound AS x FROM reflex;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+    $resultTotal = mysqli_stmt_get_result($stmt);
+
+    $sql = "SELECT reflexSound AS x FROM test INNER JOIN reflex USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $resultPerso = mysqli_stmt_get_result($stmt);
+
+    return [resultToArray($resultTotal), resultToArray($resultPerso)];
+}
+/* */
+function SoundTotal2Chart($Sound){
+    $array = array();
+    /* on créer un array à 2 dimensions avec chaque ligne =  (maxVisual en ms, pourcentage de test compris entre ce max et le précédent) */
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(0 + 25*$i, 0);
+    }
+    for ($i = 0; $i < count($Sound); $i++) { /* on parcours les BPM donné */
+        for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
+            if ($Sound[$i]['x'] <= $array[$j][0]){/* si le ième bpm est inf ou égal au bpmMax j */
+                $array[$j][1] += (1/count($Sound))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+                break;/* on sort du for j et on passe au i suivant */
+            }
+        }
+    }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
+}
+
 /* $data est le résult d'une fonction history User */
 function moyenne($conn, $data){
     $size = count($data);
@@ -864,4 +916,20 @@ function showUsers($conn, $access){
         ';
             
     } 
+}
+
+function showDatalistUsername($conn){
+    $sql = "SELECT usersUsername FROM users WHERE usersEmail NOT LIKE '%@bot.fr'";
+    $result = mysqli_query($conn, $sql);
+    echo '
+    <label for="exampleDataList" class="form-label">Search users by username</label>
+    <input name="likeUsername" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type username to search...">
+    <datalist id="datalistOptions">
+    ';
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<option value=' . $row["usersUsername"] . '>';
+     }
+    echo '
+    </datalist>
+    ';
 }

@@ -75,7 +75,7 @@ var dataTempTotal = <?php echo json_encode($dataTempTotal, JSON_NUMERIC_CHECK); 
 var dataTempPerso = <?php echo json_encode($dataTempPerso, JSON_NUMERIC_CHECK); ?>;
 
 </script>
-<script src="/AutoKapt/js/stress.js"></script>
+<script src="/AutoKapt/js/result/stress.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');

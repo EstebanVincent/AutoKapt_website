@@ -34,6 +34,7 @@
                           echo 
                           '
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/testpage.php">Tests</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                                 <ul class="dropdown-menu bg-dark">
@@ -51,6 +52,7 @@
                           echo 
                           '
                           <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/testpage.php">Tests</a></li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
@@ -65,6 +67,7 @@
                           echo 
                           '
                           <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/testpage.php">Tests</a></li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
