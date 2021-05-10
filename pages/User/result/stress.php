@@ -18,8 +18,18 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 	$dataTempTotal = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[0]);
 	$dataTempPerso = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[1]);
 
-	$moyBPM = moyenne($conn, $dataBPM);
-	$moyTemp = moyenne($conn, $dataTemp);
+	$tempBPM = moyenne($conn, $dataBPM);
+	if ($tempBPM == 'no data'){
+		$moyBPM = 'NA';
+	} else {
+		$moyBPM = (string)$tempBPM;
+	}
+	$TempTemp = moyenne($conn, $dataTemp);
+	if ($TempTemp == 'no data'){
+		$moyTemp = 'NA';
+	} else {
+		$moyTemp = (string)$TempTemp.' °C';
+	}
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
@@ -37,18 +47,18 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 			</div>
 			<div class="col">
 				<h2>Temperature</h2>
-				<h5 class="text-center text-danger"><?php echo $moyTemp?> °C</h5>
+				<h5 class="text-center text-danger"><?php echo $moyTemp?></h5>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
+				<a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i><?php echo $lang['stress-play'] ?></button></a>
 			</div>
 		</div>
 	</section>
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 rounded">
-		<h2>Mesure des BPM</h2>
+		<h2><?php echo $lang['stress-bpm'] ?></h2>
 		<div class="graphs">
 			<div id="UserBPM" style="height: 370px; width: 100%;"></div>
 			<div id="BPMStats" style="height: 370px; width: 100%;"></div>
@@ -56,7 +66,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 	</section>
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 rounded">
-		<h2>Mesure de la Temepérature</h2>
+		<h2><?php echo $lang['stress-temp'] ?></h2>
 		<div class="graphs">
 			<div id="UserTemp" style="height: 370px; width: 100%;"></div>
 			<div id="TempStats" style="height: 370px; width: 100%;"></div>

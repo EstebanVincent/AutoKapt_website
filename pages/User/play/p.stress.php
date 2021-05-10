@@ -17,17 +17,15 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
     <a class="unstyle" href="#"><!-- mettre le lien qui start le code énergia -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
-            <h2>Stress Test</h2>
-            <p class="my-0">Place your right index finger inside the tube.</p>
-            <p class="my-0">Pinch the thermometer with your left thumb and idex.</p>
-            <p class="my-0 pb-5">Click anywhere to start.</p>
+            <h2><?php echo $lang['p.stress-title'] ?></h2>
+            <?php echo $lang['p.stress-description'] ?>
         </section>
     </a>
     <div class="py-3"></div>
     <div class="row">
         <div class="col text-center">
             <section class="dark2 py-2 ms-5 me-2 rounded">
-                <h4>Statistics</h4>
+                <h4><?php echo $lang['p.stress-stats'] ?></h4>
                 <div id="BPMStats" style="height: 370px; width: 100%;"></div>
                 <div class="py-3"></div>
                 <div id="TempStats" style="height: 370px; width: 100%;"></div>
@@ -35,10 +33,8 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
         </div>
         <div class="col text-center">
             <section class="dark2 py-2 ms-2 me-5 rounded">
-                <h4>About the test</h4>
-                <p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
+                <h4><?php echo $lang['p.stress-about'] ?></h4>
+                <?php echo $lang['p.stress-p'] ?>
             </section>
         </div>
     </div>

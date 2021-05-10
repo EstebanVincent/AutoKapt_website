@@ -103,5 +103,21 @@
         Il vous sera ainsi attribué un score sur 100 en fonction de la fidélité à la note initiale.",
 
         "golden-title" => "Livre d'Or des Rick Roll",
+
+        /* p.stress */
+        "p.stress-description" => '<p class="my-0">Placez votre index droit dans le tube.</p>
+        <p class="my-0">Pincez le thermomètre avec votre main gauche.</p>
+        <p class="my-0 pb-5">Cliquez n\'importe où pour commencer.</p>',
+        "p.stress-title" => 'Test du stress',
+        "p.stress-about" => 'A propos du test',
+        "p.stress-p" => '<p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
+        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
+        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>',
+        "p.stress-stats" => 'Statistiques',
+
+        /* stress */
+        "stress-play" => ' Jouer',
+        "stress-temp" => 'Mesure de la Température',
+        "stress-bpm" => ' Mesure des BPM',
     );
 ?>
