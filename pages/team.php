@@ -45,7 +45,7 @@
         <img src="/AutoKapt/images/60376.jpg" alt="Julien" class="profile-img">
         <h3 class = "user-name">Julien</h3>
         <div id="line"></div>
-        <h5>Inutile</h5>
+        <h5>cadre</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Fugit, animi. Delectus dolores nihil vero dolorum molestiae
          consequatur alias eaque aut.</p>
@@ -55,7 +55,7 @@
         <img src="/AutoKapt/images/61585.jpg" alt="Sofyane" class="profile-img">
         <h3 class = "user-name">Sofyane</h3>
         <div id="line"></div>
-        <h5>Other1</h5>
+        <h5>cadre</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
          Fugit, animi. Delectus dolores nihil vero dolorum molestiae
          consequatur alias eaque aut.</p>

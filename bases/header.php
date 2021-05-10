@@ -1,38 +1,14 @@
-<?php
-    session_start();
+<!-- 
+    fichier inclut dans tout les fichiers php vue par l'utilisateur
+    contient head et donc config
+
+    donc l'inclure dans les fichiers du dossier pages
+
+    Il définit la barre de navigation adaptée
+ -->
+ <?php
+    require_once "head.php";
 ?>
-
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Infinite Mesure</title>
-        <link rel="stylesheet" href="/AutoKapt/CSS/styleBases.css" />
-        <link rel="stylesheet" href="/AutoKapt/CSS/style.css" />
-        <link rel="stylesheet" href="/AutoKapt/CSS/styleForms.css" />
-        <link rel="icon" href="/AutoKapt/favicon3.ico" type="image/x-icon" />
-        <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
-        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-        <!-- jQuery-Confirm -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-
-        <!-- Bootstrap 5 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-            crossorigin="anonymous"
-        />
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-            crossorigin="anonymous"
-        ></script>
-    </head>
     <body>
         <header class="header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -51,52 +27,63 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">Dashboard</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">L'équipe</a></li>
 
 <?php
                       if(isset($_SESSION["userUsername"])){
                         if($_SESSION["userAccess"] == 0){
                           echo 
                           '
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">'. $lang["nav-team"] .'</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
                                 <ul class="dropdown-menu bg-dark">
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/createManager.php">Create Manager</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyFAQ.php">Update FAQ</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyUsers.php">Update users</a></li>
-                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/createManager.php">'. $lang["nav-create-manager"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyFAQ.php">'. $lang["nav-update-faq"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/Admin/modifyUsers.php">'. $lang["nav-update-user"] .'</a></li>
+                                    <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
                                 </ul>
-                            </li>';
+                            </li>
+                            ';
                           
                         } 
                         else if($_SESSION["userAccess"] == 1){
                           echo 
                           '
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">'. $lang["nav-team"] .'</a></li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php">Create User</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/Manager/createUser.php">'. $lang["nav-create-user"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
                               </ul>
-                          </li>';
+                          </li>
+                          ';
                         } 
                         else if($_SESSION["userAccess"] == 2){
                           echo 
                           '
+                          <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">'. $lang["nav-team"] .'</a></li>
                           <li class="nav-item dropdown">
                               <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">' . $_SESSION["userUsername"] . '</a>
                               <ul class="dropdown-menu bg-dark">
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">My profile</a></li>
-                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">Log out</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/myProfile.php">'. $lang["nav-profile"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/pages/profile/logOut.php">'. $lang["nav-logout"] .'</a></li>
                               </ul>
-                          </li>';
+                          </li>
+                          ';
                         } 
                       } else {
-                        echo' <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/testpage.php">Tests</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/logIn/logIn.php">Log in</a></li>';
+                        echo
+                        ' 
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/testpage.php">Tests</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/team.php">'. $lang["nav-team"] .'</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/pages/logIn/logIn.php">'. $lang["nav-login"] .'</a></li>
+                            ';
                       }
 ?>
                         </ul>
@@ -104,4 +91,3 @@
                 </div>
             </nav>
         </header>
-      

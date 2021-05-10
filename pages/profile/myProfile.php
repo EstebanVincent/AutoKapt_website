@@ -1,7 +1,5 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
@@ -63,12 +61,12 @@
           </div>
           <h4>Insert new email</h4>
           <div class="element">
-            <input type="text" name="newUsername" required>
+            <input type="text" name="newEmail" required>
             <span></span>
             <label>New email</label>
           </div>
           <div class="element">
-            <input type="text" name="verifyNewUsername" required>
+            <input type="text" name="verifyNewEmail" required>
             <span></span>
             <label>Verify new email</label>
           </div>
@@ -87,12 +85,12 @@
           </div>
           <h4>Insert new password</h4>
           <div class="element">
-            <input type="text" name="newUsername" required>
+            <input type="text" name="newPassword" required>
             <span></span>
             <label>New password</label>
           </div>
           <div class="element">
-            <input type="text" name="verifyNewUsername" required>
+            <input type="text" name="verifyNewPassword" required>
             <span></span>
             <label>Verify new password</label>
           </div>
@@ -143,17 +141,6 @@ $('#deleteAccount').click(function() {
   $('#delete').toggle();
 });
 </script>
-
-<!-- 
-Tes infos, changer mdp
-Graph evo dernier test
-Moyenne des tests
-Maybe ajouter une banderole pub?
-Ajouter section avis
-mode admin 
--->
 <?php
-  $pathFooter = $_SERVER['DOCUMENT_ROOT'];
-  $pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathFooter);
+require_once(__ROOT__.'bases/footer.php');
 ?>

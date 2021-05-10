@@ -1,14 +1,11 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 <!-- on accede à la base de donnée pour récupérer les info
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once '../../../includes/dataBaseHandler.inc.php';
-    require_once '../../../includes/functions.inc.php';
+    require_once __ROOT__.'includes/functions.inc.php';
 
 	$dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
 
@@ -81,11 +78,6 @@ var dataTempPerso = <?php echo json_encode($dataTempPerso, JSON_NUMERIC_CHECK); 
 <script src="/AutoKapt/js/stress.js"></script>
 
 <?php
-$pathErrors = $_SERVER['DOCUMENT_ROOT'];
-$pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathErrors);
-
-$pathFooter = $_SERVER['DOCUMENT_ROOT'];
-$pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathFooter);
+require_once(__ROOT__.'includes/errors.inc.php');
+require_once(__ROOT__.'bases/footer.php');
 ?>

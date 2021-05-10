@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 
 if (isset($_POST["createNewPassword-submit"])){
 
@@ -7,8 +8,8 @@ if (isset($_POST["createNewPassword-submit"])){
     $password = $_POST["password"];
     $passwordRepeat = $_POST["password-repeat"];
 
-    require_once '../dataBaseHandler.inc.php';
-    require_once '../functions.inc.php';
+
+    require_once __ROOT__.'includes/functions.inc.php';
 
     if (!pwdMatch($password, $passwordRepeat)){
         /* l'url précédent, on concerve ainsi les tokens */
@@ -22,6 +23,6 @@ if (isset($_POST["createNewPassword-submit"])){
     changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat);
     
 } else {
-    header("location: ../../home.php?error=bite");
+    header("location: ". HTTP_SERVER ."home.php?error=bite");
     exit();
 }

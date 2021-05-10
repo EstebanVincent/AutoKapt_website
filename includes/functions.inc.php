@@ -1,6 +1,5 @@
 <?php
-/* session_start(); */
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 /* return true si match false sinon */
 function pwdMatch($password, $pwdRepeat) {
     $result;
@@ -16,7 +15,7 @@ function usernameExists($conn, $username, $email) {
     $sql = "SELECT * FROM users WHERE usersUsername = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
 
@@ -52,17 +51,17 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
     $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersBirth, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header("location: ../../pages/logIn/signUp.php/?error=stmtfailed"));
+        die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php/?error=stmtfailed"));
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "ssssii", $username, $email, $hashedPassword , $gender, $birth, $access);
+    mysqli_stmt_bind_param($stmt, "sssssi", $username, $email, $hashedPassword , $gender, $birth, $access);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
 
-    die(header("location: ../home.php/?error=accountcreationsuccess"));
+    die(header("location:". HTTP_SERVER ."/home.php/?error=accountcreationsuccess"));
 }
 
 
@@ -70,31 +69,27 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
 function logInUser($conn, $username, $password){
     $usernameExists = usernameExists($conn, $username, $username);/* 2 fois car comme ça check pas mail */
     if($usernameExists === false){
-        die(header("location: ../../pages/logIn/logIn.php/?error=wronglogin"));
+        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wronglogin"));
     }
     $passwordHashed =  $usernameExists["usersPassword"];
     $checkPassword = password_verify($password, $passwordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/logIn/logIn.php/?error=wrongpassword"));
+        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wrongpassword"));
     } else if ($checkPassword === true){
-        session_start();
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
         $_SESSION["userAccess"] = $usernameExists["usersAccess"];
-        $_SESSION["userLanguage"] = $usernameExists["usersLanguage"];
-        die(header("location: ../../home.php/?error=loginSuccess"));
+        die(header("location:". HTTP_SERVER ."home.php/?error=loginSuccess"));
     }
 }
 
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 30 min*/
 function passwordRecoveryEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
-
-    require_once '../dataBaseHandler.inc.php';
 
     $userEmail = $_POST["email"];
 
@@ -138,7 +133,7 @@ function passwordRecoveryEmail($conn, $selector, $token){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ../../pages/logIn/passwordRecovery.php?reset=success");
+    header("location: ". HTTP_SERVER ."pages/logIn/passwordRecovery.php?reset=success");
 }
 /* correspond au forget password en cliquant sur le lien du mail, donc utilisation de token pour eviter le hack, utilise les bdd users et pwdreset*/
 function changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat){
@@ -214,7 +209,7 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
                             } else {
                                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                                 mysqli_stmt_execute($stmt);
-                                header("location: ../../pages/logIn/logIn.php?newPassword=passwordupdated");
+                                header("location: ". HTTP_SERVER ."pages/logIn/logIn.php?newPassword=passwordupdated");
                             }
 
                         }
@@ -228,13 +223,12 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
 
 /* deja dans le compte et verification du mdp donc deja secure */
 function changePassword($conn, $currentPassword, $newPassword){
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -247,13 +241,13 @@ function changePassword($conn, $currentPassword, $newPassword){
     $checkPassword = password_verify($currentPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersPassword=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         $newPasswordHashed = password_hash($newPassword, PASSWORD_DEFAULT);
@@ -261,18 +255,17 @@ function changePassword($conn, $currentPassword, $newPassword){
         mysqli_stmt_bind_param($stmt, "si", $newPasswordHashed, $sessionId);
         mysqli_stmt_execute($stmt);  
 
-        die(header("location: ../../pages/profile/myProfile.php/?change=updatepasswordsuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updatepasswordsuccess"));
     }
 }
 /* same et on change la valeur de l'username de la session en plus */
 function changeUsername($conn, $verifyPassword, $newUsername) {
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -285,13 +278,13 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: " . $_SERVER['HTTP_REFERER'] . "?error=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersUsername=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         
@@ -299,18 +292,17 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
         mysqli_stmt_execute($stmt);  
 
         $_SESSION["userUsername"] = $newUsername;
-        die(header("location: ../../pages/profile/myProfile.php/?change=updateusernamesuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updateusernamesuccess"));
     }
 }
 /* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
 function changeEmail($conn, $verifyPassword, $newEmail) {
-    session_start();
     $sessionId = $_SESSION["userId"];
     $sql = "SELECT usersPassword FROM users WHERE usersId=?;";
 
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+        header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
         exit(); 
     }
     mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -323,50 +315,29 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ../../pages/profile/changePassword.php/?change=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?change=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersEmail=? WHERE usersId=?;";
 
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
+            header("location: " . $_SERVER['HTTP_REFERER'] . "?error=stmtfailed");/* pour les erreurs apres */
             exit(); 
         }
         
         mysqli_stmt_bind_param($stmt, "si", $newEmail, $sessionId);
-        mysqli_stmt_execute($stmt);  
+        $a = mysqli_stmt_execute($stmt);  
+        
 
-        die(header("location: ../../pages/profile/myProfile.php/?error=updateemailsuccess"));
+        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?error=updatemailsuccess"));
     }
 }
-/* Change la langue */
-function changeLanguage($conn, $language){
-    session_start();
-    $sessionId = $_SESSION["userId"];
-
-    $sql = "UPDATE users SET usersLanguage=? WHERE usersId=?;";
-    $stmt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($stmt, $sql)){
-            header("location: ../?error=stmtfailed");/* pour les erreurs apres */
-            exit(); 
-        }
-        
-        mysqli_stmt_bind_param($stmt, "ii", $language, $sessionId);
-        mysqli_stmt_execute($stmt);  
-
-        $_SESSION["userLanguage"] = $language;
-
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=languechangesuccess'));
-}
-
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createUserEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
-
-    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
@@ -414,11 +385,9 @@ function createUserEmail($conn, $selector, $token){
 }
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createManagerEmail($conn, $selector, $token){
-    $url = "localhost/AutoKapt/pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
-
-    /* require_once '../dataBaseHandler.inc.php'; */
 
     $userEmail = $_POST["email"];
 
@@ -457,7 +426,7 @@ function createManagerEmail($conn, $selector, $token){
     $message .= '<p>Here is your account creation link: </br>';
     $message .= '<a href="' . $url . '">' . $url . '</a></p>';
 
-    $headers = "From: Infinite Mesures <Infinite_Mesures@gmail.com>\r\n";
+    $headers = "From: Infinite Mesures <Infinite_Measures@gmail.com>\r\n";
     $headers .= "Reply-To: Infinite_Mesures@gmail.com\r\n";
     $headers .= "Content-type: text/html\r\n";
 
@@ -488,7 +457,7 @@ function getEmail($conn, $selector, $validator){
         /* on recupere le résultat */
         $result = mysqli_stmt_get_result($stmt);
         if(!$row = mysqli_fetch_assoc($result)){ /* transforme le résultat en array */
-            echo "u need to re-submit your reset request";
+            echo "Time given for account creation is over";
             exit();
         } else  {
             /* le token validator est passé en binaire */
@@ -521,7 +490,7 @@ function showFAQ($conn, $language){
         echo "error3";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "i", $language);
+        mysqli_stmt_bind_param($stmt, "s", $language);
         mysqli_stmt_execute($stmt);
     }
 
@@ -544,58 +513,6 @@ function showFAQ($conn, $language){
 			</div>
         ';
     }
-}
-
-/* ajoute une question/reponse a la faq */
-function addQuestionFAQ($conn, $question, $answer, $language){
-    $sql = "INSERT INTO faq (faqQuestion, faqAnswer, faqLanguage) VALUES (?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssi", $question, $answer, $language);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ../../pages/Admin/modifyFAQ.php?faq=addFAQ'));/* pas  lien http précédent car si 2 a la suite ca donne 2 
-    ?faq et ca fait de la merde */
-}
-/* enleve un element de la faq */
-function removeQuestionFAQ($conn, $faqId){
-    $sql = "DELETE FROM faq WHERE faqId=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "i", $faqId);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=removeQ'));
-}
-/* modify un element de la faq */
-function modifyQuestionFAQ($conn, $faqId, $newQuestion, $newAnswer){
-    $sql ="UPDATE faq SET faqQuestion=?, faqAnswer=? WHERE faqId=?;";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error=stmtfailed'));
-    }
-
-    mysqli_stmt_bind_param($stmt, "ssi", $newQuestion, $newAnswer, $faqId);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-
-    die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '?faq=updateQ'));
-}
-
-/* envoi une alerte js en php */
-function php_alert($msg){
-    echo '<script>alert("' . $msg . '")</script>';
 }
 
 /* echo la table des email de users et return un array des emails */
@@ -834,6 +751,8 @@ function moyenne($conn, $data){
 
 /* Affiche le tablo des lignes de test de l'user */
 function showActivity($conn, $userId){
+    global $lang; /* on récupere la var global donné par config */
+
     $sql = "SELECT testType, testDate FROM test WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
 
@@ -847,7 +766,7 @@ function showActivity($conn, $userId){
 
     $result = mysqli_stmt_get_result($stmt);
     $array = resultToArray($result);
-
+    
     /* on replace les valeurs de 0 à 3 en type correspondant */
     for ($i = 0; $i < count($array); $i++) {
         switch ($array[$i]['testType']) {
@@ -855,22 +774,22 @@ function showActivity($conn, $userId){
                 $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-brain"></i></a> Stress';
                 break;
             case 1:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> Reflex';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-reflex"];
                 break;
             case 2:
-                $array[$i]['testType'] = 'Memory';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-memory"];
                 break;
             case 3:
-                $array[$i]['testType'] = 'Audition';
+                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
                 break;
         }
     }
     /* on parcours le tablo de la requete sql en partant de la fin */
     for ($i = count($array) - 1; $i >= 0; $i--) {
         /* temps écoulé depuis le test en question */
-        $time_ago = time_elapsed_string($array[$i]['testDate'], ' ago');
+        $time_ago = time_elapsed_string($array[$i]['testDate'], $lang["ago"]);
         $split_time = preg_split("/[\s]/", $array[$i]['testDate']);
-        $time = $split_time[0] . ' à ' . $split_time[1];
+        $time = $split_time[0] . $lang["at"] . $split_time[1];
             echo '
             <tr>
                 <td class="align-middle"><h4>'. $array[$i]['testType'] .'</h4></td>
@@ -884,6 +803,7 @@ function showActivity($conn, $userId){
 /* fonction venant de stackoverflow */
 /* https://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474 */
 function time_elapsed_string($datetime, $after, $full = false) {
+    global $lang; /* on récupere la var global donné par config */
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -892,13 +812,13 @@ function time_elapsed_string($datetime, $after, $full = false) {
     $diff->d -= $diff->w * 7;
 
     $string = array(
-        'y' => 'year',
-        'm' => 'month',
-        'w' => 'week',
-        'd' => 'day',
-        'h' => 'hour',
-        'i' => 'minute',
-        's' => 'second',
+        'y' => $lang["y"],
+        'm' => $lang["m"],
+        'w' => $lang["w"],
+        'd' => $lang["d"],
+        'h' => $lang["h"],
+        'i' => $lang["i"],
+        's' => $lang["s"],
     );
     foreach ($string as $k => &$v) {
         if ($diff->$k) {
@@ -909,7 +829,11 @@ function time_elapsed_string($datetime, $after, $full = false) {
     }
 
     if (!$full) $string = array_slice($string, 0, 1);
-    return $string ? implode(', ', $string) . $after : 'just now';
+    if ($lang["ago"] == "ago")
+        return $string ? implode(', ', $string) . ' ' . $after : 'just now';
+    else {
+        return $string ? $after  . ' ' . implode(', ', $string) : "à l'instant";
+    }
 }
 
 /* Affiche le tablo de tout les users ayant l'acces demandé */

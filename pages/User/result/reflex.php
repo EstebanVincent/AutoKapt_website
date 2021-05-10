@@ -1,7 +1,5 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
     <div id = "imagePrincipale">
 		<h1>Infinite Mesures</h1>
@@ -29,8 +27,7 @@
 	
 	
     <?php
-    require_once '../../../includes/dataBaseHandler.inc.php';
-    require_once '../../../includes/functions.inc.php';
+    require_once __ROOT__.'includes/functions.inc.php';
 
 	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
 
@@ -54,14 +51,9 @@ var dataVisualPerso = <?php echo json_encode($dataVisualPerso, JSON_NUMERIC_CHEC
 
 
 </script>
-<script src="../../../js/reflex.js"></script>
+<script src="/AutoKapt/js/reflex.js"></script>
 
 <?php
-$pathErrors = $_SERVER['DOCUMENT_ROOT'];
-$pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathErrors);
-
-$pathFooter = $_SERVER['DOCUMENT_ROOT'];
-$pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathFooter);
+require_once(__ROOT__.'includes/errors.inc.php');
+require_once(__ROOT__.'bases/footer.php');
 ?>

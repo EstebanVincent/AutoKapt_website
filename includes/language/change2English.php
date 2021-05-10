@@ -1,6 +1,8 @@
 <?php
+/* on enleve la query avant de rediriger afin d'éviter d'avoir plusieurs query */
+$bits = explode('?',$_SERVER['HTTP_REFERER']);
+$redirect = $bits[0];
+echo $redirect;
 
-require_once '../dataBaseHandler.inc.php';
-require_once '../functions.inc.php';
-
-changeLanguage($conn, 1);
+die(header("location: " . $redirect . "?lang=en"));
+?>

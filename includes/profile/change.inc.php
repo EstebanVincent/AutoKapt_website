@@ -1,19 +1,18 @@
 <?php
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 /* Change password */
 if(isset($_POST["change-password-submit"])){
-  $currentPassword = $_POST["currentPassword"];
+  $currentPassword = $_POST["verifyPassword"];
   $newPassword = $_POST["newPassword"];
   $verifyNewPassword = $_POST["verifyNewPassword"];
 
-  require_once '../dataBaseHandler.inc.php';
-  require_once '../functions.inc.php';
+  require_once __ROOT__.'includes/functions.inc.php';
 
   if (!pwdMatch($newPassword, $verifyNewPassword)){
-    die(header("location: ../../pages/profile/changePassword.php/?error=pwdsdontmatch"));
+    die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=".$newPassword.$verifyNewPassword));
   }
   if (!pwdLongEnough($newPassword)){
-    die(header("location: ../../pages/profile/changePassword.php/?error=password<8char"));
+    die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=password<8char"));
   }
   changePassword($conn, $currentPassword, $newPassword);
 
@@ -25,11 +24,10 @@ else if(isset($_POST["change-username-submit"])){
   $newUsername = $_POST["newUsername"];
   $verifyNewUsername = $_POST["verifyNewUsername"];
 
-  require_once '../dataBaseHandler.inc.php';
-  require_once '../functions.inc.php';
+  require_once __ROOT__.'includes/functions.inc.php';
 
   if (!pwdMatch($newUsername, $verifyNewUsername)){
-    die(header("location: ../../pages/profile/changeUsername.php/?error=usernamesdontmatch"));
+    die(header("location: ". HTTP_SERVER ."pages/profile/changeUsername.php/?error=usernamesdontmatch"));
   }
   changeUsername($conn, $verifyPassword, $newUsername);
 
@@ -41,16 +39,15 @@ else if(isset($_POST["change-email-submit"])){
   $newEmail = $_POST["newEmail"];
   $verifyNewEmail = $_POST["verifyNewEmail"];
 
-  require_once '../dataBaseHandler.inc.php';
-  require_once '../functions.inc.php';
+  require_once __ROOT__.'includes/functions.inc.php';
 
   if (!pwdMatch($newEmail, $verifyNewEmail)){
-    die(header("location: ../../pages/profile/changePassword.php/?error=emailsdontmatch"));
+    die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=emailsdontmatch"));
   }
   changeEmail($conn, $verifyPassword, $newEmail);
 
 } else {
-  die(header("location: ../../pages/profile/myProfile.php"));
+  die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php"));
 
 }
 

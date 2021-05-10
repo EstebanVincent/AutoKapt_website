@@ -1,5 +1,8 @@
 <?php
 
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
+require_once __ROOT__.'includes/functions.inc.php';
+
 if (isset($_POST["signUpManager-submit"])) {
     $selector = $_POST["selector"];
     $validator = $_POST["validator"];
@@ -9,9 +12,6 @@ if (isset($_POST["signUpManager-submit"])) {
     $pwdRepeat = $_POST["password-repeat"];
     $gender = $_POST["gender"];
     $birth = $_POST["birth"];
-
-    require_once 'dataBaseHandler.inc.php';
-    require_once 'functions.inc.php';
 
     $email = getEmail($conn, $selector, $validator);
     $a = pwdMatch($password, $pwdRepeat);
@@ -40,11 +40,8 @@ else if (isset($_POST["signUpUser-submit"])) {
     $gender = $_POST["gender"];
     $birth = $_POST["birth"];
 
-  require_once 'dataBaseHandler.inc.php';
-  require_once 'functions.inc.php';
-
-  $email = getEmail($conn, $selector, $validator);
-
+    $email = getEmail($conn, $selector, $validator);
+    
 
   if (!pwdMatch($password, $pwdRepeat)){
       die(header('Location: ' . $_SERVER['HTTP_REFERER'] . '&error=pwdsdontmatch'));
@@ -60,5 +57,5 @@ else if (isset($_POST["signUpUser-submit"])) {
   createUser($conn, $username, $email, $password, $gender, $birth, 2);
 }
 else {
-    die(header("location: ../../pages/logIn/signUp.php"));
+    die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php"));
 }

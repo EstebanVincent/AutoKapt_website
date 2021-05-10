@@ -1,12 +1,12 @@
 <?php
-
-require_once '../dataBaseHandler.inc.php';
-require_once '../functions.inc.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
+require_once __ROOT__.'includes/functions.inc.php';
 
 //--->get all users > start
 if(isset($_GET['call_type']) && $_GET['call_type'] =="get_users")
 {
-	$sql = "SELECT * FROM users ORDER BY usersAccess;";
+	$sql = "SELECT * FROM users WHERE usersEmail NOT LIKE '%@bot.fr' ORDER BY usersAccess;";
+    /* get all users but the bot accounts */
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){

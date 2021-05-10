@@ -1,8 +1,7 @@
 <?php
 
-require_once '../dataBaseHandler.inc.php';
-require_once '../functions.inc.php';
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
+require_once __ROOT__.'includes/functions.inc.php';
 
 //--->get all faq > start
 if(isset($_GET['call_type']) && $_GET['call_type'] =="get_faq")
@@ -55,7 +54,7 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="question_entry")
         echo "error3";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "ssii", $question, $answer, $language, $id);
+        mysqli_stmt_bind_param($stmt, "sssi", $question, $answer, $language, $id);
         mysqli_stmt_execute($stmt);
     }	
     echo json_encode(array(
