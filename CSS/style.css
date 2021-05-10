@@ -12,17 +12,27 @@ ul {
 li {
     list-style-type: none;
 }
-h2 {
-    text-transform: uppercase;
+/* h2 {
     text-align: center;
     padding-top: 30px;
     font-size: 2em;
+    color: honeydew;
+} */
+h3_2 {
+    text-align: center;
+    color: white;
+    font-size: 3em;
+    text-shadow: 1px 3px 2px black;
 }
+
 a {
     text-decoration: none;
     color: black;
 }
 
+p{
+    margin-left: 35 px;
+}
 /*************************** FOOTER ******************************* */
 footer {
     position: bottom;
@@ -86,6 +96,11 @@ h3 {
     color: antiquewhite;
     font-size: 3em;
     text-shadow: 1px 3px 2px black;
+}
+/*************************** IMAGE ******************************* */
+#image {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 /*************************** PROFILES ******************************* */
@@ -305,7 +320,6 @@ table {
 .testpagemain {
     display: flex;
     justify-content: space-around;
-    margin: 20px 20px;
     flex-direction: column;
 }
 .testpage {
@@ -314,6 +328,9 @@ table {
     opacity: 1;
 
     background-color: lightgray;
+    margin: 10px 10px;
+}
+.testpage-title {
     margin: 10px 10px;
 }
 
@@ -345,20 +362,21 @@ table {
 .testpage-text {
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 25px;
     color: black;
     text-shadow: none;
     opacity: 1;
 }
 /******************** Log In ************************ */
-#backgroundLogIn{
+#backgroundLogIn {
     height: 100%;
     width: 100%;
     background: url(/AutoKapt/images/electrocardiogram.jpg);
-    
 }
 
-#logInContainer{
+#logInContainer {
     border: 4px gray;
     border-radius: 15px;
     width: 75%;
@@ -368,4 +386,8 @@ table {
     margin-right: auto;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+.center {
+    align-items: center;
 }

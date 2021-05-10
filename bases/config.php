@@ -16,11 +16,20 @@ Il définit l'absolute path, le path serveur, la connection avec la base de donn
     define('HTTP_SERVER', '//' . SERVER_NAME . '/' . WEBSITE_NAME . '/');
 
     /* connection avec la base de donnée */
+<<<<<<< HEAD
+    $dBServer = "localhost";
     $dBUsername = "root";
     $dBPassword = "";
     $dBName = "autokapt";  
 
-    $conn = mysqli_connect(SERVER_NAME, $dBUsername, $dBPassword, $dBName);
+    $conn = mysqli_connect($dBServer, $dBUsername, $dBPassword, $dBName);
+=======
+    $dBServeurName = 'localhost';
+    $dBUsername = "root";
+    $dBPassword = "";
+    $dBName = "autokapt";  
+    $conn = mysqli_connect($dBServeurName, $dBUsername, $dBPassword, $dBName);
+>>>>>>> bf1e64e4862db2527f71b0cc8754629bfcc0cfdb
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());

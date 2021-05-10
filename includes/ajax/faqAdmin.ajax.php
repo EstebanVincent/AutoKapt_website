@@ -83,14 +83,21 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="delete_question_entry")
 		die();
     }
     mysqli_stmt_bind_param($stmt, "i", $row_id);
-    mysqli_stmt_execute($stmt);
-    
-
-    echo json_encode(array(
-        'status' => 'success', 
-        'msg' => 'Successfully deleted selected row', 
-    ));
-    die();
+    $success = mysqli_stmt_execute($stmt);
+    $error = mysqli_stmt_error($stmt);
+    if (!$success) {
+        echo json_encode(array(
+            'status' => 'error', 
+            'msg' => 'requete refusé par database : '. $error, 
+        ));
+        die();
+    } else {
+        echo json_encode(array(
+            'status' => 'success', 
+            'msg' => 'Successfully deleted selected row', 
+        ));
+        die();
+    }
 	 
 }
 //--->delete row entry  > end
@@ -131,13 +138,23 @@ if(isset($_POST['call_type']) && $_POST['call_type'] =="new_question_entry")
             exit();
         } else {
             mysqli_stmt_bind_param($stmt, "sss", $question, $answer, $language);
-            mysqli_stmt_execute($stmt);
+            $success = mysqli_stmt_execute($stmt);
+            $error = mysqli_stmt_error($stmt);
         }	
-		echo json_encode(array(
-			'status' => 'success', 
-			'msg' => 'Successfully added new row', 
-		));
-		die();
+        if($success){
+            echo json_encode(array(
+                'status' => 'success', 
+                'msg' => 'Successfully added new row', 
+            ));
+            die();
+        } else {
+            echo json_encode(array(
+                'status' => 'success', 
+                'msg' => 'requete refusé par database : '. $error, 
+            ));
+            die();
+        }
+		
 	} else {
         echo json_encode(array(
 			'status' => 'error', 

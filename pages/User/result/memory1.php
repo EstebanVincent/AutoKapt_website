@@ -40,7 +40,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a href="/AutoKapt/pages/User/play/p.reflex.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
+				<a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
 			</div>
 		</div>
 	</section>
@@ -72,7 +72,7 @@ var dataSoundTotal = <?php echo json_encode($dataSoundTotal, JSON_NUMERIC_CHECK)
 var dataSoundPerso = <?php echo json_encode($dataSoundPerso, JSON_NUMERIC_CHECK); ?>;
 
 </script>
-<script src="/AutoKapt/js/result/reflex.js"></script>
+<script src="/AutoKapt/js/result/memory.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');
