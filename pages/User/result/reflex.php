@@ -14,9 +14,20 @@
 
 	$dataSoundTotal = SoundTotal2Chart(getSoundTotal($conn, $_SESSION["userId"])[0]);
 	$dataSoundPerso = SoundTotal2Chart(getSoundTotal($conn, $_SESSION["userId"])[1]);
-
-	$moyVisual = moyenne($conn, $dataVisual);
-	$moySound = moyenne($conn, $dataSound);
+	
+	$tempVisual = moyenne($conn, $dataVisual);
+	if ($tempVisual == 'no data'){
+		$moyVisual = 'NA';
+	} else {
+		$moyVisual = (string)$tempVisual.' ms';
+	}
+	$tempSound = moyenne($conn, $dataSound);
+	if ($tempSound == 'no data'){
+		$moySound = 'NA';
+	} else {
+		$moySound = (string)$tempSound.' ms';
+	}
+	
 
     ?>
 
@@ -31,11 +42,11 @@
 		<div class="row">
 			<div class="col">
 				<h2>Visual</h2>
-				<h5 class="text-center text-danger"><?php echo $moyVisual?> ms</h5>
+				<h5 class="text-center text-danger"><?php echo $moyVisual?></h5>
 			</div>
 			<div class="col">
 				<h2>Sound</h2>
-				<h5 class="text-center text-danger"><?php echo $moySound?> ms</h5>
+				<h5 class="text-center text-danger"><?php echo $moySound?></h5>
 			</div>
 		</div>
 		<div class="row">
