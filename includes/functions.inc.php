@@ -793,6 +793,9 @@ function SoundTotal2Chart($Sound){
 /* $data est le résult d'une fonction history User */
 function moyenne($conn, $data){
     $size = count($data);
+    if ($size == 0){
+        return 'no data';
+    }
     $total = 0;
     for ($i = 0; $i < count($data); $i++) { /* on parcours les données */
         $total += $data[$i]['y'];
@@ -901,7 +904,7 @@ function IP_2_db($conn){
     mysqli_stmt_execute($stmt);
 }
 function got_trolled($conn){
-    $sql = "SELECT * FROM bonus;";
+    $sql = "SELECT DISTINCT bonusIp FROM bonus;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
