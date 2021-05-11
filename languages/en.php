@@ -102,5 +102,22 @@
         You will thus be assigned a score out of 100 depending on the fidelity to the initial note.",
 
         "golden-title" => "Golden Book of Rick Roll",
+
+        /* p.stress */
+        "p.stress-description" => '<p class="my-0">Place your right index finger inside the tube.</p>
+        <p class="my-0">Pinch the thermometer with your left thumb and idex.</p>
+        <p class="my-0 pb-5">Click anywhere to start.</p>',
+        "p.stress-title" => 'Stress Test',
+        "p.stress-about" => 'About the test',
+        "p.stress-p" => '<p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
+        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
+        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>',
+        "p.stress-stats" => 'Statistics',
+
+        /* stress */
+        "stress-play" => ' Play',
+        "stress-temp" => 'Temperature mesuring',
+        "stress-bpm" => ' BPM mesuring',
+
     );
 ?>
