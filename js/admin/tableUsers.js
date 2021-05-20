@@ -1,5 +1,6 @@
 $(document).ready(function ($) {
     var urlTotal = window.location.href;
+    var start = urlTotal.split("/AutoKapt")[0];
     function create_html_table(tbl_data) {
         /* on définit nos variables */
         var page_tempo = urlTotal.split("page=");
@@ -20,7 +21,7 @@ $(document).ready(function ($) {
                 content: "Merci de ne pas toucher à l'url",
                 buttons: {
                     confirm: function () {
-                        window.location.replace("http://localhost/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
                     },
                 },
             });
@@ -31,7 +32,7 @@ $(document).ready(function ($) {
                 content: "Merci de ne pas toucher à l'url",
                 buttons: {
                     confirm: function () {
-                        window.location.replace("http://localhost/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
                     },
                 },
             });
