@@ -923,7 +923,7 @@ function getMemoryHistoryUser($conn, $sessionId){
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        echo "error3";
+        echo "error4";
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -939,18 +939,18 @@ function getMemoryTotal($conn, $sessionId){
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        echo "error3";
+        echo "error5";
         exit();
     } else {
         mysqli_stmt_execute($stmt);
     }
     $resultTotal = mysqli_stmt_get_result($stmt);
 
-    $sql = "SELECT memoryRythm AS x FROM test INNER JOIN memory< USING (testId) WHERE usersId=?;";
+    $sql = "SELECT memoryRythm AS x FROM test INNER JOIN memory USING (testId) WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        echo "error3";
+        echo "error6";
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "i", $sessionId);
@@ -975,4 +975,10 @@ function MemoryTotal2Chart($rythm){
             }
         }
     }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
 }

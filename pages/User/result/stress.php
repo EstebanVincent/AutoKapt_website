@@ -12,7 +12,6 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 	$dataBPMTotal = BPMTotal2Chart(getBPMTotal($conn, $_SESSION["userId"])[0]);
 	$dataBPMPerso = BPMTotal2Chart(getBPMTotal($conn, $_SESSION["userId"])[1]);
 
-
 	$dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
 
 	$dataTempTotal = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[0]);

@@ -10,7 +10,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 	$dataMemory = getMemoryHistoryUser($conn, $_SESSION["userId"]);
 
 	$dataMemoryTotal = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[0]);
-	$dataRythmPerso = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[1]);
+	$dataMemoryPerso = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[1]);
 
 	$tempMemory = moyenne($conn, $dataMemory);
 	if ($tempMemory == 'no data'){
@@ -52,7 +52,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 </div>
 	
 <script>
-var $dataMemory = <?php echo json_encode($dataMemory, JSON_NUMERIC_CHECK); ?>;
+var dataMemory = <?php echo json_encode($dataMemory, JSON_NUMERIC_CHECK); ?>;
 var dataMemoryTotal = <?php echo json_encode($dataMemoryTotal, JSON_NUMERIC_CHECK); ?>;
 var dataMemoryPerso = <?php echo json_encode($dataMemoryPerso, JSON_NUMERIC_CHECK); ?>;
 

@@ -5,8 +5,6 @@ for (var i = 0; i < dataMemory.length; i++) {
     dataMemory[i].x = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 }
 
-
-
 window.onload = function () {
     var chartMemory = new CanvasJS.Chart("UserMemory", {
         animationEnabled: true,
@@ -30,7 +28,7 @@ window.onload = function () {
             },
         ],
     });
-    var chartMemoryTotal = new CanvasJS.Chart("memoryStats", {
+    var chartMemoryTotal = new CanvasJS.Chart("MemoryStats", {
         animationEnabled: true,
         theme: "dark2", //"light2", "dark1", "dark2"
         title: {
