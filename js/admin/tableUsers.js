@@ -14,7 +14,18 @@ $(document).ready(function ($) {
         var number_entries = tbl_data.length;
         var number_pages = Math.ceil(number_entries / entries_per_page);
 
-        if (current_page < 1 || current_page > number_pages) {
+        if (number_pages == 0) {
+            /* si pas de résult */
+            $.confirm({
+                title: "Attention",
+                content: "Pas de résultats",
+                buttons: {
+                    confirm: function () {
+                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                    },
+                },
+            });
+        } else if (current_page < 1 || current_page > number_pages) {
             /* si on dépasse des pages possibles */
             $.confirm({
                 title: "Attention",
