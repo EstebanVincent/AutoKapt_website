@@ -8,8 +8,8 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
     require_once __ROOT__.'includes/functions.inc.php';
 
-	$dataBPMTotal = BPMTotal2Chart(getBPMTotal($conn, $_SESSION["userId"])[0]);
-	$dataTempTotal = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[0]);
+	$dataMemoryTotal = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[0]);
+
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
@@ -28,9 +28,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
         <div class="col text-center">
             <section class="dark2 py-2 ms-5 me-2 rounded">
                 <h4>Statistics</h4>
-                <div id="BPMStats" style="height: 370px; width: 100%;"></div>
-                <div class="py-3"></div>
-                <div id="TempStats" style="height: 370px; width: 100%;"></div>
+                <div id="memoryStats" style="height: 370px; width: 100%;"></div>
             </section>
         </div>
         <div class="col text-center">
@@ -47,8 +45,8 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 
 <script>
 
-var dataBPMTotal = <?php echo json_encode($dataBPMTotal, JSON_NUMERIC_CHECK); ?>;
-var dataTempTotal = <?php echo json_encode($dataTempTotal, JSON_NUMERIC_CHECK); ?>;
+var dataMemoryTotal = <?php echo json_encode($dataMemoryTotal, JSON_NUMERIC_CHECK); ?>;
+
 
 </script>
 <script src="/AutoKapt/js/play/p.memory.js"></script>

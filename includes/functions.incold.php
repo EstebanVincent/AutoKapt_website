@@ -635,16 +635,16 @@ function getTempTotal($conn, $sessionId){
     return [resultToArray($resultTotal), resultToArray($resultPerso)];
 }
 /* on considere les températures de 35 à 40°C avec un écart de 0.25 entre chaque */
-function TempTotal2Chart($memory){
+function TempTotal2Chart($Temp){
     $array = array();
     /* on créer un array à 2 dimensions avec chaque ligne =  (maxTemp, pourcentage de test compris entre ce max et le précédent) */
     for ($i = 1; $i < 21; $i++) {
         $array[] = array(35 + 0.25*$i, 0);
     }
-    for ($i = 0; $i < count($memory); $i++) { /* on parcours les BPM donné */
+    for ($i = 0; $i < count($Temp); $i++) { /* on parcours les BPM donné */
         for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
-            if ($memory[$i]['x'] <= $array[$j][0]){
-                $array[$j][1] += (1/count($memory))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+            if ($Temp[$i]['x'] <= $array[$j][0]){
+                $array[$j][1] += (1/count($Temp))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
                 break;/* on sort du for j et on passe au i suivant */
             }
         }
@@ -793,9 +793,6 @@ function SoundTotal2Chart($Sound){
 /* $data est le résult d'une fonction history User */
 function moyenne($conn, $data){
     $size = count($data);
-    if ($size == 0){
-        return 'no data';
-    }
     $total = 0;
     for ($i = 0; $i < count($data); $i++) { /* on parcours les données */
         $total += $data[$i]['y'];
@@ -890,34 +887,6 @@ function time_elapsed_string($datetime, $after, $full = false) {
         return $string ? $after  . ' ' . implode(', ', $string) : "à l'instant";
     }
 }
-
-function IP_2_db($conn){
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $sql = "INSERT INTO bonus (bonusIp) VALUES (?);";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header("location: ". HTTP_SERVER ."home.php"));
-    }
-
-
-    mysqli_stmt_bind_param($stmt, "s", $ip);
-    mysqli_stmt_execute($stmt);
-}
-function got_trolled($conn){
-    $sql = "SELECT DISTINCT bonusIp FROM bonus;";
-    $stmt = mysqli_stmt_init($conn);
-
-    if(!mysqli_stmt_prepare($stmt, $sql)){
-        echo "error3";
-        exit();
-    } else {
-        mysqli_stmt_execute($stmt);
-    }
-
-    $result = mysqli_stmt_get_result($stmt);
-    $array = resultToArray($result);
-    echo count($array);
-}
 function getMemoryHistoryUser($conn, $sessionId){
     $sql = "SELECT testDate AS x, memoryRythm AS y FROM test INNER JOIN memory USING (testId) WHERE usersId=?;";
     $stmt = mysqli_stmt_init($conn);
@@ -961,16 +930,16 @@ function getMemoryTotal($conn, $sessionId){
     return [resultToArray($resultTotal), resultToArray($resultPerso)];
 }
 /* on considere les températures de 35 à 40°C avec un écart de 0.25 entre chaque */
-function MemoryTotal2Chart($rythm){
+function MemoryTotal2Chart($Temp){
     $array = array();
     /* on créer un array à 2 dimensions avec chaque ligne =  (maxTemp, pourcentage de test compris entre ce max et le précédent) */
-    for ($i = 1; $i < 100; $i++) {
-        $array[] = array(0 + $i, 0);
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(35 + 0.25*$i, 0);
     }
-    for ($i = 0; $i < count($rythm); $i++) { /* on parcours les BPM donné */
+    for ($i = 0; $i < count($Temp); $i++) { /* on parcours les BPM donné */
         for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
-            if ($rythm[$i]['x'] <= $array[$j][0]){
-                $array[$j][1] += (1/count($rythm))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+            if ($Temp[$i]['x'] <= $array[$j][0]){
+                $array[$j][1] += (1/count($Temp))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
                 break;/* on sort du for j et on passe au i suivant */
             }
         }
