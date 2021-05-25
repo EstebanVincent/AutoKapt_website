@@ -5,10 +5,10 @@
 <?php
     require_once __ROOT__.'includes/functions.inc.php';
 
-	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
+	$dataMemory = getMemoryHistoryUser($conn, $_SESSION["userId"]);
 
-	$dataVisualTotal = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[0]);
-	$dataVisualPerso = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[1]);
+	$dataMemoryTotal = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[0]);
+	$dataMemoryPerso = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[1]);
 
 	$dataSound = getSoundHistoryUser($conn, $_SESSION["userId"]);
 
