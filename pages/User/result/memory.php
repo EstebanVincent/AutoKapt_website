@@ -1,57 +1,64 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
-    <div id = "imagePrincipale">
-		<h1>Infinite Mesures</h1>
-		<div id = "firstLine"></div>
-		<h3>Mesure de la mémoire</h3>
-	</div>
-
-	</header> 
-<body>
-<section>
-	<h2>Mesure de la capacité du patient à mémoriser une suite de notes</h2>
-	<div class="graphs">
-		<div id="UserVisual" style="height: 370px; width: 100%;"></div>
-		<div id="VisualStats" style="height: 370px; width: 100%;"></div>
-	</div>
-</section>
-
-<!-- <section>
-	<h2>Mesure de la Temepérature</h2>
-	<div class="graphs">
-		<div id="UserTemp" style="height: 370px; width: 100%;"></div>
-		<div id="TempStats" style="height: 370px; width: 100%;"></div>
-	</div>
-</section> -->
-	
-	
-    <?php
+<!-- on accede à la base de donnée pour récupérer les info
+On calcul les % en réunissant par tranche de résultats
+on les transforme en tableau lisible par canvasJS une fois mis en json -->
+<?php
     require_once __ROOT__.'includes/functions.inc.php';
 
-	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
+	$dataMemory = getMemoryHistoryUser($conn, $_SESSION["userId"]);
 
-	$dataVisualTotal = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[0]);
-	$dataVisualPerso = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[1]);
+	$dataMemoryTotal = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[0]);
+	$dataRythmPerso = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[1]);
 
+	$tempMemory = moyenne($conn, $dataMemory);
+	if ($tempMemory == 'no data'){
+		$moyMemory = 'NA';
+	} else {
+		$moyMemory = (string)$tempMemory;
+	}
+?>
 
-	/* $dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
-
-	$dataTempTotal = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[0]);
-	$dataTempPerso = TempTotal2Chart(getTempTotal($conn, $_SESSION["userId"])[1]); */
-
-
-    ?>
-</body>
+<div class="container-fluid bg-secondary text-white-50">
+	<div class="py-3"></div>
+	<section class="dark2 py-2 mx-5 rounded">
+		<div class="row">
+			<div class="col text-center">
+				<h2>Memory</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<h2>Memory</h2>
+				<h5 class="text-center text-danger"><?php echo $moyMemory?></h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col text-center">
+				<a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
+			</div>
+		</div>
+	</section>
+	<div class="py-3"></div>
+	<section class="dark2 py-2 mx-5 rounded">
+		<h2>Mesure des Memory</h2>
+		<div class="graphs">
+			<div id="UserMemory" style="height: 370px; width: 100%;"></div>
+			<div id="MemoryStats" style="height: 370px; width: 100%;"></div>
+		</div>
+	</section>
+	<div class="py-3"></div>
+</div>
+	
 <script>
-var dataVisual = <?php echo json_encode($dataVisual, JSON_NUMERIC_CHECK); ?>;
-var dataVisualTotal = <?php echo json_encode($dataVisualTotal, JSON_NUMERIC_CHECK); ?>;
-var dataVisualPerso = <?php echo json_encode($dataVisualPerso, JSON_NUMERIC_CHECK); ?>;
-
+var $dataMemory = <?php echo json_encode($dataMemory, JSON_NUMERIC_CHECK); ?>;
+var dataMemoryTotal = <?php echo json_encode($dataMemoryTotal, JSON_NUMERIC_CHECK); ?>;
+var dataMemoryPerso = <?php echo json_encode($dataMemoryPerso, JSON_NUMERIC_CHECK); ?>;
 
 
 </script>
-<script src="/AutoKapt/js/reflex.js"></script>
+<script src="/AutoKapt/js/result/memory.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');
