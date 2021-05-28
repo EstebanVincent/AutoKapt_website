@@ -9,7 +9,7 @@ if (isset($_POST["createNewPassword-submit"])){
     $passwordRepeat = $_POST["password-repeat"];
 
 
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
     if (!pwdMatch($password, $passwordRepeat)){
         /* l'url précédent, on concerve ainsi les tokens */

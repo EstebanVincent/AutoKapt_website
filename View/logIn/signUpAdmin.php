@@ -8,7 +8,7 @@
     </div>
     <div class="right">
         <h4>Registration</h4>
-        <div class="back"><a href="/AutoKapt/pages/logIn/logIn.php">Already have an account?</a></div>
+        <div class="back"><a href="/AutoKapt/View/logIn/logIn.php">Already have an account?</a></div>
         <form action="/AutoKapt/includes/logIn/signUp.inc.php" method="POST">
             <div class="element">
                 <input type="text" name="username" required>

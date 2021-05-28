@@ -3,7 +3,7 @@
 ?>
 
 <?php
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
 	$dataMemory = getMemoryHistoryUser($conn, $_SESSION["userId"]);
 
@@ -40,7 +40,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
+				<a href="/AutoKapt/View/User/play/p.memory.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
 			</div>
 		</div>
 	</section>

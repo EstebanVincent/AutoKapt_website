@@ -1,6 +1,6 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/head.php');
-  require_once __ROOT__.'includes/functions.inc.php';
+  require_once __ROOT__.'Model/functions.inc.php';
 ?>
 <body>
     <div id = "backgroundLogIn">

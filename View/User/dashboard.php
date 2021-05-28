@@ -1,6 +1,6 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
     /* stress data */
     $dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
     $dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
@@ -77,22 +77,22 @@
                 <tbody>
                     <tr class="text-white-50">
                         <td><h5>Stress</h5></td>
-                        <td><a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/stress.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/View/User/play/p.stress.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/View/User/result/stress.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td><?php echo $moyBPM . ' BPM | '. $moyTemp ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-reflex'] ?></h5></td>
-                        <td><a href="/AutoKapt/pages/User/play/p.reflex.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/reflex.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/View/User/play/p.reflex.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/View/User/result/reflex.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td><?php echo $moyVisual . ' | '. $moySound ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-memory'] ?></h5></td>
-                        <td><a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/View/User/play/p.memory.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/View/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td><?php echo $moyMemory ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-hearing'] ?></h5></td>
-                        <td><a href="/AutoKapt/pages/User/play/p.audition.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
+                        <td><a href="/AutoKapt/View/User/play/p.audition.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/View/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
                         <td>a uncomment qd sofyane a fini<?php /* echo $moyAudition */ ?></td>
                     </tr>
                 </tbody>

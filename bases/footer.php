@@ -71,7 +71,7 @@
                             <a class="btn btn-outline-secondary btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
 
                             <!-- Youtube -->
-                            <a class="btn btn-outline-secondary btn-floating m-1" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="window.open('/AutoKapt/pages/bonus/goldenBook.php');" role="button"><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-secondary btn-floating m-1" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" onclick="window.open('/AutoKapt/View/bonus/goldenBook.php');" role="button"><i class="fab fa-youtube"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -80,7 +80,7 @@
                     <ul class="list-unstyled">
                         <li>
                             <h5><?php echo $lang['footer-faq'] ?></h5>
-                            <a href="/AutoKapt/pages/faq.php" class="text-white-50">FAQ</a>
+                            <a href="/AutoKapt/View/faq.php" class="text-white-50">FAQ</a>
                         </li>
                         <li>
                             <h5>CONTACT</h5>

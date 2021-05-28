@@ -21,9 +21,9 @@
                     <span></span>
                     <label>Password</label>
                 </div>
-                <div class="forgot"><a href="/AutoKapt/pages/logIn/passwordRecovery.php">Forgot password?</a></div>
+                <div class="forgot"><a href="/AutoKapt/View/logIn/passwordRecovery.php">Forgot password?</a></div>
                 <input type="submit" name="logIn-submit" value="Login">
-                <div class="create"><a href="/AutoKapt/pages/logIn/signUpAdmin.php">Create Account</a></div>
+                <div class="create"><a href="/AutoKapt/View/logIn/signUpAdmin.php">Create Account</a></div>
             </form>
 
         <?php
