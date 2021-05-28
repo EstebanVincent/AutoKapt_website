@@ -1,11 +1,10 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/head.php');
 ?>
-<body>
-    <div id = "backgroundLogIn">
+<body id="backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, blanditiis.</p>
-    </div>
+   
     <div class="right">
         <h4>Forgot your password?</h4>
         <p id="please">Please enter your account's registered email adress and we'll send you a recovery email.</p>

@@ -373,13 +373,13 @@ table {
 #backgroundLogIn {
     height: 100%;
     width: 100%;
-    background: url(/AutoKapt/images/electrocardiogram.jpg);
+    background: #32373a;
 }
 
 #logInContainer {
-    border: 4px gray;
+    border: 4px solid black;
     border-radius: 15px;
-    width: 75%;
+    width: 50%;
     height: 40%;
     background-color: whitesmoke;
     margin-left: auto;
@@ -388,6 +388,32 @@ table {
     margin-bottom: auto;
 }
 
-.center {
-    align-items: center;
+#pageContainer{
+    border: 30px solid black;
+    width:100% ;
+    height: 100vh;
+    justify-content: center;
+}
+
+.aligne {
+    margin-left:10%;
+}
+
+.verticalAlignment{
+    margin-top: 50vh;
+}
+
+#logInButton{
+    align-self: center;
+    outline: none;
+    width: 100px;
+    border-radius: 8px;
+    background-color: rgb(82, 82, 255);
+    color: white;
+    font-weight: 700;
+}
+a:link{
+    color: blue;
+    font-weight: 700;
+    text-decoration: none;
 }
