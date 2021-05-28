@@ -1,5 +1,59 @@
 <?php
-  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+    require_once __ROOT__.'includes/functions.inc.php';
+    /* stress data */
+    $dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
+    $dataTemp = getTempHistoryUser($conn, $_SESSION["userId"]);
+
+    $tempBPM = moyenne($conn, $dataBPM);
+	if ($tempBPM == 'no data'){
+		$moyBPM = 'NA';
+	} else {
+		$moyBPM = (string)$tempBPM;
+	}
+    $TempTemp = moyenne($conn, $dataTemp);
+    if ($TempTemp == 'no data'){
+        $moyTemp = 'NA';
+    } else {
+        $moyTemp = (string)$TempTemp.' °C';
+    }
+
+    /* Reflex data */
+    $dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
+    $dataSound = getSoundHistoryUser($conn, $_SESSION["userId"]);
+
+    $tempVisual = moyenne($conn, $dataVisual);
+	if ($tempVisual == 'no data'){
+		$moyVisual = 'NA';
+	} else {
+		$moyVisual = (string)$tempVisual.' ms';
+	}
+	$tempSound = moyenne($conn, $dataSound);
+	if ($tempSound == 'no data'){
+		$moySound = 'NA';
+	} else {
+		$moySound = (string)$tempSound.' ms';
+	}
+
+    /* memory data */
+    $dataMemory = getMemoryHistoryUser($conn, $_SESSION["userId"]);
+
+    $tempMemory = moyenne($conn, $dataMemory);
+	if ($tempMemory == 'no data'){
+		$moyMemory = 'NA';
+	} else {
+		$moyMemory = (string)$tempMemory;
+	}
+
+    /* audition data */
+    /* $dataAudition = getAuditionHistoryUser($conn, $_SESSION["userId"]);
+
+    $tempAudition = moyenne($conn, $dataAudition);
+	if ($tempAudition == 'no data'){
+		$moyAudition = 'NA';
+	} else {
+		$moyAudition = (string)$tempAudition;
+	} */
 ?>
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
@@ -24,22 +78,22 @@
                     <tr class="text-white-50">
                         <td><h5>Stress</h5></td>
                         <td><a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/stress.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
-                        <td>sql a faire</td>
+                        <td><?php echo $moyBPM . ' BPM | '. $moyTemp ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-reflex'] ?></h5></td>
                         <td><a href="/AutoKapt/pages/User/play/p.reflex.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/reflex.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
-                        <td>sql a faire</td>
+                        <td><?php echo $moyVisual . ' | '. $moySound ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-memory'] ?></h5></td>
                         <td><a href="/AutoKapt/pages/User/play/p.memory.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/memory.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
-                        <td>sql a faire</td>
+                        <td><?php echo $moyMemory ?></td>
                     </tr>
                     <tr class="text-white-50">
                         <td><h5><?php echo $lang['dashboard-hearing'] ?></h5></td>
                         <td><a href="/AutoKapt/pages/User/play/p.audition.php"><button class="btn btn-danger"><i class="far fa-play-circle"></i> <?php echo $lang['play'] ?></button></a><a href="/AutoKapt/pages/User/result/audition.php"><button class="btn btn-danger"><i class="fas fa-chart-line"></i> Stats</button></a></td>
-                        <td>sql a faire</td>
+                        <td>a uncomment qd sofyane a fini<?php /* echo $moyAudition */ ?></td>
                     </tr>
                 </tbody>
             </table>
@@ -57,10 +111,7 @@
                 </thead>
                 <tbody>
 <?php
-require_once __ROOT__.'includes/functions.inc.php';
-
                     showActivity($conn, $_SESSION['userId'])
-
 ?>
                 </tbody>
             </table>

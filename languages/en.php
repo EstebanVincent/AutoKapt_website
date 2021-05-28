@@ -13,7 +13,7 @@
         
         /* dashboard */
         "dashboard-title" => "Dashboard",
-        "dashboard-p" => "c'est du en",
+        "dashboard-p" => "It's in english",
         "dashboard-reflex" => "Reflex",
         "dashboard-memory" => "Memory",
         "dashboard-hearing" => "Hearing",
@@ -34,7 +34,7 @@
         
         /* footer */
         "footer-title1" => "About",
-        "footer-p" => "C'est du en",
+        "footer-p" => "It's in english",
         "footer-title2" => "Media",
         "footer-title3" => "Need Help?",
         "footer-title4" => "Legal Section",

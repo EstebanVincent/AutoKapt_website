@@ -826,16 +826,16 @@ function showActivity($conn, $userId){
     for ($i = 0; $i < count($array); $i++) {
         switch ($array[$i]['testType']) {
             case 0:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-brain"></i></a> Stress';
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-stethoscope"></i></a> Stress';
                 break;
             case 1:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-reflex"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-tachometer-alt"></i></a> '. $lang["dashboard-reflex"];
                 break;
             case 2:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-memory"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-brain"></i></a> '. $lang["dashboard-memory"];
                 break;
             case 3:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
                 break;
         }
     }
