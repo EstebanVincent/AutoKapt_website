@@ -6,9 +6,9 @@
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
-	$dataAuditionTotal = auditionTotal2Chart(getauditionTotal($conn, $_SESSION["userId"])[0]);
+	$dataAuditionTotal = AuditionTotal2Chart(getAuditionTotal($conn, $_SESSION["userId"])[0]);
 	
 ?>
 

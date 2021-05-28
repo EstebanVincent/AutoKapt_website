@@ -982,3 +982,65 @@ function MemoryTotal2Chart($rythm){
     }
     return $arrayFinal;
 }
+
+function getAuditionscore($conn, $sessionId){
+    $sql = "SELECT testDate AS x, auditionScore AS y FROM test INNER JOIN audition USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+function getAuditionTotal($conn, $sessionId){
+    $sql = "SELECT auditionScore AS x FROM audition;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+    $resultTotal = mysqli_stmt_get_result($stmt);
+
+    $sql = "SELECT auditionScore AS x FROM test INNER JOIN audition USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $resultPerso = mysqli_stmt_get_result($stmt);
+
+    return [resultToArray($resultTotal), resultToArray($resultPerso)];
+}
+function auditionTotal2Chart($Audition){
+    $array = array();
+    /* on créer un array à 2 dimensions avec chaque ligne =  (maxVisual en ms, pourcentage de test compris entre ce max et le précédent) */
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(0 + 5*$i, 0);
+    }
+    for ($i = 0; $i < count($Audition); $i++) { /* on parcours les BPM donné */
+        for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
+            if ($Audition[$i]['x'] <= $array[$j][0]){/* si le ième bpm est inf ou égal au bpmMax j */
+                $array[$j][1] += (1/count($Audition))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+                break;/* on sort du for j et on passe au i suivant */
+            }
+        }
+    }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
+}
