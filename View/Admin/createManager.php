@@ -1,7 +1,5 @@
 <?php
-  $pathHeader = $_SERVER['DOCUMENT_ROOT'];
-  $pathHeader .= '/AutoKapt/bases/header.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-  include_once($pathHeader);
+  require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
 ?>
 
     <div id = "backgroundLogIn">
@@ -18,22 +16,9 @@
             </div>
             <input type="submit" name="createManager-submit" value="Create Account">
         </form>
-    
-
-    <?php
-        $pathErrors = $_SERVER['DOCUMENT_ROOT'];
-        $pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-        include_once($pathErrors);
-    ?>
-    
     </div>
 
 <?php
-$pathErrors = $_SERVER['DOCUMENT_ROOT'];
-$pathErrors .= '/AutoKapt/includes/errors.inc.php'; /* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathErrors);
-
-$pathFooter = $_SERVER['DOCUMENT_ROOT'];
-$pathFooter .= '/AutoKapt/bases/footer.php';/* psq le / va voir la vrai root d'ou cette méthode */
-include_once($pathFooter);
+require_once(__ROOT__.'includes/errors.inc.php');
+require_once(__ROOT__.'bases/footer.php');
 ?>
