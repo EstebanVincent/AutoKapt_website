@@ -36,7 +36,7 @@
 	<section class="dark2 py-2 mx-5 rounded">
 		<div class="row">
 			<div class="col text-center">
-				<h2>Visual</h2>
+				<h2>Stats</h2>
 			</div>
 		</div>
 		<div class="row">
