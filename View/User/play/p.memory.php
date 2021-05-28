@@ -6,10 +6,10 @@
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
-	$dataVisualTotal = VisualTotal2Chart(getVisualTotal($conn, $_SESSION["userId"])[0]);
-	$dataSoundTotal = SoundTotal2Chart(getSoundTotal($conn, $_SESSION["userId"])[0]);
+	$dataMemoryTotal = MemoryTotal2Chart(getMemoryTotal($conn, $_SESSION["userId"])[0]);
+
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
@@ -17,9 +17,9 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
     <a class="unstyle" href="#"><!-- mettre le lien qui start le code énergia -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
-            <h2>Reflex test</h2>
-            <p class="my-0">Look at the LED and put the headset on</p>
-            <p class="my-0">Press the button as soon as you have a stimuli.</p>
+            <h2>Memory Test</h2>
+            <p class="my-0">You will hear a sound with a certain rythm.</p>
+            <p class="my-0">Try to repeat the same rythm afterwards</p>
             <p class="my-0 pb-5">Click anywhere to start.</p>
         </section>
     </a>
@@ -28,9 +28,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
         <div class="col text-center">
             <section class="dark2 py-2 ms-5 me-2 rounded">
                 <h4>Statistics</h4>
-                <div id="VisualStats" style="height: 370px; width: 100%;"></div>
-                <div class="py-3"></div>
-                <div id="SoundStats" style="height: 370px; width: 100%;"></div>
+                <div id="memoryStats" style="height: 370px; width: 100%;"></div>
             </section>
         </div>
         <div class="col text-center">
@@ -47,11 +45,11 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 
 <script>
 
-var dataVisualTotal = <?php echo json_encode($dataVisualTotal, JSON_NUMERIC_CHECK); ?>;
-var dataSoundTotal = <?php echo json_encode($dataSoundTotal, JSON_NUMERIC_CHECK); ?>;
+var dataMemoryTotal = <?php echo json_encode($dataMemoryTotal, JSON_NUMERIC_CHECK); ?>;
+
 
 </script>
-<script src="/AutoKapt/js/play/p.reflex.js"></script>
+<script src="/AutoKapt/js/play/p.memory.js"></script>
 
 <?php
 require_once(__ROOT__.'includes/errors.inc.php');

@@ -1,6 +1,6 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
-  require_once(__ROOT__.'includes/functions.inc.php');
+  require_once(__ROOT__.'Model/functions.inc.php');
   IP_2_db($conn);
 ?>
 <div class="container-fluid bg-secondary text-white-50">

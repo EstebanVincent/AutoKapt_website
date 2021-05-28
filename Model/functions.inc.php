@@ -51,7 +51,7 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
     $sql = "INSERT INTO users (usersUsername, usersEmail, usersPassword, usersGender, usersBirth, usersAccess) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
-        die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php/?error=stmtfailed"));
+        die(header("location: ". HTTP_SERVER ."View/logIn/signUp.php/?error=stmtfailed"));
     }
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -69,13 +69,13 @@ function createUser($conn, $username, $email, $password, $gender, $birth, $acces
 function logInUser($conn, $username, $password){
     $usernameExists = usernameExists($conn, $username, $username);/* 2 fois car comme ça check pas mail */
     if($usernameExists === false){
-        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wronglogin"));
+        die(header("location:". HTTP_SERVER ."View/logIn/logIn.php/?error=wronglogin"));
     }
     $passwordHashed =  $usernameExists["usersPassword"];
     $checkPassword = password_verify($password, $passwordHashed);
 
     if (!$checkPassword){
-        die(header("location:". HTTP_SERVER ."pages/logIn/logIn.php/?error=wrongpassword"));
+        die(header("location:". HTTP_SERVER ."View/logIn/logIn.php/?error=wrongpassword"));
     } else if ($checkPassword === true){
         $_SESSION["userId"] = $usernameExists["usersId"];
         $_SESSION["userUsername"] = $usernameExists["usersUsername"];
@@ -87,7 +87,7 @@ function logInUser($conn, $username, $password){
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 30 min*/
 function passwordRecoveryEmail($conn, $selector, $token){
-    $url = HTTP_SERVER."pages/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."View/logIn/createNewPassword.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 1800;
 
@@ -133,7 +133,7 @@ function passwordRecoveryEmail($conn, $selector, $token){
     $headers .= "Content-type: text/html\r\n";
 
     mail($to, $subject, $message, $headers);
-    header("location: ". HTTP_SERVER ."pages/logIn/passwordRecovery.php?reset=success");
+    header("location: ". HTTP_SERVER ."View/logIn/passwordRecovery.php?reset=success");
 }
 /* correspond au forget password en cliquant sur le lien du mail, donc utilisation de token pour eviter le hack, utilise les bdd users et pwdreset*/
 function changePasswordFromEmail($conn, $selector, $validator, $password, $passwordRepeat){
@@ -209,7 +209,7 @@ function changePasswordFromEmail($conn, $selector, $validator, $password, $passw
                             } else {
                                 mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                                 mysqli_stmt_execute($stmt);
-                                header("location: ". HTTP_SERVER ."pages/logIn/logIn.php?newPassword=passwordupdated");
+                                header("location: ". HTTP_SERVER ."View/logIn/logIn.php?newPassword=passwordupdated");
                             }
 
                         }
@@ -241,7 +241,7 @@ function changePassword($conn, $currentPassword, $newPassword){
     $checkPassword = password_verify($currentPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?error=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."View/profile/changePassword.php/?error=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersPassword=? WHERE usersId=?;";
 
@@ -255,7 +255,7 @@ function changePassword($conn, $currentPassword, $newPassword){
         mysqli_stmt_bind_param($stmt, "si", $newPasswordHashed, $sessionId);
         mysqli_stmt_execute($stmt);  
 
-        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updatepasswordsuccess"));
+        die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?change=updatepasswordsuccess"));
     }
 }
 /* same et on change la valeur de l'username de la session en plus */
@@ -292,7 +292,7 @@ function changeUsername($conn, $verifyPassword, $newUsername) {
         mysqli_stmt_execute($stmt);  
 
         $_SESSION["userUsername"] = $newUsername;
-        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?change=updateusernamesuccess"));
+        die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?change=updateusernamesuccess"));
     }
 }
 /* same et peut être faire une confirmation par mail jsp ca a l'air compliqué */
@@ -315,7 +315,7 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
     $checkPassword = password_verify($verifyPassword, $currentPasswordHashed);
 
     if (!$checkPassword){
-        die(header("location: ". HTTP_SERVER ."pages/profile/changePassword.php/?change=wrongpassword"));
+        die(header("location: ". HTTP_SERVER ."View/profile/changePassword.php/?change=wrongpassword"));
     } else if ($checkPassword === true) {
         $sql = "UPDATE users SET usersEmail=? WHERE usersId=?;";
 
@@ -329,13 +329,13 @@ function changeEmail($conn, $verifyPassword, $newEmail) {
         $a = mysqli_stmt_execute($stmt);  
         
 
-        die(header("location: ". HTTP_SERVER ."pages/profile/myProfile.php/?error=updatemailsuccess"));
+        die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?error=updatemailsuccess"));
     }
 }
 
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createUserEmail($conn, $selector, $token){
-    $url = HTTP_SERVER."pages/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."View/User/signUpUser.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
 
@@ -385,7 +385,7 @@ function createUserEmail($conn, $selector, $token){
 }
 /* send le mail a l'adresse donné, les token sont concerver dans la bbd pwdreset avec un temps d'expiration de 1 semaine*/
 function createManagerEmail($conn, $selector, $token){
-    $url = HTTP_SERVER."pages/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = HTTP_SERVER."View/Manager/signUpManager.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $expires = date("U") + 604800; /* 1 semaine en secondes */
 
@@ -826,16 +826,16 @@ function showActivity($conn, $userId){
     for ($i = 0; $i < count($array); $i++) {
         switch ($array[$i]['testType']) {
             case 0:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.stress.php"><i class="fas fa-brain"></i></a> Stress';
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/View/User/play/p.stress.php"><i class="fas fa-stethoscope"></i></a> Stress';
                 break;
             case 1:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-reflex"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/View/User/play/p.reflex.php"><i class="fas fa-tachometer-alt"></i></a> '. $lang["dashboard-reflex"];
                 break;
             case 2:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-memory"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/View/User/play/p.reflex.php"><i class="fas fa-brain"></i></a> '. $lang["dashboard-memory"];
                 break;
             case 3:
-                $array[$i]['testType'] = '<a href="/AutoKapt/pages/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
+                $array[$i]['testType'] = '<a class="link-secondary" href="/AutoKapt/View/User/play/p.reflex.php"><i class="fas fa-music"></i></a> '. $lang["dashboard-hearing"];
                 break;
         }
     }
@@ -971,6 +971,68 @@ function MemoryTotal2Chart($rythm){
         for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
             if ($rythm[$i]['x'] <= $array[$j][0]){
                 $array[$j][1] += (1/count($rythm))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
+                break;/* on sort du for j et on passe au i suivant */
+            }
+        }
+    }
+    /*on donne des keys a l'array pour le graphe  */
+    $arrayFinal = array();
+    for ($i = 0; $i < 20; $i++) {
+        $arrayFinal[] = array("x" => $array[$i][0],  "y" => $array[$i][1]);
+    }
+    return $arrayFinal;
+}
+
+function getAuditionscore($conn, $sessionId){
+    $sql = "SELECT testDate AS x, auditionScore AS y FROM test INNER JOIN audition USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $results = mysqli_stmt_get_result($stmt);
+
+    return resultToArray($results);
+}
+function getAuditionTotal($conn, $sessionId){
+    $sql = "SELECT auditionScore AS x FROM audition;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_execute($stmt);
+    }
+    $resultTotal = mysqli_stmt_get_result($stmt);
+
+    $sql = "SELECT auditionScore AS x FROM test INNER JOIN audition USING (testId) WHERE usersId=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error3";
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $resultPerso = mysqli_stmt_get_result($stmt);
+
+    return [resultToArray($resultTotal), resultToArray($resultPerso)];
+}
+function auditionTotal2Chart($Audition){
+    $array = array();
+    /* on créer un array à 2 dimensions avec chaque ligne =  (maxVisual en ms, pourcentage de test compris entre ce max et le précédent) */
+    for ($i = 1; $i < 21; $i++) {
+        $array[] = array(0 + 5*$i, 0);
+    }
+    for ($i = 0; $i < count($Audition); $i++) { /* on parcours les BPM donné */
+        for ($j = 0; $j < count($array); $j++){/* on parcours les maxBPM */
+            if ($Audition[$i]['x'] <= $array[$j][0]){/* si le ième bpm est inf ou égal au bpmMax j */
+                $array[$j][1] += (1/count($Audition))*100;/* le pourcentage de test de j augmente de 1/nbTotal */
                 break;/* on sort du for j et on passe au i suivant */
             }
         }

@@ -12,27 +12,27 @@ $(document).ready(function ($) {
         var current_page_min_entry = (current_page - 1) * entries_per_page;
         var current_page_max_entry = current_page * entries_per_page - 1;
         var number_entries = tbl_data.length;
-        var number_pages = Math.ceil(number_entries / entries_per_page);
+        var number_View = Math.ceil(number_entries / entries_per_page);
 
-        if (number_pages == 0) {
+        if (number_View == 0) {
             /* si pas de résult */
             $.confirm({
                 title: "Attention",
                 content: "Pas de résultats",
                 buttons: {
                     confirm: function () {
-                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                        window.location.replace(start + "/AutoKapt/View/Admin/modifyUsers.php?page=1&entries=20");
                     },
                 },
             });
-        } else if (current_page < 1 || current_page > number_pages) {
-            /* si on dépasse des pages possibles */
+        } else if (current_page < 1 || current_page > number_View) {
+            /* si on dépasse des View possibles */
             $.confirm({
                 title: "Attention",
                 content: "Merci de ne pas toucher à l'url",
                 buttons: {
                     confirm: function () {
-                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                        window.location.replace(start + "/AutoKapt/View/Admin/modifyUsers.php?page=1&entries=20");
                     },
                 },
             });
@@ -43,7 +43,7 @@ $(document).ready(function ($) {
                 content: "Merci de ne pas toucher à l'url",
                 buttons: {
                     confirm: function () {
-                        window.location.replace(start + "/AutoKapt/pages/Admin/modifyUsers.php?page=1&entries=20");
+                        window.location.replace(start + "/AutoKapt/View/Admin/modifyUsers.php?page=1&entries=20");
                     },
                 },
             });
@@ -161,8 +161,8 @@ $(document).ready(function ($) {
             tbl += "</div>";
             tbl += '<div class="col-2"></div>';
             tbl += '<div class="col-6">';
-            /* navigation entre pages uniquement si plus de entries_per_page résults */
-            if (number_pages > 1) {
+            /* navigation entre View uniquement si plus de entries_per_page résults */
+            if (number_View > 1) {
                 tbl += '<div class="btn-toolbar" role="toolbar">';
                 /* start */
                 tbl += '<div class="btn-group me-2" role="group">';
@@ -209,9 +209,9 @@ $(document).ready(function ($) {
                 tbl += '<div class="btn-group me-2" role="group">';
                 tbl +=
                     '<button id="btn-end" type="button" class="btn btn-dark"><a class="link-light text-decoration-none" href="' +
-                    change_page(number_pages) +
+                    change_page(number_View) +
                     '">' +
-                    number_pages +
+                    number_View +
                     "</a></button>";
                 tbl +=
                     '<button id="btn-next" type="button" class="btn btn-dark"><a class="link-light" href="' +
@@ -230,7 +230,7 @@ $(document).ready(function ($) {
         $(document).find(".btn_cancel").hide();
         $(document).find(".btn_delete").hide();
 
-        if (parseInt(number_pages, 10) > 5) {
+        if (parseInt(number_View, 10) > 5) {
             if (current_page == "1") {
                 $(document).find("#btn-previous").addClass("disabled");
                 $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
@@ -251,19 +251,19 @@ $(document).ready(function ($) {
             if (current_page == "4") {
                 $(document).find("#btn-point1").hide();
             }
-            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 3) {
+            if (parseInt(current_page, 10) == parseInt(number_View, 10) - 3) {
                 $(document).find("#btn-point2").hide();
             }
-            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 2) {
+            if (parseInt(current_page, 10) == parseInt(number_View, 10) - 2) {
                 $(document).find("#btn-add2").hide();
                 $(document).find("#btn-point2").hide();
             }
-            if (parseInt(current_page, 10) == parseInt(number_pages, 10) - 1) {
+            if (parseInt(current_page, 10) == parseInt(number_View, 10) - 1) {
                 $(document).find("#btn-add1").hide();
                 $(document).find("#btn-add2").hide();
                 $(document).find("#btn-point2").hide();
             }
-            if (current_page == number_pages) {
+            if (current_page == number_View) {
                 $(document).find("#btn-next").addClass("disabled");
                 $(document).find("#btn-end").addClass("disabled btn-primary").removeClass("btn-dark");
                 $(document).find("#btn-add2").hide();
@@ -271,8 +271,8 @@ $(document).ready(function ($) {
                 $(document).find("#btn-current").hide();
                 $(document).find("#btn-point2").hide();
             }
-        } else if (number_pages == "5") {
-            /* 5 pages */
+        } else if (number_View == "5") {
+            /* 5 View */
             if (current_page == "1") {
                 $(document).find("#btn-previous").addClass("disabled");
                 $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
@@ -308,8 +308,8 @@ $(document).ready(function ($) {
                 $(document).find("#btn-current").hide();
                 $(document).find("#btn-point2").hide();
             }
-        } else if (number_pages == "4") {
-            /* 4 pages */
+        } else if (number_View == "4") {
+            /* 4 View */
             if (current_page == "1") {
                 $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
                 $(document).find("#btn-previous").addClass("disabled");
@@ -343,8 +343,8 @@ $(document).ready(function ($) {
                 $(document).find("#btn-point1").hide();
                 $(document).find("#btn-point2").hide();
             }
-        } else if (number_pages == "3") {
-            /* 3 pages */
+        } else if (number_View == "3") {
+            /* 3 View */
             if (current_page == "1") {
                 $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
                 $(document).find("#btn-previous").addClass("disabled");
@@ -366,7 +366,7 @@ $(document).ready(function ($) {
             $(document).find("#btn-point1").hide();
             $(document).find("#btn-point2").hide();
         } else {
-            /* 2 pages */
+            /* 2 View */
             if (current_page == "1") {
                 $(document).find("#btn-start").addClass("disabled btn-primary").removeClass("btn-dark");
                 $(document).find("#btn-previous").addClass("disabled");

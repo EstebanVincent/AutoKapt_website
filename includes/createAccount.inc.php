@@ -1,6 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
-require_once __ROOT__.'includes/functions.inc.php';
+require_once __ROOT__.'Model/functions.inc.php';
 
 if(isset($_POST["createManager-submit"])){
     $selector = bin2hex(random_bytes(8));

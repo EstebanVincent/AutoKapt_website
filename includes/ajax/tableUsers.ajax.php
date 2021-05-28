@@ -1,6 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
-require_once __ROOT__.'includes/functions.inc.php';
+require_once __ROOT__.'Model/functions.inc.php';
 
 //--->get all usernames > start
 if(isset($_GET['call_type']) && $_GET['call_type'] =="get_usernames")

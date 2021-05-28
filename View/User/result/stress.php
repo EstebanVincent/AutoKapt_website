@@ -5,7 +5,7 @@
 On calcul les % en réunissant par tranche de résultats
 on les transforme en tableau lisible par canvasJS une fois mis en json -->
 <?php
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
 	$dataBPM = getBPMHistoryUser($conn, $_SESSION["userId"]);
 
@@ -51,7 +51,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a href="/AutoKapt/pages/User/play/p.stress.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i><?php echo $lang['stress-play'] ?></button></a>
+				<a href="/AutoKapt/View/User/play/p.stress.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i><?php echo $lang['stress-play'] ?></button></a>
 			</div>
 		</div>
 	</section>

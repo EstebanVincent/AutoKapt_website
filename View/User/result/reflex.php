@@ -3,7 +3,7 @@
 ?>
 
 <?php
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
 	$dataVisual = getVisualHistoryUser($conn, $_SESSION["userId"]);
 
@@ -36,7 +36,7 @@
 	<section class="dark2 py-2 mx-5 rounded">
 		<div class="row">
 			<div class="col text-center">
-				<h2>Visual</h2>
+				<h2>Stats</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -51,7 +51,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<a href="/AutoKapt/pages/User/play/p.reflex.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
+				<a href="/AutoKapt/View/User/play/p.reflex.php"><button class="btn btn-secondary"><i class="far fa-play-circle"></i> Play</button></a>
 			</div>
 		</div>
 	</section>

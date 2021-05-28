@@ -1,8 +1,12 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
 /* on enleve la query avant de rediriger afin d'éviter d'avoir plusieurs query */
-$bits = explode('?',$_SERVER['HTTP_REFERER']);
-$redirect = $bits[0];
-echo $redirect;
+$url = $_SERVER['HTTP_REFERER'];
+$bool = strpos($url,'?');
 
-die(header("location: " . $redirect . "?lang=fr"));
+if($bool){
+    die(header("location: " . $url . "&lang=fr"));
+} else {
+    die(header("location: " . $url . "?lang=fr"));
+}
 ?>

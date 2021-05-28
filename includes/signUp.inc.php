@@ -1,7 +1,7 @@
 <?php
 
 require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/config.php');
-require_once __ROOT__.'includes/functions.inc.php';
+require_once __ROOT__.'Model/functions.inc.php';
 
 if (isset($_POST["signUpManager-submit"])) {
     $selector = $_POST["selector"];
@@ -57,5 +57,5 @@ else if (isset($_POST["signUpUser-submit"])) {
   createUser($conn, $username, $email, $password, $gender, $birth, 2);
 }
 else {
-    die(header("location: ". HTTP_SERVER ."pages/logIn/signUp.php"));
+    die(header("location: ". HTTP_SERVER ."View/logIn/signUp.php"));
 }

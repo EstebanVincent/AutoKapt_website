@@ -6,7 +6,7 @@ if(isset($_POST["password-recovery-submit"])){
     $token = random_bytes(32);
 
 
-    require_once __ROOT__.'includes/functions.inc.php';
+    require_once __ROOT__.'Model/functions.inc.php';
 
     passwordRecoveryEmail($conn, $selector, $token);
 } else {
