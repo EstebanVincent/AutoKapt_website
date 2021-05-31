@@ -110,14 +110,66 @@
         <p class="my-0 pb-5">Cliquez n\'importe où pour commencer.</p>',
         "p.stress-title" => 'Test du stress',
         "p.stress-about" => 'A propos du test',
-        "p.stress-p" => '<p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
-        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
-        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>',
+        "p.stress-p" => '<p class="justify px-5">Il vous sera demandé de placer votre doigt dans un tube opaque qui déterminera votre rythme cardiaque par transparence au travers dudit doigt.
+        Il vous sera également demandé de pincer un capteur de température entre vos doigts pour informer le système de votre température corporelle actuelle.
+        Ces données permettront ainsi de déterminer votre niveau de stress.</p>
+        <p class="justify px-5"> L\'objectif est simple. Nous cherchons juste à déterminer si vous n\'êtes pas trop stressé et ne risquez pas de perdre connaissance ou encore faire une crise cardiaque</p>' ,
+        
         "p.stress-stats" => 'Statistiques',
 
         /* stress */
         "stress-play" => ' Jouer',
         "stress-temp" => 'Mesure de la Température',
         "stress-bpm" => ' Mesure des BPM',
+
+        /* createmanager */
+        "consignes1" => 'Entrez votre mail s\'il vous plait',
+        "créermana" => "Créer un responsable",
+        "créermana2" => "Créer un compte",
+
+        /* modif.FAQ */
+
+        "faq1" => 'Modifications et mises à jour des tableaux',
+        "faq2" => 'Tous les changements seront affichés ci-dessous',
+        "faq3" => 'Comment pouvons-nous vous aidez ?',
+        "faq4" => 'Toutes les questions',
+
+
+        /* login */
+
+        "login1" => 'Connectez-vous à votre compte',
+        "login2" => 'Nom d\'utilisateur',
+        "login3" => 'Mot de passe',
+        "login4" => 'Mot de passe oublié ?',
+        "login5" => 'Connectez vous pour pouvoir réaliser les tests ainsi que vous informez sur notre société.',
+        
+         /* passwordrecovery */ 
+
+         "oublimdp1" => 'Ne vous inquiétez pas ! Nous allons vous aider à retrouver votre mot de passe pour que vous puissiez continuer d\'effectuer vos tests. ',
+         "oublimdp2" => 'Vous avez oublié votre mot de passe ?',
+         "oublimdp3" => 'Veuillez entrer l\'adresse e-mail enregistrée de votre compte et nous vous enverrons un e-mail de récupération.',
+         
+          /* signUpadmin */ 
+
+        "signup1" => 'Merci de nous faire confiance ! Nous espérons ne pas vous décevoir.',
+        "signup2" => 'Inscription',
+        "signup3" => 'Genre',
+        "signup4" => 'Date de naissance',
+        "signup5" => 'Confirmer votre mot de passe.',
+
+        /* createuser */
+
+        "créuser1" => 'Créer un utilisateur',
+
+
+ 
+
+        /* p.reflex */
+
+        "instru1" => 'Regardez la LED et mettez le casque.',
+        "instru2" => 'Appuyez sur le bouton dès que vous avez un stimulus.',
+        "instru3" => 'Cliquez n\'importe où pour débuter le test ', 
+        "reflex_about1" => 'Vos réflexes seront évalués face à des stimuli auditifs et visuels. Les premiers seront effectués au moyen d’un signal lumineux, les deuxièmes avec un son dans votre casque. Vous devrez ainsi appuyer sur le bouton devant vous dès que vous entendez ou voyez le signal pour que le système en déduise votre temps de réaction.',
+        "reflex_about2" => 'La mesure des réflèxes est essentiel. Nous voulons éviter tout accident du à un manque de reflèxes.',
     );
 ?>

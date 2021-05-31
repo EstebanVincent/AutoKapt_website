@@ -109,15 +109,66 @@
         <p class="my-0 pb-5">Click anywhere to start.</p>',
         "p.stress-title" => 'Stress Test',
         "p.stress-about" => 'About the test',
-        "p.stress-p" => '<p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
-        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
-        <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>',
+        "p.stress-p" => '<p class="justify px-5">You will be asked to place your finger in an opaque tube which will determine your heart rate through the finger.
+        You will also be asked to pinch a temperature sensor between your fingers to inform the system of your current body temperature.
+        This data will be used to determine your stress level.</p>
+        <p class="justify px-5">The objective is simple. We just want to make sure you are not too stressed and in danger of passing out or having a heart attack.</p>' ,
         "p.stress-stats" => 'Statistics',
 
         /* stress */
         "stress-play" => ' Play',
         "stress-temp" => 'Temperature mesuring',
         "stress-bpm" => ' BPM mesuring',
+
+        /* createmanager */ 
+        "consignes1" => 'Please, write your email adress',
+        "créermana" => 'Create a Manager',
+        "créermana2" => 'Create an account',
+
+        /* modif.FAQ */ 
+
+        "faq1" => 'Table Edits/Upates',
+        "faq2" => 'All the changes will be displayed below',
+        "faq3" => 'How can we help you ?',
+        "faq4" => 'All questions',
+
+        /* login */
+
+        "login1" => 'Log in your account',
+        "login2" => 'Username',
+        "login3" => 'Password',
+        "login4" => 'Forgot password',
+        "login5" => 'Please log in to carry out the tests and to inform yourself about our company. ',
+        
+
+        /* passwordrecovery */ 
+
+        "oublimdp1" => 'Don\'t worry! We will help you recover your password so you can continue testing.',
+        "oublimdp2" => 'Forgot your password ?',
+        "oublimdp3" => 'Please enter your account\'s registered email adress and we\'ll send you a recovery email.',
+        
+        /* signUpadmin */ 
+
+        "signup1" => 'Thank you for trusting us! We hope not to disappoint you.',
+        "signup2" => 'Registration',
+        "signup3" => 'Gender',
+        "signup4" => 'Date of Birth',
+        "signup5" => 'Confirm Password',
+
+        /* createuser */
+
+        "créuser1" => 'Create an User',
+
+
+
+
+         /* p.reflex */
+
+         "instru1" => 'Look at the LED and put the headset on',
+         "instru2" => 'Press the button as soon as you have a stimuli.',
+         "instru3" => 'Click anywhere to start.', 
+         "reflex_about1" => 'Your reflexes will be tested against auditory and visual stimuli. The former will be done with a light signal, the latter with a sound in your headset. You will have to press the button in front of you as soon as you hear or see the signal for the system to deduce your reaction time.',
+         "reflex_about2" => 'The measurement of reflexes is essential. We want to avoid accidents due to lack of reflexes.',
 
     );
 ?>
