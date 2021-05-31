@@ -34,7 +34,7 @@
 
         /* footer */
         "footer-title1" => "A propos",
-        "footer-p" => "C'est du fr",
+        "footer-p" => "Nous développons une application révolutionnaire qui permettra de réaliser plusieurs tests comme la mesure du stresse, la mesure des reflèxes ou encore un test d'audition et de mémoire.",
         "footer-title2" => "Media",
         "footer-title3" => "Besoin d'aide?",
         "footer-title4" => "Section Légale",

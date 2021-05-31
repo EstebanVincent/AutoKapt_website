@@ -34,7 +34,7 @@
         
         /* footer */
         "footer-title1" => "About",
-        "footer-p" => "It's in english",
+        "footer-p" => "We are developing a revolutionary application that will allow several tests to be carried out, such as stress measurement, reflexes measurment or even a hearing and memory test.",
         "footer-title2" => "Media",
         "footer-title3" => "Need Help?",
         "footer-title4" => "Legal Section",
