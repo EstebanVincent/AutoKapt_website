@@ -11,15 +11,15 @@
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">
         <div class="card-body">
-            <div class="card-title"><b>HTML Table Edits/Upates</b> </div>
-            <p class="card-text">All the changes will be displayed below</p>
+            <div class="card-title"><b><?php echo $lang['faq1'] ?></b> </div>
+            <p class="card-text"><?php echo $lang['faq2'] ?></p>
             <div class="post_msg text-info"> </div>
         </div>
 	</section>
   <div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">
         <div class="card-body">
-            <div class="card-title"><b>All Questions</b> </div>
+            <div class="card-title"><b><?php echo $lang['faq4'] ?></b> </div>
             <div class="table_faq"></div>
 	    </div>
 	</section>

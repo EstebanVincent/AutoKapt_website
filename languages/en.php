@@ -139,14 +139,16 @@
         "login3" => 'Password',
         "login4" => 'Forgot password',
         "login5" => 'Please log in to carry out the tests and to inform yourself about our company. ',
-        
+        "login6" => 'Quickly log in to your account to find out all the news updates.',
 
         /* passwordrecovery */ 
 
         "oublimdp1" => 'Don\'t worry! We will help you recover your password so you can continue testing.',
         "oublimdp2" => 'Forgot your password ?',
         "oublimdp3" => 'Please enter your account\'s registered email adress and we\'ll send you a recovery email.',
-        
+        "creermdp" => 'We advise you to change your password regularly to ensure the security of your account.',
+
+
         /* signUpadmin */ 
 
         "signup1" => 'Thank you for trusting us! We hope not to disappoint you.',
@@ -158,6 +160,7 @@
         /* createuser */
 
         "créuser1" => 'Create an User',
+        "geruser" => 'manage users', 
 
 
 
