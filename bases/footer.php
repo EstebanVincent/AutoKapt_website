@@ -88,8 +88,8 @@
                         </li>
                         <li>
                             <h5><?php echo $lang['footer-title4'] ?></h5>
-                            <a href="#!" class="text-white-50 text-start">CGU</a><br>
-                            <a href="#!" class="text-white-50 text-start"><?php echo $lang['footer-mention'] ?></a>
+                            <a href="/AutoKapt/View/cgu.php" class="text-white-50 text-start">CGU</a><br>
+                            <a href="/AutoKapt/View/mentionsLegales.php" class="text-white-50 text-start"><?php echo $lang['footer-mention'] ?></a>
                         </li>
                     </ul>
                 </div>

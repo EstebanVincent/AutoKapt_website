@@ -60,11 +60,12 @@
         "modif-user3" => "Tous les utilisateurs.",
 
         /* myProfil */
-        "profile1" => "Information Personnel",
-        "profile-username" => "Nom d'utilisateur= Test",
-        "profile-email" => "Email = Lorem ipsum dolor sit amet.",
-        "profile-genre" => "Genre = Homme",
-        "profile-age" => "Age = 22 ans",
+        "profile1" => "Information Personnelle",
+        "profile-username" => "Nom d'utilisateur = ",
+        "profile-email" => "Email = ",
+        "profile-genre" => "Genre = ",
+        "profile-age" => "Date de naissance = ",
+
         "change-user" => "Changer le nom d'utilisateur",
         "change-mail" => "Changer l'email",
         "change-mdp" => "Changer le mot de passe",

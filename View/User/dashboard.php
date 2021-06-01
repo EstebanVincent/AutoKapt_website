@@ -48,7 +48,7 @@
      //audition data 
      $dataAudition = getAuditionHistoryUser($conn, $_SESSION["userId"]);
 
-    $scoreAuditionmoy = moyenneaud($conn, $dataAudition);
+    $scoreAuditionmoy = moyenne($conn, $dataAudition);
 	if ($scoreAuditionmoy == 'no data'){
 		$moyAudition = 'NA';
 	} else {

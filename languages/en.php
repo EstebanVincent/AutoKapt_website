@@ -61,10 +61,11 @@
 
         /* myProfil */
         "profile1" => "Personal Information",
-        "profile-username" => "Username = Test",
-        "profile-email" => "Email = Lorem ipsum dolor sit amet.",
-        "profile-genre" => "Gender = Male",
-        "profile-age" => "Age = 22 years",
+        "profile-username" => "Username = ",
+        "profile-email" => "Email = ",
+        "profile-genre" => "Gender = ",
+        "profile-age" => "Birth date = ",
+
         "change-user" => "Change username",
         "change-mail" => "Change email",
         "change-mdp" => "Change password",

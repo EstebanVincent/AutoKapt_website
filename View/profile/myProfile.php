@@ -1,15 +1,19 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  require_once __ROOT__.'Model/functions.inc.php';
+  $array = getInfo($conn, $_SESSION['userId'])[0];
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 rounded">
-		<h2> <?php echo $lang['profile1'] ?> </h2>
-    <p> <?php echo $lang['profile-username'] ?></p>
-    <p> <?php echo $lang['profile-email'] ?> </p>
-    <p> <?php echo $lang['profile-genre'] ?> </p>
-    <p> <?php echo $lang['profile-age'] ?> </p>
+    <div class="ms-3">
+      <h2> <?php echo $lang['profile1'] ?> </h2>
+      <p> <?php echo $lang['profile-username'].$_SESSION['userUsername'] ?></p>
+      <p> <?php echo $lang['profile-email'].$array['usersEmail'] ?> </p>
+      <p> <?php echo $lang['profile-genre'].$array['usersGender'] ?> </p>
+      <p> <?php echo $lang['profile-age'].$array['usersBirth'] ?> </p>
+    </div>
   </section>
   <div class="py-3"></div>
   <div class="row">
@@ -70,7 +74,7 @@
             <span></span>
             <label> <?php echo $lang['verif-mail'] ?></label>
           </div>
-          <input class="btn btn-info" type="submit" name="change-email-submit" value="Update username">
+          <input class="btn btn-info" type="submit" name="change-email-submit" value="Update Email">
         </form>
     </div>
     <!-- prend un tier de l'écran -->
@@ -85,16 +89,16 @@
           </div>
           <h4><?php echo $lang['insert-mdp'] ?></h4>
           <div class="element">
-            <input type="text" name="newPassword" required>
+            <input name="newPassword" type="password" required>
             <span></span>
             <label> <?php echo $lang['new-mdp'] ?> </label>
           </div>
           <div class="element">
-            <input type="text" name="verifyNewPassword" required>
+            <input name="verifyNewPassword" type="password" required>
             <span></span>
             <label> <?php echo $lang['verif-newmdp'] ?> </label>
           </div>
-          <input class="btn btn-info" type="submit" name="change-password-submit" value="Update username">
+          <input class="btn btn-info" type="submit" name="change-password-submit" value="Update Password">
         </form>
     </div>
     <!-- prend un tier de l'écran -->
