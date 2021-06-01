@@ -58,6 +58,7 @@
                               <ul class="dropdown-menu bg-dark">
                                   <li><a class="dropdown-item" href="/AutoKapt/View/profile/myProfile.php"><i class="fas fa-id-card"></i> '. $lang["nav-profile"] .'</a></li>
                                   <li><a class="dropdown-item" href="/AutoKapt/View/Manager/createUser.php"><i class="fas fa-plus-circle"></i> '. $lang["nav-create-user"] .'</a></li>
+                                  <li><a class="dropdown-item" href="/AutoKapt/View/Manager/managerUsers.php?page=1&entries=20"><i class="fas fa-users"></i> '. $lang["nav-update-user"] .'</a></li>
                                   <li><a class="dropdown-item" href="/AutoKapt/View/profile/logOut.php"><i class="fas fa-sign-out-alt"></i> '. $lang["nav-logout"] .'</a></li>
                               </ul>
                           </li>

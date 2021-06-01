@@ -30,7 +30,7 @@ a {
     color: black;
 }
 
-p{
+p {
     margin-left: 35 px;
 }
 /*************************** FOOTER ******************************* */
@@ -388,22 +388,22 @@ table {
     margin-bottom: auto;
 }
 
-#pageContainer{
+#pageContainer {
     border: 30px solid black;
-    width:100% ;
+    width: 100%;
     height: 100vh;
     justify-content: center;
 }
 
 .aligne {
-    margin-left:10%;
+    margin-left: 10%;
 }
 
-.verticalAlignment{
+.verticalAlignment {
     margin-top: 50vh;
 }
 
-#logInButton{
+#logInButton {
     align-self: center;
     outline: none;
     width: 100px;
@@ -412,8 +412,8 @@ table {
     color: white;
     font-weight: 700;
 }
-a:link{
+/* a:link{
     color: blue;
     font-weight: 700;
     text-decoration: none;
-}
+} */

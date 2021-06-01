@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="/AutoKapt/CSS/styleBases.css" />
         <link rel="stylesheet" href="/AutoKapt/CSS/style.css" />
         <link rel="stylesheet" href="/AutoKapt/CSS/styleForms.css" />
-        <link rel="icon" href="/AutoKapt/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="/AutoKapt/images/favicon.ico" type="image/x-icon" />
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/7f495e885c.js" crossorigin="anonymous"></script>
 
