@@ -4,10 +4,10 @@
 <body>
     <div id = "backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, blanditiis.</p>
+        <p><?php echo $lang['signup1'] ?></p>
     </div>
     <div class="right">
-        <h4>Create a User</h4>
+        <h4><?php echo $lang['créuser1'] ?></h4>
         <form action="/AutoKapt/includes/createAccount.inc.php" method="POST">
             <div class="element">
                 <input type="email" name="email" required>

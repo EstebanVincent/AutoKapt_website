@@ -4,7 +4,7 @@
 <body>
     <div id = "backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, blanditiis.</p>
+        <p><?php echo $lang['creermdp'] ?></p>
     </div>
     <div class="right">
         <?php
@@ -22,12 +22,12 @@
                         <div class="element">
                             <input type="password" name="password" required>
                             <span></span>
-                            <label>New password</label>
+                            <label><?php echo $lang['new-mdp'] ?></label>
                         </div>
                         <div class="element">
                             <input type="password" name="password-repeat" required>
                             <span></span>
-                            <label>Confirm Pwd</label>
+                            <label><?php echo $lang['signup5'] ?></label>
                         </div>
                         <input type="submit" name="createNewPassword-submit" value="Reset password">
                     </form>

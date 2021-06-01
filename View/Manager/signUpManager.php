@@ -5,7 +5,7 @@
 <body>
     <div id = "backgroundLogIn">
         <div id = "logo"><a href="/AutoKapt/home.php"><img src="/AutoKapt/images/logo.png" alt="logo"></a></div>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae, blanditiis.</p>
+        <p><?php echo $lang['signup1'] ?></p>
     </div>
     <div class="right">
         <?php
@@ -23,22 +23,22 @@
                             <div class="element">
                                 <input type="text" name="username" required>
                                 <span></span>
-                                <label>Username</label>
+                                <label><?php echo $lang['login2'] ?></label>
                             </div>
                             <div class="element">
                                 <input type="password" name="password" required>
                                 <span></span>
-                                <label>New password</label>
+                                <label><?php echo $lang['login3'] ?></label>
                             </div>
                             <div class="element">
                                 <input type="password" name="password-repeat" required>
                                 <span></span>
-                                <label>Confirm Pwd</label>
+                                <label><?php echo $lang['signup5'] ?></label>
                             </div>
                             <div class="element">
                                 <input list="gender" name="gender" required>
                                 <span></span>
-                                <label>Gender</label>
+                                <label><?php echo $lang['signup3'] ?></label>
                                 <datalist id="gender">
                                     <option value="Male">
                                     <option value="Female">
@@ -48,7 +48,7 @@
                             <div class="element">
                                 <input type="date" name="birth"required>
                                 <span></span>
-                                <label>Date of birth</label>
+                                <label><?php echo $lang['signup4'] ?></label>
                             </div>
                             <input type="submit" name="signUpManager-submit" value="Create Account">
                         </form>

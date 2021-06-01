@@ -6,7 +6,7 @@
 	<div class="py-3"></div>
 	<section class="dark2 py-2 mx-5 card">
         <div class="card-body">
-            <div class="card-title"><b>Gérer les utilisateurs</b> </div>
+            <div class="card-title"><b><?php echo $lang['geruser'] ?></b> </div>
             <p class="card-text">
                 <?php echo $lang['modif-user1'] ?> 
             </p>
@@ -16,7 +16,7 @@
     <div class="py-3"></div>
     <section class="dark2 py-2 mx-5 card">
         <div class="card-body">
-            <div class="card-title"><b>HTML Table Edits/Upates</b> </div>
+            <div class="card-title"><b><?php echo $lang['faq1'] ?></b> </div>
             <p class="card-text">  <?php echo $lang['modif-user2'] ?> </p>
             <div class="post_msg text-info"> </div>
         </div>

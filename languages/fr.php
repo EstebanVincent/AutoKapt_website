@@ -34,7 +34,7 @@
 
         /* footer */
         "footer-title1" => "A propos",
-        "footer-p" => "C'est du fr",
+        "footer-p" => "Nous développons une application révolutionnaire qui permettra de réaliser plusieurs tests comme la mesure du stresse, la mesure des reflèxes ou encore un test d'audition et de mémoire.",
         "footer-title2" => "Media",
         "footer-title3" => "Besoin d'aide?",
         "footer-title4" => "Section Légale",
@@ -143,13 +143,16 @@
         "login3" => 'Mot de passe',
         "login4" => 'Mot de passe oublié ?',
         "login5" => 'Connectez vous pour pouvoir réaliser les tests ainsi que vous informez sur notre société.',
-        
+        "login6" => 'Connectez-vous rapidement à votre compte pour découvrir toutes les nouvelles mis à jour.',
+
+
          /* passwordrecovery */ 
 
          "oublimdp1" => 'Ne vous inquiétez pas ! Nous allons vous aider à retrouver votre mot de passe pour que vous puissiez continuer d\'effectuer vos tests. ',
          "oublimdp2" => 'Vous avez oublié votre mot de passe ?',
          "oublimdp3" => 'Veuillez entrer l\'adresse e-mail enregistrée de votre compte et nous vous enverrons un e-mail de récupération.',
-         
+         "creermdp" => 'Nous vous conseillons de changer régulièrement votre mot de passe pour assurer plus de sureté vis à vis de votre compte.',
+
           /* signUpadmin */ 
 
         "signup1" => 'Merci de nous faire confiance ! Nous espérons ne pas vous décevoir.',
@@ -161,6 +164,7 @@
         /* createuser */
 
         "créuser1" => 'Créer un utilisateur',
+        "geruser" => 'Gérer les utilisateurs',
 
 
  
