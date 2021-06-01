@@ -23,7 +23,7 @@
                 </div>
                 <div class="forgot"><a href="/AutoKapt/View/logIn/passwordRecovery.php"><?php echo $lang['login4'] ?></a></div>
                 <input type="submit" name="logIn-submit" value="Login">
-                <div class="create"><a href="/AutoKapt/View/logIn/signUpAdmin.php"><?php echo $lang['créermana2'] ?></a></div>
+
             </form>
 
         <?php

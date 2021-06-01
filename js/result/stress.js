@@ -30,8 +30,8 @@ window.onload = function () {
             {
                 type: "splineArea",
                 showInLegend: true,
-                name: "Global",
-                color: "#FC2020",
+                name: "Perso",
+                color: "#2020FC",
                 dataPoints: dataBPM,
             },
         ],
@@ -56,8 +56,8 @@ window.onload = function () {
             {
                 type: "splineArea",
                 showInLegend: true,
-                name: "Global",
-                color: "#FC2020",
+                name: "Perso",
+                color: "#2020FC",
                 dataPoints: dataTemp,
             },
         ],
@@ -102,10 +102,10 @@ window.onload = function () {
         animationEnabled: true,
         theme: "dark2", //"light2", "dark1", "dark2"
         title: {
-            text: "Stress Température Global Statistics",
+            text: "Stress Temperature Global Statistics",
         },
         axisX: {
-            title: "Température",
+            title: "Temperature",
             suffix: "°C",
         },
         axisY: {

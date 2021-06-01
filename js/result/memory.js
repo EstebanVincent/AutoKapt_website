@@ -22,8 +22,8 @@ window.onload = function () {
             {
                 type: "splineArea",
                 showInLegend: true,
-                name: "Time",
-                color: "#FC2020",
+                name: "Perso",
+                color: "#2020FC",
                 dataPoints: dataMemory,
             },
         ],

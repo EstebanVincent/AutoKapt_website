@@ -5,7 +5,6 @@ for (var i = 0; i < dataAudition.length; i++) {
     dataAudition[i].x = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 }
 
-
 window.onload = function () {
     var chartAudition = new CanvasJS.Chart("UserAudition", {
         animationEnabled: true,
@@ -23,13 +22,13 @@ window.onload = function () {
             {
                 type: "splineArea",
                 showInLegend: true,
-                name: "Time",
-                color: "#FC2020",
+                name: "Perso",
+                color: "#2020FC",
                 dataPoints: dataAudition,
             },
         ],
     });
-    
+
     var chartAuditionTotal = new CanvasJS.Chart("AuditionStats", {
         animationEnabled: true,
         theme: "dark2", //"light2", "dark1", "dark2"
@@ -66,8 +65,6 @@ window.onload = function () {
             },
         ],
     });
-    ;
     chartAuditionTotal.render();
     chartAudition.render();
-    
 };

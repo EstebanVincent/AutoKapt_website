@@ -32,10 +32,10 @@ window.onload = function () {
         animationEnabled: true,
         theme: "dark2", //"light2", "dark1", "dark2"
         title: {
-            text: "Température Global Statistics",
+            text: "Temperature Global Statistics",
         },
         axisX: {
-            title: "Température",
+            title: "Temperature",
             suffix: "°C",
         },
         axisY: {
