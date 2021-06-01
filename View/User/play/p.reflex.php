@@ -18,9 +18,9 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
             <h2>Reflex test</h2>
-            <p class="my-0">Look at the LED and put the headset on</p>
-            <p class="my-0">Press the button as soon as you have a stimuli.</p>
-            <p class="my-0 pb-5">Click anywhere to start.</p>
+            <p class="my-0"><?php echo $lang['instru1'] ?></p>
+            <p class="my-0"><?php echo $lang['instru2'] ?></p>
+            <p class="my-0 pb-5"><?php echo $lang['instru3'] ?></p>
         </section>
     </a>
     <div class="py-3"></div>
@@ -36,9 +36,9 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
         <div class="col text-center">
             <section class="dark2 py-2 ms-2 me-5 rounded">
                 <h4>About the test</h4>
-                <p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
+                <p class="justify px-5"><?php echo $lang['reflex_about1'] ?></p>
+                <p class="justify px-5"><?php echo $lang['reflex_about2'] ?></p>
+                <p class="justify px-5"></p>
             </section>
         </div>
     </div>

@@ -17,26 +17,26 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
     <a class="unstyle" href="#"><!-- mettre le lien qui start le code énergia -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
-            <h2>Memory Test</h2>
-            <p class="my-0">You will hear a sound with a certain rythm.</p>
-            <p class="my-0">Try to repeat the same rythm afterwards</p>
-            <p class="my-0 pb-5">Click anywhere to start.</p>
+            <h2><?php echo $lang['pagemem1'] ?></h2>
+            <p class="my-0"><?php echo $lang['pagemem2'] ?></p>
+            <p class="my-0"><?php echo $lang['pagemem3'] ?></p>
+            <p class="my-0 pb-5"><?php echo $lang['pagemem4'] ?></p>
         </section>
     </a>
     <div class="py-3"></div>
     <div class="row">
         <div class="col text-center">
             <section class="dark2 py-2 ms-5 me-2 rounded">
-                <h4>Statistics</h4>
+                <h4><?php echo $lang['pagemem5'] ?></h4>
                 <div id="memoryStats" style="height: 370px; width: 100%;"></div>
             </section>
         </div>
         <div class="col text-center">
             <section class="dark2 py-2 ms-2 me-5 rounded">
-                <h4>About the test</h4>
-                <p class="justify px-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci sed nostrum animi enim iusto aliquid voluptate incidunt molestias distinctio itaque aspernatur laborum, veniam nobis et recusandae quae asperiores culpa cum, eligendi, earum ut alias in eius quasi! Incidunt adipisci natus, quos autem iure tempora veniam fugit necessitatibus, minima id suscipit.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
-                <p class="justify px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit natus reiciendis nam dolores itaque blanditiis.</p>
+                <h4><?php echo $lang['pagemem6'] ?></h4>
+                <p class="justify px-5"> <?php echo $lang['pagemem7'] ?></p>
+                <p class="justify px-5"> <?php echo $lang['pagemem8'] ?></p>
+                <p class="justify px-5"> <?php echo $lang['pagemem9'] ?></p>
             </section>
         </div>
     </div>

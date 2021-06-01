@@ -166,6 +166,30 @@
         "créuser1" => 'Créer un utilisateur',
         "geruser" => 'Gérer les utilisateurs',
 
+        /* p.son */ 
+
+        "pageson1" =>'Test d\'audition',
+        "pageson2" =>'Essayer de reproduire le même son que vous avez entendu.',
+        "pageson3" =>'Plus le son est proche plus vous aurez de meilleurs résultats',
+        "pageson4" =>'Cliquer n\'importe où pour commencer.',
+        "pageson5" =>'A propos du test',
+        "pageson6" => 'Ce test permet d\'évaluer votre capacité à reproduire un son.',
+        "pageson7" => 'Le résultat est déterminer en comparant les deux fréquences des sons.',
+
+
+         /* p.memory */
+
+         "pagemem1" => 'Test de mémoire',
+         "pagemem2" => 'Vous allez entendre un son avec un rythme spéciale.',
+         "pagemem3" => 'Essayer de reproduire à la note près ce même rythme',
+         "pagemem4" => 'Cliquer n importe où pour commencer.',
+         "pagemem5" => 'Statistiques',
+         "pagemem6" => 'A propos du test',
+         "pagemem7" => '',
+         "pagemem8" => '',
+         "pagemem9" => '', 
+  
+
 
  
 

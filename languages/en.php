@@ -61,11 +61,10 @@
 
         /* myProfil */
         "profile1" => "Personal Information",
-        "profile-username" => "Username = ",
-        "profile-email" => "Email = ",
-        "profile-genre" => "Gender = ",
-        "profile-age" => "Birth date = ",
-
+        "profile-username" => "Username = Test",
+        "profile-email" => "Email = Lorem ipsum dolor sit amet.",
+        "profile-genre" => "Gender = Male",
+        "profile-age" => "Age = 22 years",
         "change-user" => "Change username",
         "change-mail" => "Change email",
         "change-mdp" => "Change password",
@@ -162,6 +161,28 @@
 
         "créuser1" => 'Create an User',
         "geruser" => 'manage users', 
+
+        /* p.son */ 
+
+        "pageson1" =>'audition test',
+        "pageson2" =>'Try to reproduce the same sound you have hearded',
+        "pageson3" =>'More the sounds are close more your result will better',
+        "pageson4" =>'Click anywhere to start.',
+        "pageson5" =>'About the test',
+        "pageson6" => 'This test permit to evaluate your capacities to reproduce a certain sound.',
+        "pageson7" => 'Results are determined by calculating the differencies between the two frequencies',
+        
+        /* p.memory */
+
+        "pagemem1" => 'Memory Test',
+        "pagemem2" => 'You will hear a sound with a certain rythm.',
+        "pagemem3" => 'Try to repeat the same rythm afterwards',
+        "pagemem4" => 'Click anywhere to start.',
+        "pagemem5" => 'Statistics',
+        "pagemem6" => 'About the test',
+        "pagemem7" => '',
+        "pagemem8" => '',
+        "pagemem9" => '', 
 
 
 

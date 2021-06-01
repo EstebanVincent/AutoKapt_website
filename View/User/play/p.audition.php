@@ -17,26 +17,26 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
     <a class="unstyle" href="#"><!-- mettre le lien qui start le code énergia -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
-            <h2>audition test</h2>
-            <p class="my-0">Try to reproduce the same sound you have hearded</p>
-            <p class="my-0">More the sounds are close more your result will better</p>
-            <p class="my-0 pb-5">Click anywhere to start.</p>
+            <h2><?php echo $lang['pageson1'] ?></h2>
+            <p class="my-0"><?php echo $lang['pageson1'] ?></p>
+            <p class="my-0"><?php echo $lang['pageson2'] ?></p>
+            <p class="my-0 pb-5"><?php echo $lang['pageson3'] ?></p>
         </section>
     </a>
     <div class="py-3"></div>
     <div class="row">
         <div class="col text-center">
             <section class="dark2 py-2 ms-5 me-2 rounded">
-                <h4>Statistics</h4>
+                <h4><?php echo $lang['pageson4'] ?></h4>
                 <div id="AuditionStats" style="height: 370px; width: 100%;"></div>
                 
             </section>
         </div>
         <div class="col text-center">
             <section class="dark2 py-2 ms-2 me-5 rounded">
-                <h4>About the test</h4>
-                <p class="justify px-5">This test permit to evaluate your capacities to reproduce a certain sound.</p>
-                <p class="justify px-5">Results are determined by calculating the differencies between the two frequencies</p>
+                <h4><?php echo $lang['pageson5'] ?></h4>
+                <p class="justify px-5"><?php echo $lang['pageson6'] ?></p>
+                <p class="justify px-5"><?php echo $lang['pageson7'] ?></p>
                 <p class="justify px-5"></p>
             </section>
         </div>
