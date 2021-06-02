@@ -1,5 +1,8 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  if (!isset($_SESSION['userAccess'])){
+	die(header("Location: /AutoKapt/home.php"));
+}
 ?>
 
 <?php

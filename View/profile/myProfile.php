@@ -1,5 +1,8 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  if (!isset($_SESSION['userAccess'])){
+    die(header("Location: /AutoKapt/home.php"));
+}
   require_once __ROOT__.'Model/functions.inc.php';
   $array = getInfo($conn, $_SESSION['userId'])[0];
 ?>

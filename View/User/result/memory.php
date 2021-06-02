@@ -1,5 +1,8 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  if (!isset($_SESSION['userAccess'])){
+	die(header("Location: /AutoKapt/home.php"));
+}
 ?>
 <!-- on accede à la base de donnée pour récupérer les info
 On calcul les % en réunissant par tranche de résultats

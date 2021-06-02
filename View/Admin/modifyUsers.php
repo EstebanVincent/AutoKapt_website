@@ -1,5 +1,11 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  if (!isset($_SESSION['userAccess'])){
+    die(header("Location: /AutoKapt/home.php"));
+}
+if ($_SESSION['userAccess'] != 0 ){
+    die(header("Location: /AutoKapt/home.php"));
+}
 ?>
 
 <div class="container-fluid bg-secondary text-white-50">
