@@ -9,10 +9,10 @@ if(isset($_POST["change-password-submit"])){
   require_once __ROOT__.'Model/functions.inc.php';
 
   if (!pwdMatch($newPassword, $verifyNewPassword)){
-    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php.php/?error=".$newPassword.$verifyNewPassword));
+    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?error=".$newPassword.$verifyNewPassword));
   }
   if (!pwdLongEnough($newPassword)){
-    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php.php/?error=password<8char"));
+    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?error=password<8char"));
   }
   changePassword($conn, $currentPassword, $newPassword);
 
@@ -27,7 +27,7 @@ else if(isset($_POST["change-username-submit"])){
   require_once __ROOT__.'Model/functions.inc.php';
 
   if (!pwdMatch($newUsername, $verifyNewUsername)){
-    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php.php/?error=usernamesdontmatch"));
+    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?error=usernamesdontmatch"));
   }
   changeUsername($conn, $verifyPassword, $newUsername);
 
@@ -42,12 +42,12 @@ else if(isset($_POST["change-email-submit"])){
   require_once __ROOT__.'Model/functions.inc.php';
 
   if (!pwdMatch($newEmail, $verifyNewEmail)){
-    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php.php/?error=emailsdontmatch"));
+    die(header("location: ". HTTP_SERVER ."View/profile/myProfile.php/?error=emailsdontmatch"));
   }
   changeEmail($conn, $verifyPassword, $newEmail);
 
 } else {
-  die(header("location: ". HTTP_SERVER ." View/profile/myProfile.php.php"));
+  die(header("location: ". HTTP_SERVER ." View/profile/myProfile.php"));
 
 }
 
