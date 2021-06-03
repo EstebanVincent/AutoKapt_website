@@ -1074,3 +1074,79 @@ function getInfo($conn, $sessionId){
     $result = mysqli_stmt_get_result($stmt);
     return resultToArray($result);
 }
+//partie intégration//
+// On récup les la trame envoyer depuis la carte tiva.
+$ch = curl_init();
+curl_setopt(
+$ch,
+CURLOPT_URL,
+"http://projets-tomcat.isep.fr:8080/appService?ACTION=GETLOG&TEAM=9999");
+curl_setopt($ch, CURLOPT_HEADER, FALSE);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+$data = curl_exec($ch);
+curl_close($ch);
+echo "Raw Data:<br />";
+echo("$data");
+
+// On découpe la chaine de caractère en proportion de 33 caractère.
+$data_tab = str_split($data,33);
+echo "Tabular Data:<br />";
+for($i=0, $size=count($data_tab); $i<$size; $i++){
+echo "Trame $i: $data_tab[$i]<br />";
+}
+$trame = $data_tab[1];
+// décodage avec des substring
+$t = substr($trame,0,1);
+$o = substr($trame,1,4);
+$r=substr($trame,2,1);
+$c = substr($trame,3,1);
+$nn = substr($trame,4,2);
+$vvvv = substr($trame,5,4);
+$aaaa = substr($trame,6,4);
+$xx = substr($trame,7,2);
+$yyyy = substr($trame,8,4);
+$mm = substr($trame,9,2);
+$dd = substr($trame,10,2);
+$hh = substr($trame,11,2);
+$mm = substr($trame,12,2);
+$ss = substr($trame,13,2);
+
+
+function veriftypeofdata($c){
+    $dataAudition=0;
+    $dataVisual=0;
+    $dataReflex=0;
+    $dataStress_temp=0;
+    $dataStress_bpm=0;
+    if($c==3){
+        $dataStress_temp=$vvvv; 
+
+    }
+    else if($c==5){
+        $dataStress_bpm=$vvvv; 
+
+    }
+    else if($c==11){
+        $dataAudition=$vvvv;
+    }
+    
+}
+
+
+
+function updateauditiontable($conn, $sessionId){
+
+    $sql = "INSERT INTO audition (auditionScore)  VALUES ('$dataAudition') WHERE usersId =?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if(!mysqli_stmt_prepare($stmt, $sql)){
+        echo "error5";
+        exit();
+    } 
+    else {
+        mysqli_stmt_bind_param($stmt, "i", $sessionId);
+        mysqli_stmt_execute($stmt);
+    }
+    $result = mysqli_stmt_get_result($stmt);
+    return resultToArray($result);
+}
