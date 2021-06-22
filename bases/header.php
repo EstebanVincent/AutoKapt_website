@@ -35,6 +35,7 @@
                           '
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/View/User/dashboard.php">'. $lang["nav-dashboard"] .'</a></li>
                             <li class="nav-item"><a class="nav-link" href="/AutoKapt/View/testpage.php">Tests</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/AutoKapt/Model/integration.inc.php">Integration</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-user"></i> ' . $_SESSION["userUsername"] . '</a>
                                 <ul class="dropdown-menu bg-dark">

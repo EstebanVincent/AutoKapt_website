@@ -1,5 +1,6 @@
 <?php
   require_once($_SERVER['DOCUMENT_ROOT'].'/AutoKapt/bases/header.php');
+  require_once(__ROOT__.'Model/integration.inc.php');
   if (!isset($_SESSION['userAccess'])){
     die(header("Location: /AutoKapt/home.php"));
 }
@@ -17,7 +18,7 @@ on les transforme en tableau lisible par canvasJS une fois mis en json -->
 
 <div class="container-fluid bg-secondary text-white-50">
 	<div class="py-3"></div>
-    <a class="unstyle" href="#"><!-- mettre le lien qui start le code énergia -->
+    <a class="unstyle" href="/AutoKapt/View/integration.php"><!-- mettre le lien qui start le code énergia -->
         <section class="dark2 py-2 mx-5 rounded text-center bg-info text-dark">
             <i class="fas fa-brain fs-1 pt-5"></i>
             <h2><?php echo $lang['p.stress-title'] ?></h2>
