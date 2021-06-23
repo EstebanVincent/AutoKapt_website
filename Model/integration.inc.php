@@ -34,7 +34,7 @@ function createTrame($testType){
             $short_trame = $tra.$obj.$req.$typ.$num.$ans;
             $trame = $short_trame . createChk($short_trame);
             break;
-        case 1:/* reflex */
+        case 1:/* stress, bpm */
             $typ = "9";
             $short_trame = $tra.$obj.$req.$typ.$num.$ans;
             $trame = $short_trame . createChk($short_trame);
@@ -44,7 +44,7 @@ function createTrame($testType){
             $short_trame = $tra.$obj.$req.$typ.$num.$ans;
             $trame = $short_trame . createChk($short_trame);
             break;
-        case 3:/* audition */
+        case 3:/* son */
             $typ = "7";
             $short_trame = $tra.$obj.$req.$typ.$num.$ans;
             $trame = $short_trame . createChk($short_trame);
@@ -68,24 +68,6 @@ function sendTrame($trame){
 /* sendTrame(createTrame(3)); */
 
 /* fonctions finies */
-
-/* renvoie true si la trame est bonne et faulse si corrompu */
-function checksum($trame){
-    $resultDec = 0;
-    $check = substr($trame,17,19);
-    /* on parcours la trame sans le chk */
-    for ($i = 0; $i < 17; $i++){
-        $resultDec += ord(substr($trame,$i,1));
-    }
-    $resultHex = dechex($resultDec);
-    $len = strlen($resultHex);
-    $toCheck = substr($resultHex,$len-2,$len);
-    
-    if($toCheck == $check){
-        return true;
-    }
-    return false;
-}
 
 /* renvoie le chk de la trame en cours de création */
 function createChk($short_trame){
@@ -128,34 +110,68 @@ function trame2array($trame){
     );
 }
 
+/* renvoie les valeurs de température et ECG */
+function getStressResult(){
+    $ch = curl_init("http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G9Ee");
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    $data_tab = str_split($data,33);
+
+    $bool = true;
+    $i = 0;
+    while($bool){
+        $trame1 = $data_tab[count($data_tab)-(2+2*$i)];
+        $trame2 = $data_tab[count($data_tab)-(4+2*$i)];
+        $array1 = trame2array($trame1);
+        $array2 = trame2array($trame2);
+        $typ1 = $array1['type'];
+        $typ2 = $array2['type'];
+
+        if (($typ1 == 3 && $typ2 == 9) || ($typ1 == 9 && $typ2 == 3)){
+            if ($typ1 == 3){
+                $tempValue = $array1['value'];
+                $bpmValue = $array2['value'];
+            } else {
+                $tempValue = $array2['value'];
+                $bpmValue = $array1['value'];
+            }
+            $bool = false;
+        }
+        $i += 1;
+    }
+    $result = array(
+        'stressBPM' => getBPM($bpmValue),
+        'stressTemp' => getTemp($tempValue),
+    );
+    return $result;
+}
+
 /* créer une ligne dans test et la ligne correspondante dans stress */
-function stress2bdd($conn, $arrayTemp, $arrayBPM){
-    $testDate = $arrayTemp['time'];
+function stress2bdd($conn, $stressBPM, $stressTemp){
     $testType = 0;
     $usersId = $_SESSION['userId'];
 
-    $stressTemp = getTemp($arrayTemp['value']);
-    $stressBPM = $arrayBPM['value'];
 
-    $sql = "INSERT INTO test (testDate, testType, usersId) VALUES (?, ?, ?);";
+    $sql = "INSERT INTO test (testType, usersId) VALUES (?, ?);";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
         echo "error";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "sii", $testDate, $testType, $usersId);
+        mysqli_stmt_bind_param($stmt, "ii", $testType, $usersId);
         mysqli_stmt_execute($stmt);
     }
 
-    $sql = "SELECT testId FROM test WHERE testDate=?;";
+    $sql = "SELECT max(testId) FROM test;";
     $stmt = mysqli_stmt_init($conn);
 
     if(!mysqli_stmt_prepare($stmt, $sql)){
         echo "error";
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "s", $testDate);
         mysqli_stmt_execute($stmt);
     }
     $result =mysqli_stmt_get_result($stmt);
@@ -175,7 +191,51 @@ function stress2bdd($conn, $arrayTemp, $arrayBPM){
     }
 }
 
+function getData($test){
+    $ch = curl_init("http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=G9Ee");
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    $data_tab = str_split($data,33);
+    $newest_trame = $data_tab[count($data_tab)-2];
+    $array = trame2array($newest_trame);
+    switch ($test) {
+        case 3:
+            $value = getTemp($array['value']);
+            $date = $array['time'];
+            $typ = $array['type'];
+            if ($typ == $test){
+                echo json_encode(array(
+                    'value' => $value, 
+                ));;
+            } else {
+                echo json_encode(array(
+                    'value' => 'error',  
+                ));;
+            }
+            break;
+        case 9:
+            $value = getBPM($array['value']);
+            $date = $array['time'];
+            $typ = $array['type'];
+            if ($typ == $test){
+                echo json_encode(array(
+                    'value' => $value, 
+                ));;
+            } else {
+                echo json_encode(array(
+                    'value' => 'error',  
+                ));;
+            }
+            break;
+    }
+}
+
 /* return la température en °C à partir de la valeur en HEX */
 function getTemp($val){
     return $val/100;
+}
+function getBPM($val){
+    return hexdec($val);
 }
